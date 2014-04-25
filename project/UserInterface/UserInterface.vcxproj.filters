@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Ui">
+      <UniqueIdentifier>{0bb8b043-7783-4212-824d-bbcd5a3fc1da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Selection">
+      <UniqueIdentifier>{8e91c3e7-84ec-4f20-9b94-2bf39517e3e1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\UserInterface\Ui\UiButton.cpp">
+      <Filter>Source Files\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\UserInterface\Ui\UiDropDown.cpp">
+      <Filter>Source Files\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\UserInterface\Ui\UiElement.cpp">
+      <Filter>Source Files\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\UserInterface\Ui\UiManager.cpp">
+      <Filter>Source Files\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\UserInterface\Ui\UiPanel.cpp">
+      <Filter>Source Files\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\UserInterface\Ui\UiPropertyGrid.cpp">
+      <Filter>Source Files\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\UserInterface\Ui\UiUtilities.cpp">
+      <Filter>Source Files\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\UserInterface\Selection\ComponentSelector.cpp">
+      <Filter>Source Files\Selection</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\UserInterface\Ui\UiButton.h">
+      <Filter>Source Files\Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UserInterface\Ui\UiDropDown.h">
+      <Filter>Source Files\Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UserInterface\Ui\UiElement.h">
+      <Filter>Source Files\Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UserInterface\Ui\UiManager.h">
+      <Filter>Source Files\Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UserInterface\Ui\UiPanel.h">
+      <Filter>Source Files\Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UserInterface\Ui\UiPropertyGrid.h">
+      <Filter>Source Files\Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UserInterface\Ui\UiUtilities.h">
+      <Filter>Source Files\Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UserInterface\Selection\ComponentSelector.h">
+      <Filter>Source Files\Selection</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

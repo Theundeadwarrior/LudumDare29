@@ -1,0 +1,11 @@
+// Cube map shading
+#version 140
+
+in vec3 oCoordCube;
+
+uniform samplerCube SkyBox;
+
+void main()
+{
+	gl_FragColor = texture(SkyBox, oCoordCube);
+}

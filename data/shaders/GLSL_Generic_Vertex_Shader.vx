@@ -1,0 +1,32 @@
+#version 140
+
+#if defined(DIFFUSEMAP) || defined(SPECULARMAP) || defined(PARALLAXMAP)
+	out vec2 var_uv;
+#endif
+
+out vec4 var_modelViewPosition;
+out vec3 var_normal;  
+
+in vec4 position;
+in vec3 normal;
+in vec2 texCoords;
+
+uniform ViewMatrix{ mat4 viewMatrix; };
+uniform ProjectionMatrix { mat4 projectionMatrix; };
+
+uniform mat4 ModelMatrix;
+uniform mat4 ModelViewMatrix;
+uniform mat3 NormalMatrix;
+
+void main(void)
+{
+	var_modelViewPosition = ModelViewMatrix * position;
+	vec4 P = vec4(projectionMatrix * var_modelViewPosition);
+	
+#if defined(DIFFUSEMAP) || defined(SPECULARMAP) || defined(PARALLAXMAP)
+	var_uv = texCoords;
+#endif
+
+	var_normal = normalize(NormalMatrix * normal);
+	gl_Position = P;
+}

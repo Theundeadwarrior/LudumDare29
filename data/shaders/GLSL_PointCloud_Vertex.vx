@@ -1,0 +1,42 @@
+// Shader for the brain rendered with a cloud of points
+#version 140
+
+uniform float pointSize;
+uniform float xMin;
+uniform float xMax;
+uniform float yMin;
+uniform float yMax;
+uniform float zMin;
+uniform float zMax;
+uniform float distanceShellSphere;
+uniform float distanceViewPlane;
+
+uniform mat4 ModelMatrix;
+uniform ViewMatrix{ mat4 viewMatrix; };
+uniform ProjectionMatrix { mat4 projectionMatrix; };
+
+in vec4 position;
+in vec4 color;
+
+//out vec4 oPosition;
+out vec4 oColor;
+//out float pointSize;
+
+void main(void)
+{	
+	vec4 positionWorld = ModelMatrix * position;
+	vec4 positionView = viewMatrix * positionWorld;
+	
+	gl_Position = projectionMatrix * positionView;
+
+	oColor = color;	
+	if (length(vec3(position.x,(position.y+1.0f)*0.667f,position.z*0.667f)) > distanceShellSphere || length(positionView) < distanceViewPlane || positionWorld.x > xMax || positionWorld.y > yMax || positionWorld.z > zMax || positionWorld.x < xMin || positionWorld.y < yMin || positionWorld.z < zMin)
+	{
+		oColor.a = 0.0;
+		gl_Position.x = 1000000000.0;
+		gl_Position.y = 1000000000.0;
+		gl_Position.z = 1000000000.0;
+	}
+	
+	gl_PointSize  = pointSize;
+}

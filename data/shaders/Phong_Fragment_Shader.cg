@@ -1,0 +1,44 @@
+//Phong shading
+#include "Generic_Parameters.cg"
+uniform float test2;
+
+FragmentOut fragment_shader(in FragmentIn input)
+{
+    FragmentOut output;
+	output.color = float4(0,0,0,0);
+
+	for(int i=0; i<PointLightsCount; i++)
+	{
+		float4x4 lightTransf = PointLightsTransform[i];
+		float4 lightPos = float4(lightTransf[0][3], lightTransf[1][3], lightTransf[2][3], 1);
+		float3 lightVec = mul(ViewMatrix,lightPos).xyz - input.modelViewPosition.xyz;
+		float dist = length(lightVec);
+		float ratio = max(0.0,(PointLightsRadius[i]-dist)/PointLightsRadius[i]);
+		lightVec = normalize(lightVec);
+		float3 viewVec = normalize(-input.modelViewPosition.xyz);
+		float3 reflectVec = normalize(-reflect(lightVec,input.normal));
+
+		//Ambient
+		float4 frontMatAmbient = float4(0.3,0.3,0.3,1);
+		float4 lightAmbient = ratio*PointLightsAmbient[i];
+		float4 ambient = frontMatAmbient * lightAmbient;
+
+		//Diffuse
+		float4 frontMatDiffuse = float4(0.5,0.7,0.8,1);
+		float4 lightDiffuse = ratio*PointLightsDiffuse[i];
+		float4 diffuse = frontMatDiffuse*lightDiffuse*float4(tex2D(DiffuseMap, input.uv).rgb,1);
+		float lambert = dot(lightVec, input.normal);
+		diffuse  = max(lambert, 0.0) * diffuse;
+
+		//Specular
+		float4 frontMatSpec = float4(0.6, 0.6, 0.6, 1);
+		float4 lightSpec = ratio*PointLightsSpecular[i];
+		float shininess = 60.0;
+		float specularVec = dot(reflectVec, viewVec);
+		float4 specular = (frontMatSpec * lightSpec) * pow(max(specularVec, 0.0), shininess);
+
+		output.color += ambient + diffuse + specular;
+	}
+
+    return output;
+}

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Lighting">
+      <UniqueIdentifier>{e63884eb-090f-4639-be2c-2648379e2cdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Material">
+      <UniqueIdentifier>{dda8dcb4-b1c6-4d37-abdf-31e0ce1c8ed9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PointCloud">
+      <UniqueIdentifier>{67d23be8-fc50-4306-8002-c712147a631b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geometry">
+      <UniqueIdentifier>{727679cd-92ec-4d44-9493-4a3fe94cdb80}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\FunctionalTest\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\FunctionalTest\Lighting\PointLightPhongFunctionnalTest.cpp">
+      <Filter>Source Files\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\FunctionalTest\Lighting\PointLightBlinnPhongFunctionnalTest.cpp">
+      <Filter>Source Files\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\FunctionalTest\FunctionalTestData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\FunctionalTest\Material\MaterialFunctionnalTest.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\FunctionalTest\PointCloud\PointCloudFunctionnalTest.cpp">
+      <Filter>Source Files\PointCloud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\FunctionalTest\Geometry\GeometryFunctionnalTest.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\FunctionalTest\FunctionnalTestIncludePackage.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\FunctionalTest\Lighting\PointLightPhongFunctionnalTest.h">
+      <Filter>Source Files\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\FunctionalTest\Lighting\PointLightBlinnPhongFunctionnalTest.h">
+      <Filter>Source Files\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\FunctionalTest\FunctionalTestData.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\FunctionalTest\Material\MaterialFunctionnalTest.h">
+      <Filter>Source Files\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\FunctionalTest\PointCloud\PointCloudFunctionnalTest.h">
+      <Filter>Source Files\PointCloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\FunctionalTest\Geometry\GeometryFunctionnalTest.h">
+      <Filter>Source Files\Geometry</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

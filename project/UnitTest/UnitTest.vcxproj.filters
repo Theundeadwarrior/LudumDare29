@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2ac3dda5-fb57-4049-8dde-dd206f0de7e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UserInterface">
+      <UniqueIdentifier>{4c7e39fb-edf9-46f9-af25-ea3d8941cd5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{9c42b238-87c8-417f-8cca-5077fd42a578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Events">
+      <UniqueIdentifier>{3f693a1f-c32a-4371-b599-469d010f77be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GraphicsEngine">
+      <UniqueIdentifier>{0e5df8bb-843c-4b57-bcc5-53d56fc5ee3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LowLevelGraphics">
+      <UniqueIdentifier>{e698aad2-e611-42dd-a393-443dca0ca1cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PhysicsEngine">
+      <UniqueIdentifier>{ee0cdf49-ebaa-4e0b-8e46-39ffe73a8fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager">
+      <UniqueIdentifier>{f0bbf57e-0394-44e5-b994-a4d7ebeefbb4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\UnitTest\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\UnitTest\Utilities\ObjectLoaderTest.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UnitTest\Utilities\BrainLoaderTest.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UnitTest\SceneManager\TransformTest.h">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UnitTest\SceneManager\CameraTest.h">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UnitTest\Utilities\IndexerTest.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UnitTest\SceneManager\MaterialTest.h">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UnitTest\SceneManager\PointLightTest.h">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UnitTest\PhysicsEngine\PhysicsEngineTest.h">
+      <Filter>Source Files\PhysicsEngine</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

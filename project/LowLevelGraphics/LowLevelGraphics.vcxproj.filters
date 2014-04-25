@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\source\LowLevelGraphics\Material\Shader\FragmentShader.cpp">
+      <Filter>Source Files\Material\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\Geometry\Geometry.cpp">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\LowLevelAPI\GPUAPI\LowLevelGPUAPI.cpp">
+      <Filter>Source Files\LowLevelAPI\GPUAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\LowLevelAPI\ShaderAPI\LowLevelShaderAPI.cpp">
+      <Filter>Source Files\LowLevelAPI\ShaderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\LowLevelAPI\WindowAPI\LowLevelWindowAPI.cpp">
+      <Filter>Source Files\LowLevelAPI\WindowAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\Material\Shader\Shader.cpp">
+      <Filter>Source Files\Material\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\Material\Shader\VertexShader.cpp">
+      <Filter>Source Files\Material\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\WindowManager\WindowManager.cpp">
+      <Filter>Source Files\WindowManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\Context\Context.cpp">
+      <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\Material\Texture\Texture.cpp">
+      <Filter>Source Files\Material\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\Material\Shader\ShaderProgram.cpp">
+      <Filter>Source Files\Material\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\LowLevelGraphics\Material\Texture\TextureSkyBox.cpp">
+      <Filter>Source Files\Material\Texture</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\LowLevelGraphics\Context\Context.h">
+      <Filter>Source Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\Material\Shader\FragmentShader.h">
+      <Filter>Source Files\Material\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\Geometry\Geometry.h">
+      <Filter>Source Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\LowLevelAPI\GPUAPI\LowLevelGPUAPI.h">
+      <Filter>Source Files\LowLevelAPI\GPUAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\LowLevelAPI\ShaderAPI\LowLevelShaderAPI.h">
+      <Filter>Source Files\LowLevelAPI\ShaderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\LowLevelAPI\WindowAPI\LowLevelWindowAPI.h">
+      <Filter>Source Files\LowLevelAPI\WindowAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\Material\Shader\VertexShader.h">
+      <Filter>Source Files\Material\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\Material\Shader\Shader.h">
+      <Filter>Source Files\Material\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\WindowManager\WindowManager.h">
+      <Filter>Source Files\WindowManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\Material\Texture\Texture.h">
+      <Filter>Source Files\Material\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\Material\Shader\ShaderProgram.h">
+      <Filter>Source Files\Material\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\LowLevelGraphics\Material\Texture\TextureSkyBox.h">
+      <Filter>Source Files\Material\Texture</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d65438fe-fefb-47b7-bb95-4c27838ac4d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WindowManager">
+      <UniqueIdentifier>{108d41be-d85c-4dfe-96b5-1f34a7cdfbd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Material">
+      <UniqueIdentifier>{2b6a05e8-78fa-4a8a-94bd-e0ebc8a6f344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Material\Shader">
+      <UniqueIdentifier>{7f50b3f9-1208-4051-92cd-5c7bca94deef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LowLevelAPI">
+      <UniqueIdentifier>{b4d49753-1b4c-4ac2-a5d0-45774281b4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LowLevelAPI\GPUAPI">
+      <UniqueIdentifier>{7ed9bef0-f2af-4ce5-9b3a-f5f9f52c5cbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LowLevelAPI\ShaderAPI">
+      <UniqueIdentifier>{c39593fc-415b-4447-9682-d3fb4bc6f1f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LowLevelAPI\WindowAPI">
+      <UniqueIdentifier>{4e218a0f-5f42-48a5-a917-2af94cfbace8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context">
+      <UniqueIdentifier>{e151ab6c-d878-48e9-b250-150529e2ce83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geometry">
+      <UniqueIdentifier>{81f4fbf5-0371-410a-b0bc-53d194f81acf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Material\Texture">
+      <UniqueIdentifier>{df45fd16-c6a3-497e-9d4a-b0effac1ea35}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

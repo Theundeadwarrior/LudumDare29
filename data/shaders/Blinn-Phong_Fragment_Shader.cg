@@ -1,0 +1,44 @@
+//Blinn-Phong shading
+#include "Generic_Parameters.cg"
+
+FragmentOut fragment_shader(in FragmentIn input)
+{
+	FragmentOut output;
+
+	float3 viewVec = normalize(-input.modelViewPosition.xyz);
+        float3 diffuseMapColor = tex2D(DiffuseMap, input.uv).rgb;
+
+	output.color = float4(0,0,0,1);
+
+	for(int i=0; i<PointLightsCount; i++)
+	{
+		float4x4 lightTransf = PointLightsTransform[i];
+		float4 lightPos = float4(lightTransf[0][3], lightTransf[1][3], lightTransf[2][3], 1);
+		float3 lightVec = mul(ViewMatrix,lightPos).xyz - input.modelViewPosition.xyz;
+		float dist = length(lightVec);
+		float ratio = max(0.0,(PointLightsRadius[i]-dist)/PointLightsRadius[i]);
+		lightVec = normalize(lightVec);
+		
+		//Ambient
+		float3 materialAmbientColor = float3(0.3,0.3,0.3);
+		float3 lightAmbientColor = ratio*PointLightsAmbient[i].rgb;
+		float3 ambientColor = materialAmbientColor * lightAmbientColor;
+
+		//Diffuse
+		float3 materialDiffuseColor = float3(1,1,1);
+		float3 lightDiffuseColor = ratio*PointLightsDiffuse[i].rgb;
+		float3 diffuseColor = saturate(dot(lightVec, input.normal))*materialDiffuseColor*lightDiffuseColor*diffuseMapColor;
+
+		//Specular
+		float3 materialSpecularColor = float3(0.06, 0.03, 0.015);
+		float3 lightSpecularColor = ratio*PointLightsSpecular[i].rgb;
+		float shininess = 160.0;
+
+		float3 halfVec = normalize(lightVec+viewVec);
+		float3 specularColor = pow(saturate(dot(input.normal, halfVec)),shininess)*materialSpecularColor*lightSpecularColor;
+
+		output.color.rgb += ambientColor + diffuseColor + specularColor;
+	}
+
+	return output;
+}

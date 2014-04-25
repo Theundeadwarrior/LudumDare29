@@ -1,0 +1,17 @@
+// Cube map shader
+#version 140
+
+uniform mat4 ModelViewMatrix;
+uniform mat4 ProjectionMatrixSkyBox;
+
+in vec4 position;
+in vec3 coordCube;
+
+out vec3 oCoordCube;
+
+void main(void)
+{	
+    vec4 modelViewPosition = ModelViewMatrix * position;
+    gl_Position = ProjectionMatrixSkyBox * modelViewPosition;
+	oCoordCube = coordCube;
+}

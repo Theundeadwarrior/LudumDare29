@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Behaviour">
+      <UniqueIdentifier>{8f6c7d8d-fcb9-4e3f-a3be-6e55f9fbb1fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Spawner">
+      <UniqueIdentifier>{5dda2386-e6d2-42e4-beb7-33741c0ef35a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NewParticleSystem">
+      <UniqueIdentifier>{786b3733-2339-47d4-ab6e-4c1e150fb074}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\ParticleSystem\Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ParticleSystem\ParticleBatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ParticleSystem\Behavior\AccelerationBehavior.cpp">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ParticleSystem\Spawner\Spawner.cpp">
+      <Filter>Source Files\Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ParticleSystem\Spawner\Despawner.cpp">
+      <Filter>Source Files\Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ParticleSystem\Behavior\FollowBehavior.cpp">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ParticleSystem\Behavior\FadeBehavior.cpp">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ParticleSystem\Behavior\MultiColorBehavior.cpp">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ParticleSystem\Behavior\OrbitalBehavior.cpp">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ParticleSystem\Behavior\ExplodingSizeBehavior.cpp">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ParticleSystem\ParticleSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\ParticleSystem\Particle.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\ParticleBatch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\Behavior\AccelerationBehavior.h">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\Behavior\Behavior.h">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\Spawner\Spawner.h">
+      <Filter>Source Files\Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\Spawner\Despawner.h">
+      <Filter>Source Files\Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\Behavior\AttractorRepulsor.h">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\Behavior\OrbitalBehavior.h">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\Behavior\FollowBehavior.h">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\Behavior\FadeBehavior.h">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\Behavior\MultiColorBehavior.h">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\Behavior\ExplodingSizeBehavior.h">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ParticleSystem\ParticleSystem.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

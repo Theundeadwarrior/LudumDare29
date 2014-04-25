@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\source\Utilities\BasicGeometry\BasicGeometryGenerator.cpp">
+      <Filter>Source Files\BasicGeometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Color\Color.cpp">
+      <Filter>Source Files\Color</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Debug\Debug.cpp">
+      <Filter>Source Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\IdGenerator\IdGenerator.cpp">
+      <Filter>Source Files\IdGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Indexer\Indexer.cpp">
+      <Filter>Source Files\Indexer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\BrainLoader\BrainLoader.cpp">
+      <Filter>Source Files\BrainLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\BrainLoader\Image3D.cpp">
+      <Filter>Source Files\BrainLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Math\MathUtilities.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Physic\PhysicUtilities.cpp">
+      <Filter>Source Files\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Physic\Ray.cpp">
+      <Filter>Source Files\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Physic\AABB.cpp">
+      <Filter>Source Files\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Physic\OBB.cpp">
+      <Filter>Source Files\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Loader\ObjectLoader.cpp">
+      <Filter>Source Files\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Timer\Timer.cpp">
+      <Filter>Source Files\Timer</Filter>
+	</ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Win32\Win32Utilities.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Utilities\Win32\FileSyst.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\Utilities\BasicGeometry\BasicGeometryGenerator.h">
+      <Filter>Source Files\BasicGeometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Color\Color.h">
+      <Filter>Source Files\Color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Debug\Debug.h">
+      <Filter>Source Files\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\IdGenerator\IdGenerator.h">
+      <Filter>Source Files\IdGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Indexer\Indexer.h">
+      <Filter>Source Files\Indexer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\BrainLoader\BrainLoader.h">
+      <Filter>Source Files\BrainLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\BrainLoader\Image3D.h">
+      <Filter>Source Files\BrainLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Math\MathUtilities.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Physic\PhysicUtilities.h">
+      <Filter>Source Files\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Physic\Ray.h">
+      <Filter>Source Files\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Physic\AABB.h">
+      <Filter>Source Files\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Physic\OBB.h">
+      <Filter>Source Files\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Loader\ObjectLoader.h">
+      <Filter>Source Files\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Image\ImageUtilities.h">
+      <Filter>Source Files\Image</Filter>
+	</ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Timer\Timer.h">
+      <Filter>Source Files\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Win32\Win32Utilities.h">
+      <Filter>Source Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Utilities\Win32\FileSyst.h">
+      <Filter>Source Files\Win32</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{87810fdb-a468-44e8-9fff-d18beb2bc36e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BasicGeometry">
+      <UniqueIdentifier>{3f74beb4-f5ff-4b06-9476-6e82b5b9d429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Debug">
+      <UniqueIdentifier>{9b910835-24d0-4b39-ab35-38af770ab0ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Color">
+      <UniqueIdentifier>{d6ffcd9d-5171-4ad8-adfe-835e86517849}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IdGenerator">
+      <UniqueIdentifier>{c9bff5bc-b906-4eb1-81cd-62a8bf2c793f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Indexer">
+      <UniqueIdentifier>{4dd2bf5e-4baf-4b69-b951-d3f328cf735d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BrainLoader">
+      <UniqueIdentifier>{aa7b8675-eb26-4b24-9ef9-44ff81d0b954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{3e5b7e5d-aeb6-45ea-af60-998b2445d177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physic">
+      <UniqueIdentifier>{e9fd57d2-21c1-4a06-8893-c47cd5b2a39b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loader">
+      <UniqueIdentifier>{54eb468b-73f5-47de-b0d7-3acf9a4bb9ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Image">
+      <UniqueIdentifier>{38ce39ce-55ad-4868-a4c9-462007987862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Win32">
+      <UniqueIdentifier>{eb90d516-5f26-4868-8bb4-25890015521a}</UniqueIdentifier>
+	</Filter>
+    <Filter Include="Source Files\Timer">
+      <UniqueIdentifier>{ebb0de63-6150-4840-b3ae-8d7f8534e885}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,9 @@
+// Shader for the brain rendered with a cloud of points
+#version 140
+
+in vec4 oColor;
+
+void main(void)
+{
+	gl_FragColor = oColor;
+}

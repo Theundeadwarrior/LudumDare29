@@ -1,0 +1,51 @@
+//Matrices
+uniform float4x4 ViewMatrix;
+uniform float4x4 ProjectionMatrix;
+uniform float4x4 ModelMatrix;
+uniform float4x4 ModelViewMatrix;
+uniform float3x3 NormalMatrix;
+
+//Lighting Textures
+uniform sampler2D DiffuseMap  :  TEXTURE0;
+
+//Parallax Mapping
+uniform sampler2D ParallaxMap  :  TEXTURE1;
+uniform float ParallaxHeightScale;
+uniform float ParallaxHeightBias;
+
+//Lights
+uniform float4 PointLightsDiffuse[5];
+uniform float4 PointLightsAmbient[5];
+uniform float4 PointLightsSpecular[5];
+uniform float PointLightsRadius[5];
+uniform float4x4 PointLightsTransform[5];
+uniform int PointLightsCount;
+
+struct VertexIn
+{
+    float4 position :            POSITION;
+    float3 normal :              NORMAL;
+    float2 uv :                  TEXCOORD0;
+};
+
+struct VertexOut
+{
+    float4 position :            POSITION;
+    float2 uv :                  TEXCOORD0;
+
+    float4 modelViewPosition;
+    float3 normal;  
+};
+
+struct FragmentIn
+{
+    float2 uv :                  TEXCOORD0;
+
+    float4 modelViewPosition;
+    float3 normal;
+};
+
+struct FragmentOut
+{
+    float4 color :               COLOR;
+};

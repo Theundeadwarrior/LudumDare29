@@ -1,0 +1,13 @@
+#include "Generic_Parameters.cg"
+
+VertexOut vertex_shader(in VertexIn input)
+{	
+    VertexOut output;
+    
+    output.modelViewPosition = mul(ModelViewMatrix, input.position);
+    output.position = mul(ProjectionMatrix, output.modelViewPosition);
+    output.normal= normalize(mul(NormalMatrix,input.normal));
+    output.uv = input.uv;
+
+    return output;
+}

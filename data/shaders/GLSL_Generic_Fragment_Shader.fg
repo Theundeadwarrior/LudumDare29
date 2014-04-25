@@ -1,0 +1,116 @@
+#version 140
+
+#if defined(DIFFUSEMAP) || defined(SPECULARMAP) || defined(PARALLAXMAP)
+	in vec2 var_uv;
+#endif
+
+in vec4 var_modelViewPosition;
+in vec3 var_normal;  
+
+#if defined(DIFFUSEMAP)
+	uniform sampler2D DiffuseMap;
+#endif
+
+#if defined(PARALLAXMAP) && defined(PHONG)
+	uniform sampler2D ParallaxMap;
+	uniform float ParallaxHeightScale;
+	uniform float ParallaxHeightBias;
+#endif
+
+#ifdef PHONG
+	uniform ViewMatrix{ mat4 viewMatrix; };
+	uniform PointLightsDiffuse{ vec4 lightdiffuse[5]; };
+	uniform PointLightsAmbient{ vec4 lightambient[5]; };
+	uniform PointLightsSpecular{ vec4 lightspecular[5]; };
+	uniform PointLightsTransform { mat4 lightTransform[5]; };
+	uniform PointLightRadius { float radius[5]; };
+	uniform PointLightsCount { int lightCount; };
+	
+	uniform vec4 MaterialDiffuse;
+	uniform vec4 MaterialSpecular;
+	uniform vec4 MaterialAmbient;
+	uniform float MaterialShininess;
+#else
+	uniform vec4 PlainColor;
+#endif
+
+void main(void)
+{
+#if defined(PHONG)
+	vec4 outputColor = vec4(0.0f,0.0f,0.0f,0.0f);
+
+	#if defined(PARALLAXMAP)
+		//TangeantSpace Calculation
+		vec2 du = dFdx(var_uv);
+		vec2 dv = dFdy(var_uv);
+
+		vec3 dx = dFdx(var_modelViewPosition.xyz);
+		vec3 dy = dFdy(var_modelViewPosition.xyz);
+
+		vec3 tangent = normalize(dv.y*dx - du.y*dy);
+		vec3 binormal = normalize(dv.x*dx - du.x*dy);
+  
+		mat3 tangentspace= mat3(tangent,binormal,var_normal);
+
+		//View Vector
+		vec3 viewVec = normalize(var_modelViewPosition.xyz*tangentspace);
+		viewVec.z *= -1;
+
+		//Parallax mapping
+		vec2 uv = var_uv;  
+
+		float height = texture2D(ParallaxMap,uv).a - ParallaxHeightBias;
+		float offset = ParallaxHeightScale*(2.0*height-1.0);
+		uv.x += offset * viewVec.x;
+		uv.y -= offset * viewVec.y;
+
+		vec3 parallaxmapNormal = normalize(texture2D(ParallaxMap,uv).rgb-0.5);
+		parallaxmapNormal.y *= -1;
+		#if defined(DIFFUSEMAP)
+			vec4 diffuseMapColor = texture2D(DiffuseMap,uv);
+		#endif
+	#else
+		vec3 viewVec = normalize(-var_modelViewPosition.xyz);
+		#if defined(DIFFUSEMAP)
+			vec4 diffuseMapColor = texture2D(DiffuseMap,var_uv);
+		#endif
+	#endif
+
+	for(int i = 0; i < lightCount; i++)
+	{
+		vec4 lightPos = vec4(lightTransform[i][3][0], lightTransform[i][3][1], lightTransform[i][3][2], 1);
+		vec3 lightVec = (viewMatrix * lightPos).xyz - var_modelViewPosition.xyz;
+
+		#if defined(PARALLAXMAP)
+			lightVec = normalize(lightVec*tangentspace);
+			vec3 reflectVec = normalize(-reflect(lightVec,parallaxmapNormal));
+			float lambert = dot(lightVec, parallaxmapNormal);
+		#else
+			lightVec = normalize(lightVec);
+			vec3 reflectVec = normalize(-reflect(lightVec,var_normal));
+			float lambert = dot(lightVec, var_normal);
+		#endif
+		
+		// Ambient
+		vec4 ambient = MaterialAmbient * lightambient[i];
+		
+		// Diffuse
+		vec4 diffuse  = max(lambert, 0.0f) * MaterialDiffuse * lightdiffuse[i];
+		
+		// Specular
+		float specularVec = dot(reflectVec, viewVec);
+		vec4 specular = MaterialSpecular * lightspecular[i] * pow(max(specularVec, 0.0f), MaterialShininess);
+		
+		#if defined(DIFFUSEMAP)
+			outputColor += (ambient + diffuse)*diffuseMapColor + specular;
+		#else
+			outputColor += ambient + diffuse + specular;
+		#endif
+	}
+	gl_FragColor = outputColor;
+#elif defined(DIFFUSEMAP)
+	gl_FragColor = PlainColor*texture2D(DiffuseMap,var_uv);
+#else
+	gl_FragColor = PlainColor;
+#endif
+}

@@ -1,0 +1,72 @@
+//ParallaxMapping with Blinn-Phong illumination
+#include "Generic_Parameters.cg"
+
+FragmentOut fragment_shader(in FragmentIn input)
+{
+    FragmentOut output;
+    
+    output.color = float4(0,0,0,1);
+
+    //TangeantSpace Calculation
+    float2 du = dFdx(input.uv);
+    float2 dv = dFdy(input.uv);
+
+    float3 dx = dFdx(input.modelViewPosition.xyz);
+    float3 dy = dFdy(input.modelViewPosition.xyz);
+
+    float3 tangent = normalize(dv.y*dx - du.y*dy);
+    float3 binormal = normalize(dv.x*dx - du.x*dy);
+    float3 normal = input.normal;
+  
+    float3x3 tangentspace=float3x3(tangent,binormal,input.normal);
+
+    //View Vector
+    float3 viewVec = normalize(mul(tangentspace,input.modelViewPosition.xyz));
+    viewVec.z *= -1;
+
+    //Parallax mapping
+    float2 uv = input.uv;  
+
+    float height = tex2D(ParallaxMap,uv).a - ParallaxHeightBias;
+    float offset = ParallaxHeightScale*(2.0*height-1.0);
+    uv.x += offset * viewVec.x;
+    uv.y -= offset * viewVec.y;
+
+    float3 parallaxmapNormal = normalize(tex2D(ParallaxMap,uv).rgb-0.5);
+    parallaxmapNormal.y *= -1;
+
+    //Diffuse mapping
+    float3 diffuseMapColor = tex2D(DiffuseMap,uv).rgb;
+
+    for(int i=0; i<PointLightsCount; i++)
+    {
+        //Lighting
+	float4x4 lightTransf = PointLightsTransform[i];
+	float4 lightPos = float4(lightTransf[0][3], lightTransf[1][3], lightTransf[2][3], 1);
+        float3 lightVec = mul(ViewMatrix,lightPos).xyz;
+        lightVec = normalize(mul(tangentspace,lightVec-input.modelViewPosition.xyz));
+	float dist = length(lightVec);
+	float ratio = max(0.0,(PointLightsRadius[i]-dist)/PointLightsRadius[i]);
+
+	//Ambient
+	float3 materialAmbientColor = float3(0.3,0.3,0.3);
+	float3 lightAmbientColor = ratio*PointLightsAmbient[i].rgb;
+	float3 ambientColor = materialAmbientColor * lightAmbientColor;
+
+        //Diffuse
+        float3 materialDiffuseColor = float3(1,1,1);
+        float3 lightDiffuseColor = ratio*PointLightsDiffuse[i].rgb;
+        float3 diffuseColor = saturate(dot(lightVec, parallaxmapNormal))*diffuseMapColor*materialDiffuseColor*lightDiffuseColor;
+
+        //Specular
+        float3 materialSpecularColor = float3(0.06, 0.03, 0.015);
+        float3 lightSpecularColor = ratio*PointLightsSpecular[i].rgb;
+        float shininess = 160.0;
+
+        float3 halfVec = normalize(lightVec+viewVec);
+        float3 specularColor = pow(saturate(dot(parallaxmapNormal, halfVec)),shininess)*materialSpecularColor*lightSpecularColor;
+
+        output.color.rgb += ambientColor+diffuseColor+specularColor;
+    }
+    return output;
+}

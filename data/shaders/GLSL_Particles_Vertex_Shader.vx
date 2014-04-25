@@ -1,0 +1,17 @@
+#version 140
+
+uniform float LowerBoundSize;
+uniform float RangeBoundSize;
+uniform float AlphaSize;
+
+uniform ViewMatrix{ mat4 viewMatrix; };
+uniform ProjectionMatrix { mat4 projectionMatrix; };
+
+in vec4 position;
+
+void main(void)
+{
+	vec4 viewPosition = viewMatrix * position;
+	gl_Position = projectionMatrix * viewPosition;
+	gl_PointSize = (AlphaSize*RangeBoundSize+LowerBoundSize)/(length(viewPosition.xyz)+0.001f);
+}

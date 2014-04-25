@@ -1,0 +1,12 @@
+#include "Generic_Parameters.cg"
+
+FragmentOut fragment_shader(in FragmentIn input)
+{
+    FragmentOut output;
+
+    //output.color = float4(input.normal, 1.0);
+    //output.color *= float4(tex2D(DiffuseMap, input.uv).rgb,1);
+	output.color = float4(1,1,1,1);
+	
+    return output;
+}

@@ -1,0 +1,30 @@
+// Shader for the brain rendered with a cloud of points
+#include "Generic_Parameters.cg"
+
+uniform float distance;
+uniform float xMin;
+uniform float xMax;
+uniform float yMin;
+uniform float yMax;
+uniform float zMin;
+uniform float zMax;
+uniform float distanceShellSphere;
+uniform float distanceViewPlane;
+
+void vertex_shader(in float4 position : POSITION, out float4 oPosition : POSITION, in float4 color : COLOR, out float4 oColor : COLOR, out float pointSize : PSIZE)
+{	
+	float4x4 ViewProjMatrix = mul(ProjectionMatrix, ViewMatrix);
+	
+	float4 positionWorld = mul(ModelMatrix, position);
+	oPosition = mul(ViewProjMatrix, positionWorld);
+
+	float4 positionView = mul(ViewMatrix, positionWorld);
+	if (length(position) > distanceShellSphere || length(positionView) < distanceViewPlane || positionWorld.x > xMax || positionWorld.y > yMax || positionWorld.z > zMax || positionWorld.x < xMin || positionWorld.y < yMin || positionWorld.z < zMin)
+	{
+		color.a = 0.0f;
+	}
+	
+	pointSize = 20.0f/(distance+1.0f);
+
+	oColor = color;
+}

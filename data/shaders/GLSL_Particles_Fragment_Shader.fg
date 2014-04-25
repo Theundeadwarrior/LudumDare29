@@ -1,0 +1,10 @@
+#version 140
+
+uniform vec4 LowerBoundColor;
+uniform vec4 RangeBoundColor;
+uniform vec4 AlphaColor;
+
+void main(void)
+{
+	gl_FragColor = vec4(AlphaColor.rgb*RangeBoundColor.rgb+LowerBoundColor.rgb,AlphaColor.a*RangeBoundColor.a+LowerBoundColor.a);
+}
