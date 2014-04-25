@@ -190,21 +190,6 @@ void GraphicsEngine::DrawOpaqueObjects(SceneManager::Scene* scene)
 		// We render
         LowLevelGraphics::LowLevelAPI::DrawCall((*it)->GetGeometry(),shaderProgram->GetProgramId());
 
-        // DEBUG PURPOSE
-        glBegin(GL_LINES);
-        glColor3f(1,0,0);
-        glVertex3f(0,0,0);
-        glVertex3f(3,0,0);
-
-        glColor3f(0,1,0);
-        glVertex3f(0,0,0);
-        glVertex3f(0,3,0);
-
-        glColor3f(0,0,1);
-        glVertex3f(0,0,0);
-        glVertex3f(0,0,3);
-        glEnd();
-
 		(*it)->GetMaterial()->UnbindShaderParameters();
         LowLevelGraphics::LowLevelAPI::UnbindShaders();
     }

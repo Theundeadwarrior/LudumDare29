@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	}
 
 	//ray-picking
-	UserInterface::UiManager::GetInstance().EnableCompleteUi();
+	//UserInterface::UiManager::GetInstance().EnableCompleteUi();
 
 	unsigned long long int lastTicks = GetTickCount64();
 	unsigned long long int elapsedTicks;
