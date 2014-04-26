@@ -5,7 +5,7 @@
 
 #include "Utilities/Image/ImageUtilities.h"
 #include "Utilities/BasicGeometry/BasicGeometryGenerator.h"
-#include "SceneManager/Objects/GameplayObjects/Platform.h"
+#include "SceneManager/Objects/GameplayObjects/PlatformCanyon.h"
 #include "SceneManager/Level/Level.h"
 
 
@@ -57,12 +57,12 @@ namespace SceneManager
 			}
 			currentXPosition += currentPlatformLength;
 
-			Object* platform = new Platform(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
+			Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
 			((GamePlayObject*)platform)->Init();
 			AddObject(platform);
 		}
 
-		Object* platform = new Platform(glm::vec4(-1.5, -1.5, 0, 1), glm::vec4(0.1, 1, 1, 1));
+		Object* platform = new PlatformCanyon(glm::vec4(-1.5, -1.5, 0, 1), glm::vec4(0.1, 1, 1, 1));
 		((GamePlayObject*)platform)->Init();
 		AddObject(platform);
 	}

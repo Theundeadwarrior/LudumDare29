@@ -21,33 +21,35 @@ namespace SceneManager
 
 	TextureId Platform::GetTextureID()
 	{
-		static TextureId textureID = INVALID_TEXTURE_ID;
+		//static TextureId textureID = INVALID_TEXTURE_ID;
 
-		SceneManager& sceneManager = SceneManager::GetInstance();
+		//SceneManager& sceneManager = SceneManager::GetInstance();
 
-		if (textureID == INVALID_TEXTURE_ID)
-		{
-			Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Platform.png");
-			textureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
-		}
+		//if (textureID == INVALID_TEXTURE_ID)
+		//{
+		//	Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
+		//	Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Platform.png");
+		//	textureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
+		//}
 
-		return textureID;
+		//return textureID;
+		return INVALID_TEXTURE_ID;
 	}
 
 	MaterialID Platform::GetMaterialID()
 	{
-		static MaterialID materialID = INVALID_MATERIAL_ID;
+		//static MaterialID materialID = INVALID_MATERIAL_ID;
 
-		if (materialID == INVALID_MATERIAL_ID)
-		{
-			TextureParameter textureParameter(GetTextureID());
-			MaterialParameters materialParameters;
-			materialParameters.diffuseMapParam = textureParameter;
-			materialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters, GamePlayObject::GetShaderID());
-		}
-		
-		return materialID;
+		//if (materialID == INVALID_MATERIAL_ID)
+		//{
+		//	TextureParameter textureParameter(GetTextureID());
+		//	MaterialParameters materialParameters;
+		//	materialParameters.diffuseMapParam = textureParameter;
+		//	materialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters, GamePlayObject::GetShaderID());
+		//}
+		//
+		//return materialID;
+		return INVALID_MATERIAL_ID;
 	}
 
 	void Platform::Init()
