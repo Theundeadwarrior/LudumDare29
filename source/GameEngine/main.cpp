@@ -24,13 +24,13 @@ int main(int argc, char *argv[])
 
 	TestSceneLoader sceneTestLoader(sceneManager);
 
-	PhysicsEngine::PhysicsEngine& physicsEngine = PhysicsEngine::PhysicsEngine::GetInstance();
+	//PhysicsEngine::PhysicsEngine& physicsEngine = PhysicsEngine::PhysicsEngine::GetInstance();
 	
 	std::vector<SceneManager::Scene*> scenes = sceneManager.GetSceneList();
-	if (scenes.size() > 3)
-	{
-		physicsEngine.SetScene(scenes[3]);
-	}
+	//if (scenes.size() > 3)
+	//{
+	//	physicsEngine.SetScene(scenes[3]);
+	//}
 
 	//ray-picking
 	//UserInterface::UiManager::GetInstance().EnableCompleteUi();
@@ -43,8 +43,8 @@ int main(int argc, char *argv[])
 		Utilities::Timer::GetInstance()->MarkLap();
 		Utilities::Timer::GetInstance()->ResetTimer();
 
-		physicsEngine.Advance(Utilities::Timer::GetInstance()->GetLapTime());
-		physicsEngine.UpdateGraphicScene();
+		//physicsEngine.Advance(Utilities::Timer::GetInstance()->GetLapTime());
+		//physicsEngine.UpdateGraphicScene();
 
 		graphicsEngine->StartRendering(sceneManager.GetCurrentScene());
 		graphicsEngine->StopRendering();

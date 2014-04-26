@@ -32,6 +32,9 @@ public:
     Scene();
     ~Scene();
 
+	virtual void Init()=0{}
+	virtual void Uninit()=0{}
+
 	// Mutator
     void AddObject(Object* const object){m_objectList.push_back(object);}
 	void AddPointCloud(Object* const object){m_pointCloudList.push_back(object);}

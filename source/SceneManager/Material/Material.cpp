@@ -45,10 +45,10 @@ Material::Material(const MaterialParameters& materialParameters, ShaderListID sh
 	m_materialParameters = materialParameters;
 
 	// In case the user didn't set any active lighting technique
-	if(!m_materialParameters.phongParam.m_isActive)
-	{
-		m_materialParameters.plainColorParam.m_isActive = true;
-	}
+	//if(!m_materialParameters.phongParam.m_isActive)
+	//{
+	//	m_materialParameters.plainColorParam.m_isActive = true;
+	//}
 }
 
 //-----------------------------------------------------------------------------
@@ -59,7 +59,7 @@ Material::~Material()
 //-----------------------------------------------------------------------------
 void Material::InitDefaultParameters()
 {
-	ActivateEffect(NO_ILLUMINATION, &PlainColorParameter(glm::vec4(1,1,1,1)));
+	//ActivateEffect(NO_ILLUMINATION, &PlainColorParameter(glm::vec4(1,1,1,1)));
 }
 
 //-----------------------------------------------------------------------------
