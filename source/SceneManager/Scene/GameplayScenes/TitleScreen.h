@@ -18,26 +18,19 @@ public:
 	virtual void Init();
 	virtual void Uninit();
 
-    void LoadShader();
-    void LoadTexture();
-	void LoadQuad();
-	void LoadMaterial();
+    static ShaderListID GetShader();
+    static TextureId GetTexture();
+	static GeometryID GetQuad();
+	static MaterialID GetMaterial();
 
     void UnloadShader();
-    void UnloadTexture();
 	void UnloadQuad();
-	void UnloadMaterial();
 
 	void CreateTitleScreenObject();
 
 	void RemoveTitleScreenObject();
 
 private:
-	ShaderListID m_alphaTexturedQuadShaderID;
-	TextureId m_titleScreenTextureID;
-	GeometryID m_titleScreenQuadID;
-	MaterialID m_titleScreenMaterialID;
-
 	Object* m_titleScreenObject;
 	Camera* m_dummyCamera;
 };

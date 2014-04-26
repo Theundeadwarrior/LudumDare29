@@ -12,11 +12,7 @@ namespace Atum
 namespace SceneManager
 {
 	TitleScreen::TitleScreen()
-		:m_alphaTexturedQuadShaderID(0)
-		,m_titleScreenTextureID(0)
-		,m_titleScreenQuadID(0)
-		,m_titleScreenMaterialID(0)
-		,m_titleScreenObject(NULL)
+		:m_titleScreenObject(NULL)
 		,m_dummyCamera(NULL)
 	{
 	}
@@ -28,75 +24,52 @@ namespace SceneManager
 
 	void TitleScreen::Init()
 	{
-		LoadShader();
-		LoadTexture();
-		LoadQuad();
-		LoadMaterial();
-
 		CreateTitleScreenObject();
 	}
 
 	void TitleScreen::Uninit()
 	{
 		RemoveTitleScreenObject();
-
-		UnloadMaterial();
-		UnloadQuad();
-		UnloadTexture();
-		UnloadShader();
 	}
 
-	void TitleScreen::LoadShader()
+	ShaderListID TitleScreen::GetShader()
 	{
-		m_alphaTexturedQuadShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/FullScreenAlphaTestedTexture.vx", "../../data/shaders/AlphaTestedTexture.fg", NULL);
+		static ShaderListID alphaTexturedQuadShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/FullScreenAlphaTestedTexture.vx", "../../data/shaders/AlphaTestedTexture.fg", NULL);
+		return alphaTexturedQuadShaderID;
 	}
 
-	void TitleScreen::LoadTexture()
+	TextureId TitleScreen::GetTexture()
 	{
 		SceneManager& sceneManager = SceneManager::GetInstance();
 
 		Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
 		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/TitleScreen.bmp");
-		m_titleScreenTextureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
+
+		static TextureId titleScreenTextureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
+
+		return titleScreenTextureID;
 	}
 
-	void TitleScreen::LoadQuad()
+	GeometryID TitleScreen::GetQuad()
 	{
-		m_titleScreenQuadID = SceneManager::GetInstance().GetGeometryManager()->CreateGeometry(Utilities::CreatePlaneGeometry(1.0f,1.0f));
+		static GeometryID titleScreenQuadID = SceneManager::GetInstance().GetGeometryManager()->CreateGeometry(Utilities::CreatePlaneGeometry(1.0f,1.0f));
+		return titleScreenQuadID;
 	}
 
-	void TitleScreen::LoadMaterial()
+	MaterialID TitleScreen::GetMaterial()
 	{
-		TextureParameter textureParameter(m_titleScreenTextureID);
+		TextureParameter textureParameter(GetTexture());
 		MaterialParameters materialParameters;
 		materialParameters.diffuseMapParam = textureParameter;
 
-		m_titleScreenMaterialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters,m_alphaTexturedQuadShaderID);
-	}
+		static MaterialID titleScreenMaterialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters,GetShader());
 
-	void TitleScreen::UnloadShader()
-	{
-		SceneManager::GetInstance().GetShaderListManager()->RemoveShaderList(m_alphaTexturedQuadShaderID);
-	}
-
-	void TitleScreen::UnloadTexture()
-	{
-		SceneManager::GetInstance().GetTextureManager()->RemoveTexture(m_titleScreenTextureID);
-	}
-
-	void TitleScreen::UnloadQuad()
-	{
-		SceneManager::GetInstance().GetGeometryManager()->RemoveGeometry(m_titleScreenQuadID);
-	}
-
-	void TitleScreen::UnloadMaterial()
-	{
-		SceneManager::GetInstance().GetMaterialManager()->RemoveMaterial(m_titleScreenMaterialID);
+		return titleScreenMaterialID;
 	}
 
 	void TitleScreen::CreateTitleScreenObject()
 	{
-		m_titleScreenObject = new Object(m_titleScreenMaterialID, m_titleScreenQuadID, Transform());
+		m_titleScreenObject = new Object(GetMaterial(), GetQuad(), Transform());
 		AddObject(m_titleScreenObject);
 			
 		PerspectiveCameraParams params(45, 1024/768.0f, 0.1f, 1000.0f);

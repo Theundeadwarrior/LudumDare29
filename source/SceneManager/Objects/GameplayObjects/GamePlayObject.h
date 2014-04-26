@@ -2,6 +2,7 @@
 #define SCENEMANAGER_GAMEPLAYOBJECT_H
 
 #include "SceneManager/Objects/Object.h"
+#include "SceneManager/Manager/TypedefID.h"
 
 namespace Atum { namespace SceneManager { class PropertyList; }}
 
@@ -35,6 +36,12 @@ namespace SceneManager
 		virtual const GamePlayObjectType Intersect(const GamePlayObject& gameplayObject)const{return gameplayObject.GetGameplayObjectType();}
 
 		virtual const GamePlayObjectType GetGameplayObjectType()const =0{return Invalid;}
+
+		virtual TextureId GetTexture()=0{return -1;}
+		virtual MaterialID GetMaterial()=0{return -1;}
+
+		static ShaderListID GetShader();
+		static GeometryID GetQuad();
 
 	protected:
 		bool m_isPositionAffectedByLevel;

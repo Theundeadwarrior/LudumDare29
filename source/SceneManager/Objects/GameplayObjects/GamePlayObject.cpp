@@ -1,13 +1,17 @@
 #include "SceneManager/Objects/GameplayObjects/GamePlayObject.h"
 #include "SceneManager/SceneManager.h"
 
+#include "Utilities/BasicGeometry/BasicGeometryGenerator.h"
+
 namespace Atum
 {
 namespace SceneManager
 {
 	GamePlayObject::GamePlayObject()
 		: m_isPositionAffectedByLevel(true)
-	{}
+	{
+		m_materialID = GetMaterial();
+	}
 
 	GamePlayObject::~GamePlayObject()
 	{}
@@ -23,6 +27,17 @@ namespace SceneManager
 	{
 		Object::UpdatePropertyList( i_properties ); //update the parent properties
 		//update the child properties
+	}
+
+	ShaderListID GamePlayObject::GetShader()
+	{
+		static ShaderListID standardGameplayObjectShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/StandardGameplayObject.vx", "../../data/shaders/AlphaTestedTexture.fg", NULL);; 
+		return standardGameplayObjectShaderID;
+	}
+	GeometryID GamePlayObject::GetQuad()
+	{
+		static ShaderListID standardGameplayObjectGeometryID = SceneManager::GetInstance().GetGeometryManager()->CreateGeometry(Utilities::CreatePlaneGeometry(1.0f,1.0f));
+		return standardGameplayObjectGeometryID;
 	}
 
 } // namespace SceneManager

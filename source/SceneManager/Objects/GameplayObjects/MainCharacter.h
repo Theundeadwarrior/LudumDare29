@@ -30,8 +30,14 @@ namespace SceneManager
 		void GetPropertyList ( PropertyList& o_properties );
 		void UpdatePropertyList ( PropertyList& i_properties );
 
-		void Update();
-		void Reset();
+		virtual void Init();
+		virtual void Uninit();
+
+		virtual void Update();
+		virtual void Reset();
+
+		virtual TextureId GetTexture();
+		virtual MaterialID GetMaterial();
 
 		virtual const GamePlayObjectType GetGameplayObjectType()const{return GamePlayObject::MainCharacter;}
 
