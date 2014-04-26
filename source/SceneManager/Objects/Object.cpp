@@ -18,31 +18,36 @@ namespace Atum
 namespace SceneManager
 {
 	Object::Object()
-		:Component()
+		: Component()
+		, m_state(E_Ok)
 	{
 		
 	}
 
-	Object::Object( MaterialID materialID, GeometryID geomId, const Transform& transform )
-		:Component(),
-		m_transform(transform),
-		m_geometryID(geomId),
-		m_materialID(materialID)
+	Object::Object(MaterialID materialID, GeometryID geomId, const Transform& transform)
+		: Component()
+		, m_transform(transform)
+		, m_geometryID(geomId)
+		, m_materialID(materialID)
+		, m_state(E_Ok)
 	{
 		UpdateAABB();
 	}
 
 	Object::Object( MaterialID materialID, GeometryID geomId, const Transform & transform , const Utilities::AABB & aabb)
-		: Component(),
-		m_materialID(materialID),
-		m_geometryID(geomId),
-		m_transform(transform)
+		: Component()
+		, m_materialID(materialID)
+		, m_geometryID(geomId)
+		, m_transform(transform)
+		, m_state(E_Ok)
 	{
 		m_aabb = aabb;
 	}
 
 	Object::~Object()
-	{}
+	{
+		ATUM_ASSERT_MESSAGE(m_state == E_ToDelete, "Trying to delete an object that wasn't flagged to be deleted");
+	}
 
 	Material* const Object::GetMaterial()
 	{

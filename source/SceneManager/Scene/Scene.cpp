@@ -94,7 +94,21 @@ namespace SceneManager
 
 		for (; it != endit; ++it)
 		{
-			(*it)->Update();
+			// The object might have been deleted
+			if ((*it)->GetState() == Object::E_ToDelete)
+			{
+				delete *it;
+				it = m_objectList.erase(it);
+				
+				if (it == endit)
+				{
+					break;
+				}
+			}
+			else
+			{
+				(*it)->Update();
+			}
 		}
 	}
 

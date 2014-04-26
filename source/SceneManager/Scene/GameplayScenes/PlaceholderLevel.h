@@ -18,10 +18,17 @@ public:
 	Level();
 	~Level();
 
+	void Level::BuildObjectsFromLevelLayout();
+	std::vector<Object*>::iterator GetObjectListBegin(){ return m_objectList.begin(); }
+	std::vector<Object*>::iterator GetObjectListEnd(){ return m_objectList.end(); }
+
+
 	glm::vec4& GetCurrentPosition() { return m_currentPosition;  }
 	void ScrollSideways(const glm::vec4& translation) { m_currentPosition += translation; };
 
 private:
+	std::vector<Object*> m_objectList;
+
 	glm::vec4 m_currentPosition; // used for scrolling. 
 };
 
@@ -33,6 +40,9 @@ public:
 	~PlaceholderLevel();
 
 	virtual void Init();
+
+	void InitLevel(Level* level);
+
 	virtual void Uninit();
 
 	void CreateTitleScreenObject();
@@ -44,7 +54,7 @@ public:
 private:
 	MainCharacter* m_titleScreenObject;
 	Camera* m_dummyCamera;
-	std::list<Level> m_levels; // levels that go from left to right
+	std::list<Level*> m_levels; // levels that go from left to right
 };
 
 } // namespace SceneManager

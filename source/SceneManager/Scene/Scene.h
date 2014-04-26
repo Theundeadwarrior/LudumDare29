@@ -75,8 +75,10 @@ public:
 	void UpdateAllPointLights();
 	void UpdateAllObjects();
 
-private:
+protected:
     std::list<Object*> m_objectList;
+	
+private:
 	std::vector<Object*> m_pointCloudList;
 	std::vector<Camera*> m_cameraList;
 	std::vector<PointLight*> m_pointLightList;
