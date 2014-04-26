@@ -91,7 +91,7 @@ namespace SceneManager
 		//m_titleScreenObject = new Object(GetMaterial(), GetQuad(), Transform());
 		AddObject(m_titleScreenObject);
 
-		PerspectiveCameraParams params(45, 1024/768.0f, 0.1f, 1000.0f);
+		PerspectiveCameraParams params(45, 1280/720.0f, 0.1f, 1000.0f);
 		m_dummyCamera = new PerspectiveCamera(params, glm::vec3(0,5,5), glm::vec3(0,0,-1), glm::vec3(0,5,-5));
 
 		AddCamera(m_dummyCamera);

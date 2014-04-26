@@ -23,7 +23,7 @@ GraphicsEngine::GraphicsEngine(int argc, char *argv[])
 {
     LowLevelGraphics::LowLevelAPI::Initialize(&argc, argv);
 
-    LowLevelGraphics::WindowParameters params("Graphic Engine", 1024, 768, 0, 0);
+    LowLevelGraphics::WindowParameters params("Graphic Engine", 1280, 720, 0, 0);
     LowLevelGraphics::WindowManager::GetInstance().AddWindow(params);
 }
 
