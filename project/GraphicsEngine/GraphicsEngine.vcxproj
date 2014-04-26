@@ -19,10 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\source\GraphicsEngine\GraphicsEngine.h" />
-    <ClInclude Include="..\..\source\GraphicsEngine\Photographer\Photographer.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\source\GraphicsEngine\GraphicsEngine.cpp" />
     <ClCompile Include="..\..\source\GraphicsEngine\Photographer\Photographer.cpp" />
   </ItemGroup>
@@ -30,6 +26,10 @@
     <ProjectReference Include="..\ParticleSystem\ParticleSystem.vcxproj">
       <Project>{0266f58c-9dda-45c6-9565-0e32aa7b6d0c}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\GraphicsEngine\GraphicsEngine.h" />
+    <ClInclude Include="..\..\source\GraphicsEngine\Photographer\Photographer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{395D5235-2644-43D5-A60C-B35C96AED622}</ProjectGuid>
@@ -89,7 +89,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../extern;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../extern; $(SolutionDir)../source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

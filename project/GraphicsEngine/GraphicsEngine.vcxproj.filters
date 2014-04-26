@@ -10,19 +10,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\source\GraphicsEngine\GraphicsEngine.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\GraphicsEngine\Photographer\Photographer.h">
-      <Filter>Source Files\Photographer</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\source\GraphicsEngine\GraphicsEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\GraphicsEngine\Photographer\Photographer.cpp">
       <Filter>Source Files\Photographer</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\GraphicsEngine\GraphicsEngine.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\GraphicsEngine\Photographer\Photographer.h">
+      <Filter>Source Files\Photographer</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

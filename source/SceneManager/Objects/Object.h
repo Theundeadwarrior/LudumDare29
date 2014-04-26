@@ -36,6 +36,7 @@ namespace SceneManager
 			void Update();
 
 		protected:
+			Object();
 			Transform m_transform;
 			GeometryID m_geometryID;
 			MaterialID m_materialID;
