@@ -29,6 +29,9 @@ namespace SceneManager
 	void MainCharacter::Init()
 	{
 		GamePlayObject::Init();
+
+		SetXY(-0.4f, -0.2f);
+		SetScaleXY(0.2f , 0.2f);
 	}
 
 	void MainCharacter::Uninit()
@@ -38,7 +41,7 @@ namespace SceneManager
 
 	void MainCharacter::Update()
 	{
-
+		GamePlayObject::Update();
 	}
 
 	void MainCharacter::Reset()
@@ -46,7 +49,7 @@ namespace SceneManager
 
 	}
 
-	TextureId MainCharacter::GetTexture()
+	TextureId MainCharacter::GetTextureID()
 	{
 		SceneManager& sceneManager = SceneManager::GetInstance();
 
@@ -57,13 +60,13 @@ namespace SceneManager
 		return textureID;
 	}
 
-	MaterialID MainCharacter::GetMaterial()
+	MaterialID MainCharacter::GetMaterialID()
 	{
-		TextureParameter textureParameter(GetTexture());
+		TextureParameter textureParameter(GetTextureID());
 		MaterialParameters materialParameters;
 		materialParameters.diffuseMapParam = textureParameter;
 
-		static MaterialID materialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters,GamePlayObject::GetShader());
+		static MaterialID materialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters,GamePlayObject::GetShaderID());
 
 		return materialID;
 	}

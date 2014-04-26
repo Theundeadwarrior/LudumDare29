@@ -31,18 +31,23 @@ namespace SceneManager
 		virtual void Init();
 		virtual void Uninit(){}
 
-		virtual void Update(){}
+		virtual void Update();
 		virtual void Reset(){}
+
+		void SetXY(float x, float y);
+		void SetScaleXY(float x, float y);
+		void SetRelativeXY(float x, float y);
+		void SetRelativeScaleXY(float x, float y);
 
 		virtual const GamePlayObjectType Intersect(const GamePlayObject& gameplayObject)const{return gameplayObject.GetGameplayObjectType();}
 
 		virtual const GamePlayObjectType GetGameplayObjectType()const =0{return Invalid;}
 
-		virtual TextureId GetTexture()=0{return -1;}
-		virtual MaterialID GetMaterial()=0{return -1;}
+		virtual TextureId GetTextureID()=0{return -1;}
+		virtual MaterialID GetMaterialID()=0{return -1;}
 
-		static ShaderListID GetShader();
-		static GeometryID GetQuad();
+		static ShaderListID GetShaderID();
+		static GeometryID GetQuadID();
 
 	protected:
 		bool m_isPositionAffectedByLevel;

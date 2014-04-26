@@ -36,8 +36,8 @@ namespace SceneManager
 		virtual void Update();
 		virtual void Reset();
 
-		virtual TextureId GetTexture();
-		virtual MaterialID GetMaterial();
+		virtual TextureId GetTextureID();
+		virtual MaterialID GetMaterialID();
 
 		virtual const GamePlayObjectType GetGameplayObjectType()const{return GamePlayObject::MainCharacter;}
 
