@@ -41,6 +41,7 @@ namespace Image
 		cimg_library::CImg<T> imageFile(tpath);
 		outputParams.spectrum = imageFile.spectrum();
 		imageFile.mirror('y');
+		imageFile.rotate(90);
 		T** content = new T*[outputParams.spectrum];
 
 		for(unsigned int i = 0; i < outputParams.spectrum; ++i)
