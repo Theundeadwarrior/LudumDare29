@@ -215,6 +215,11 @@ namespace SceneManager
 		Events::EventManager::GetInstance().UnregisterMouseListener(this);
 	}
 
+	void Scene::Update()
+	{
+		UpdateAllObjects();
+	}
+
 } // namespace SceneManager
 } // namespace Atum
 

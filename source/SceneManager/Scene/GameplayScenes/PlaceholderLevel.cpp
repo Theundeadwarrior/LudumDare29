@@ -18,6 +18,11 @@ namespace SceneManager
 		, m_dummyCamera(NULL)
 	{
 		Init();
+
+		// buffers 3 levels
+		m_levels.push_back(Level());
+		m_levels.push_back(Level());
+		m_levels.push_back(Level());
 	}
 
 	PlaceholderLevel::PlaceholderLevel(const LevelLayout& level)
@@ -104,8 +109,31 @@ namespace SceneManager
 		delete m_dummyCamera;
 	}
 
+	void PlaceholderLevel::Update()
+	{
+		// Calls the update on base class for updating all objects
+		Scene::Update();
+
+
+		auto it = m_levels.begin();
+		auto itend = m_levels.end();
+		for (; it != itend; ++it)
+		{
+			it->ScrollSideways(glm::vec4(0.1f, 0, 0, 0));
+		}
+
+		// Needs to generate a new level if the current one is getting out of the screen.
+		if (m_levels.empty() == false && m_levels.front().GetCurrentPosition().x < -20)
+		{
+			m_levels.pop_front();
+			m_levels.push_back(Level());
+		}
+
+	}
+
 
 	Level::Level()
+	: m_currentPosition()
 	{
 
 	}

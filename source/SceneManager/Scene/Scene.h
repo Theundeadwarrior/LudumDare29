@@ -69,6 +69,9 @@ public:
 
 	//Lights update
 	//void UpdateIndexes(std::vector<Light*>* lights);
+
+	virtual void Update();
+
 	void UpdateAllPointLights();
 	void UpdateAllObjects();
 
