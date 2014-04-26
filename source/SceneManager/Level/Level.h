@@ -18,12 +18,10 @@ namespace SceneManager
 
 		void Update();
 		unsigned int GetWidth(){ return m_height.size(); }
-		void AddPlatform(unsigned int height, unsigned int width);
 		
-
-	private:
-		std::vector<unsigned int> m_height;
+		std::vector<int> m_height;
 		std::vector<unsigned int> m_specialTiles;
+
 	};
 
 	class LevelGenerator
@@ -49,8 +47,17 @@ namespace SceneManager
 		LevelGenerator();
 		~LevelGenerator();
 
-
 		Level GenerateLevel(const Parameters& params, unsigned int currentHeight = INVALID_UNSIGNED_INT);
+
+		int GetNextJumpLength(int jumpHeight);
+		int GetNextJumpHeight(unsigned int currentHeight, const Parameters &params);
+
+
+	private:
+
+		void AddJump(Level& level, unsigned int lenght);
+		void AddPlatform(Level& level, unsigned int height, unsigned int width);
+	
 	};
 } // namespace SceneManager
 } // namespace Atum
