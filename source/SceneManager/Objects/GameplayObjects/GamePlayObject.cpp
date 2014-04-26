@@ -20,7 +20,6 @@ namespace SceneManager
 		, m_currentPosition(position)
 		, m_scale(scale)
 	{
-
 	}
 
 	GamePlayObject::~GamePlayObject()

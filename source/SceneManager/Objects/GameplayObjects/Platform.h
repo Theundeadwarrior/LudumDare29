@@ -21,6 +21,10 @@ namespace SceneManager
 
 		virtual MaterialID GetMaterialID() override; 
 
+		virtual void Init();
+
+		virtual void Uninit();
+
 	};
 } // namespace SceneManager
 } // namespace Atum

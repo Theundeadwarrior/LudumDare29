@@ -58,9 +58,13 @@ namespace SceneManager
 			currentXPosition += currentPlatformLength;
 
 			Object* platform = new Platform(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
-			//((GamePlayObject*)platform)->Init();
-			//AddObject(platform);
+			((GamePlayObject*)platform)->Init();
+			AddObject(platform);
 		}
+
+		Object* platform = new Platform(glm::vec4(0, 0, 0, 1), glm::vec4(5, 1, 1, 1));
+		((GamePlayObject*)platform)->Init();
+		AddObject(platform);
 	}
 
 	PlaceholderLevel::~PlaceholderLevel()
@@ -86,7 +90,7 @@ namespace SceneManager
 
 		//m_titleScreenObject = new Object(GetMaterial(), GetQuad(), Transform());
 		AddObject(m_titleScreenObject);
-		//	
+
 		PerspectiveCameraParams params(45, 1024/768.0f, 0.1f, 1000.0f);
 		m_dummyCamera = new PerspectiveCamera(params, glm::vec3(0,5,5), glm::vec3(0,0,-1), glm::vec3(0,5,-5));
 

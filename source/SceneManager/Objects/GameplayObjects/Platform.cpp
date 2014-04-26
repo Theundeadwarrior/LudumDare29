@@ -18,12 +18,47 @@ namespace SceneManager
 		throw std::exception("The method or operation is not implemented.");
 	}
 
-	Atum::SceneManager::TextureId Platform::GetTextureID()
+
+	TextureId Platform::GetTextureID()
 	{
-		throw std::exception("The method or operation is not implemented.");
+		static TextureId textureID = INVALID_TEXTURE_ID;
+
+		SceneManager& sceneManager = SceneManager::GetInstance();
+
+		if (textureID == INVALID_TEXTURE_ID)
+		{
+			Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
+			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/MainCharacter.png");
+			textureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA);
+		}
+
+		return textureID;
 	}
 
-	Atum::SceneManager::MaterialID Platform::GetMaterialID()
+	MaterialID Platform::GetMaterialID()
+	{
+		static MaterialID materialID = INVALID_MATERIAL_ID;
+
+		if (materialID == INVALID_MATERIAL_ID)
+		{
+			TextureParameter textureParameter(GetTextureID());
+			MaterialParameters materialParameters;
+			materialParameters.diffuseMapParam = textureParameter;
+			materialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters, GamePlayObject::GetShaderID());
+		}
+		
+		return materialID;
+	}
+
+	void Platform::Init()
+	{
+		GamePlayObject::Init();
+		SetXY(m_currentPosition.x, m_currentPosition.y);
+		SetScaleXY(m_scale.x, m_scale.y);
+		//throw std::exception("The method or operation is not implemented.");
+	}
+
+	void Platform::Uninit()
 	{
 		throw std::exception("The method or operation is not implemented.");
 	}
