@@ -9,6 +9,8 @@ namespace SceneManager
 {
 	GamePlayObject::GamePlayObject()
 		: m_isPositionAffectedByLevel(true)
+		, m_currentPosition(glm::vec4(0,0,0,1))
+	    , m_scale(1.0f)
 	{
 
 	}

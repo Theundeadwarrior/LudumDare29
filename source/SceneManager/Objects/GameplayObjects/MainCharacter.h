@@ -43,9 +43,7 @@ namespace SceneManager
 
 	private:
 		CharacterState m_currentState;
-		glm::vec4 m_currentPosition;
 		glm::vec4 m_colorBlend;
-		float m_scale;
 	};
 
 } // namespace SceneManager
