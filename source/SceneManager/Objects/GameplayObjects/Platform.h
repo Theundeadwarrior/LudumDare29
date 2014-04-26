@@ -25,6 +25,7 @@ namespace SceneManager
 
 		virtual void Uninit();
 
+		virtual GamePlayObject::GamePlayObjectType Intersect(GamePlayObject* gameplayObject, GamePlayObject::CharacterState* state = NULL) override;
 	};
 } // namespace SceneManager
 } // namespace Atum

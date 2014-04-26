@@ -90,6 +90,17 @@ namespace SceneManager
 		return materialID;
 	}
 
+	GamePlayObject::GamePlayObjectType MainCharacter::Intersect(GamePlayObject* gameplayObject, GamePlayObject::CharacterState* state)
+	{
+		if(gameplayObject->GetGameplayObjectType() == GamePlayObject::GamePlayObjectType_MainCharacter)
+			return GamePlayObject::GamePlayObjectType_Invalid;
+
+		if(gameplayObject->Intersect(this, &m_currentState) != GamePlayObject::GamePlayObjectType_Invalid)
+		{
+			return gameplayObject->GetGameplayObjectType();
+	    }
+	}
+
 	void MainCharacter::NotifyKeyPressed(const Events::KeyboardEvent& event)
 	{
 		if(event.GetEventType() == Events::KeyboardEventType::KEY_PRESSED)
