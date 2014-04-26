@@ -84,11 +84,21 @@ void SceneManager::CreateSceneFromLevel(Scene* outCreatedScene, const Level& lev
 		currentYPosition = level.m_height[currentIndex];
 		currentIndex++;
 		currentPlatformLength++;
-		while (currentIndex < levelLength && level.m_height[currentIndex] == JUMP_LEVEL_ID)
+
+		if (currentIndex < levelLength && level.m_height[currentIndex] == JUMP_LEVEL_ID)
 		{
-			currentIndex++;
-			currentXPosition++;
+			while (currentIndex < levelLength && level.m_height[currentIndex] == JUMP_LEVEL_ID)
+			{
+				currentIndex++;
+				currentXPosition++;
+			}
+
+			currentPlatformLength--;
 		}
+
+
+		currentYPosition = level.m_height[currentIndex];
+
 		while (currentIndex < levelLength && level.m_height[currentIndex] == currentYPosition)
 		{
 			currentIndex++;
@@ -97,7 +107,8 @@ void SceneManager::CreateSceneFromLevel(Scene* outCreatedScene, const Level& lev
 		currentXPosition += currentPlatformLength;
 
 		Platform platform(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
-		currentPlatformLength = 0;
+
+		//outCreatedScene->AddObject(platform);
 	}
 }
 
