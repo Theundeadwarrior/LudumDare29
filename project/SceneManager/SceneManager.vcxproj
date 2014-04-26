@@ -229,6 +229,7 @@
     <ClInclude Include="..\..\source\SceneManager\Properties\SelectionListProperty.h" />
     <ClInclude Include="..\..\source\SceneManager\Properties\TextureProperty.h" />
     <ClInclude Include="..\..\source\SceneManager\SceneManager.h" />
+    <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\CreditScreen.h" />
     <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\TitleScreen.h" />
     <ClInclude Include="..\..\source\SceneManager\Scene\Scene.h" />
     <ClInclude Include="..\..\source\SceneManager\SkyBox\SkyBox.h" />
@@ -257,6 +258,7 @@
     <ClCompile Include="..\..\source\SceneManager\Properties\SelectionListProperty.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Properties\TextureProperty.cpp" />
     <ClCompile Include="..\..\source\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\CreditScreen.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\TitleScreen.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Scene\Scene.cpp" />
     <ClCompile Include="..\..\source\SceneManager\SkyBox\SkyBox.cpp" />

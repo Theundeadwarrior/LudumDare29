@@ -124,6 +124,9 @@
     <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\TitleScreen.h">
       <Filter>Source Files\Scene\GameplayScenes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\CreditScreen.h">
+      <Filter>Source Files\Scene\GameplayScenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\SceneManager\Objects\Object.cpp">
@@ -202,6 +205,9 @@
       <Filter>Source Files\SkyBox</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\TitleScreen.cpp">
+      <Filter>Source Files\Scene\GameplayScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\CreditScreen.cpp">
       <Filter>Source Files\Scene\GameplayScenes</Filter>
     </ClCompile>
   </ItemGroup>

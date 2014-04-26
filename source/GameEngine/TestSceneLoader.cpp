@@ -16,6 +16,7 @@
 //#include "SceneManager/Lights/PointLight.h"
 #include "SceneManager/SceneManager.h"
 #include "SceneManager/Scene/GameplayScenes/TitleScreen.h"
+#include "SceneManager/Scene/GameplayScenes/CreditScreen.h"
 //#include "SceneManager/Objects/Cube.h"
 //#include "SceneManager/SkyBox/SkyBox.h"
 //#include "ParticleSystem/ParticleSystem.h"
@@ -40,6 +41,12 @@ TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_
 
 	m_sceneManager.AddScene(titleScreen);
 	m_sceneManager.SetCurrentScene(0);
+
+	SceneManager::Scene* creditScreen = new SceneManager::CreditScreen();
+
+	creditScreen->Init();
+
+	m_sceneManager.AddScene(creditScreen);
 
 
 
@@ -506,11 +513,11 @@ void TestSceneLoader::NotifyKeyPressed(const Events::KeyboardEvent& event)
 			m_sceneManager.SetCurrentScene(0);
 			//m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
 		}
-		//else if (event.GetKey() == '2')
-		//{
-		//	m_sceneManager.SetCurrentScene(1);
-		//	//m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
-		//}
+		else if (event.GetKey() == '2')
+		{
+			m_sceneManager.SetCurrentScene(1);
+			//m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
+		}
 		//else if (event.GetKey() == '3')
 		//{
 		//	m_sceneManager.SetCurrentScene(2);

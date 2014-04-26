@@ -1,4 +1,4 @@
-#include "SceneManager/Scene/GameplayScenes/TitleScreen.h"
+#include "SceneManager/Scene/GameplayScenes/CreditScreen.h"
 #include "SceneManager/SceneManager.h"
 #include "SceneManager/Objects/Object.h"
 #include "SceneManager/Camera/PerspectiveCamera.h"
@@ -11,7 +11,7 @@ namespace Atum
 {
 namespace SceneManager
 {
-	TitleScreen::TitleScreen()
+	CreditScreen::CreditScreen()
 		:m_alphaTexturedQuadShaderID(0)
 		,m_titleScreenTextureID(0)
 		,m_titleScreenQuadID(0)
@@ -21,12 +21,12 @@ namespace SceneManager
 	{
 	}
 
-	TitleScreen::~TitleScreen()
+	CreditScreen::~CreditScreen()
 	{
 		Uninit();
 	}
 
-	void TitleScreen::Init()
+	void CreditScreen::Init()
 	{
 		LoadShader();
 		LoadTexture();
@@ -36,7 +36,7 @@ namespace SceneManager
 		CreateTitleScreenObject();
 	}
 
-	void TitleScreen::Uninit()
+	void CreditScreen::Uninit()
 	{
 		RemoveTitleScreenObject();
 
@@ -46,26 +46,26 @@ namespace SceneManager
 		UnloadShader();
 	}
 
-	void TitleScreen::LoadShader()
+	void CreditScreen::LoadShader()
 	{
 		m_alphaTexturedQuadShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/FullScreenAlphaTestedTexture.vx", "../../data/shaders/AlphaTestedTexture.fg", NULL);
 	}
 
-	void TitleScreen::LoadTexture()
+	void CreditScreen::LoadTexture()
 	{
 		SceneManager& sceneManager = SceneManager::GetInstance();
 
 		Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
-		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/TitleScreen.bmp");
+		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/Credits.bmp");
 		m_titleScreenTextureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
 	}
 
-	void TitleScreen::LoadQuad()
+	void CreditScreen::LoadQuad()
 	{
 		m_titleScreenQuadID = SceneManager::GetInstance().GetGeometryManager()->CreateGeometry(Utilities::CreatePlaneGeometry(1.0f,1.0f));
 	}
 
-	void TitleScreen::LoadMaterial()
+	void CreditScreen::LoadMaterial()
 	{
 		TextureParameter textureParameter(m_titleScreenTextureID);
 		MaterialParameters materialParameters;
@@ -74,27 +74,27 @@ namespace SceneManager
 		m_titleScreenMaterialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters,m_alphaTexturedQuadShaderID);
 	}
 
-	void TitleScreen::UnloadShader()
+	void CreditScreen::UnloadShader()
 	{
 		SceneManager::GetInstance().GetShaderListManager()->RemoveShaderList(m_alphaTexturedQuadShaderID);
 	}
 
-	void TitleScreen::UnloadTexture()
+	void CreditScreen::UnloadTexture()
 	{
 		SceneManager::GetInstance().GetTextureManager()->RemoveTexture(m_titleScreenTextureID);
 	}
 
-	void TitleScreen::UnloadQuad()
+	void CreditScreen::UnloadQuad()
 	{
 		SceneManager::GetInstance().GetGeometryManager()->RemoveGeometry(m_titleScreenQuadID);
 	}
 
-	void TitleScreen::UnloadMaterial()
+	void CreditScreen::UnloadMaterial()
 	{
 		SceneManager::GetInstance().GetMaterialManager()->RemoveMaterial(m_titleScreenMaterialID);
 	}
 
-	void TitleScreen::CreateTitleScreenObject()
+	void CreditScreen::CreateTitleScreenObject()
 	{
 		m_titleScreenObject = new Object(m_titleScreenMaterialID, m_titleScreenQuadID, Transform());
 		AddObject(m_titleScreenObject);
@@ -106,7 +106,7 @@ namespace SceneManager
 		SetCurrentCamera(0);
 	}
 
-	void TitleScreen::RemoveTitleScreenObject()
+	void CreditScreen::RemoveTitleScreenObject()
 	{
 		delete m_titleScreenObject;
 		delete m_dummyCamera;
