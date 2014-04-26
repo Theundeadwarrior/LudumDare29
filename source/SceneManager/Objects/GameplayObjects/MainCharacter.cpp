@@ -52,7 +52,7 @@ namespace SceneManager
 
 		Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
 		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/MainCharacter.png");
-		static TextureId textureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
+		static TextureId textureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA);
 
 		return textureID;
 	}
