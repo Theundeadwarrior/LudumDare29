@@ -5,9 +5,7 @@ namespace Atum
 {
 namespace SceneManager
 {
-	MainCharacter::MainCharacter(MaterialID materialID, const Transform& transform)
-		:GamePlayObject(materialID, 
-		transform)
+	MainCharacter::MainCharacter()
 	{
 		m_isPositionAffectedByLevel = false;
 	}

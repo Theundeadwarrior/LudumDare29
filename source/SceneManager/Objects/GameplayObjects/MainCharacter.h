@@ -33,11 +33,13 @@ namespace SceneManager
 		void Update();
 		void Reset();
 
+		virtual const GamePlayObjectType GetGameplayObjectType()const{return GamePlayObject::MainCharacter;}
+
 	private:
 		CharacterState m_currentState;
 		glm::vec4 m_currentPosition;
+		glm::vec4 m_colorBlend;
 		float m_scale;
-
 	};
 
 } // namespace SceneManager

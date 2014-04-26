@@ -5,11 +5,8 @@ namespace Atum
 {
 namespace SceneManager
 {
-	GamePlayObject::GamePlayObject(MaterialID materialID, const Transform& transform)
-		:Object(materialID, 
-		SceneManager::GetInstance().GetGeometryManager()->GetStandardPlaneGeometryId(), 
-		transform)
-		,m_isPositionAffectedByLevel(true)
+	GamePlayObject::GamePlayObject()
+		: m_isPositionAffectedByLevel(true)
 	{}
 
 	GamePlayObject::~GamePlayObject()
