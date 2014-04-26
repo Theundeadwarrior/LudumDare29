@@ -50,7 +50,7 @@ namespace SceneManager
 
 		m_speed -= m_acceleration; 
 
-		SetRelativeXY(0.0f,m_speed);
+		SetRelativeXY(0.01f,m_speed);
 	}
 
 	void MainCharacter::Reset()

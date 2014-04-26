@@ -13,10 +13,10 @@ namespace SceneManager
 	{
 	}
 
-	const GamePlayObject::GamePlayObjectType PlatformCanyon::GetGameplayObjectType() const
-	{
-		throw std::exception("The method or operation is not implemented.");
-	}
+	//const GamePlayObject::GamePlayObjectType PlatformCanyon::GetGameplayObjectType() const
+	//{
+	//	throw std::exception("The method or operation is not implemented.");
+	//}
 
 
 	TextureId PlatformCanyon::GetTextureID()

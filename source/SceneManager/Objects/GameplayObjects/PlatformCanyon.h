@@ -16,7 +16,9 @@ namespace SceneManager
 		PlatformCanyon::PlatformCanyon(glm::vec4 position, glm::vec4 scale);
 		~PlatformCanyon() {}
 
-		virtual const GamePlayObjectType GetGameplayObjectType() const override;
+		//virtual const GamePlayObjectType GetGameplayObjectType() const override;
+
+		virtual const GamePlayObject::GamePlayObjectType GetGameplayObjectType()const{return GamePlayObject::GamePlayObjectType_Platform;}
 
 		virtual TextureId GetTextureID() override;
 
