@@ -46,7 +46,7 @@ namespace SceneManager
 	protected:
 		bool m_isPositionAffectedByLevel;
 		glm::vec4 m_currentPosition;
-		float m_scale;
+		glm::vec4 m_scale;
 	};
 
 } // namespace SceneManager
