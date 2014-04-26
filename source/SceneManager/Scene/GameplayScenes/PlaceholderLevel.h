@@ -9,12 +9,15 @@ namespace Atum
 {
 namespace SceneManager
 {
-    
+ 
+class Level;
+
 class PlaceholderLevel : public Scene
 {
 public:
     PlaceholderLevel();
-    ~PlaceholderLevel();
+	PlaceholderLevel(const Level& level);
+	~PlaceholderLevel();
 
 	virtual void Init();
 	virtual void Uninit();

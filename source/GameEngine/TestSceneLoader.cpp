@@ -64,7 +64,7 @@ TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_
 	SceneManager::LevelGenerator levelGen;
 
 	SceneManager::Level level = levelGen.GenerateLevel(params);
-	m_sceneManager.CreateSceneFromLevel(placeholder, level);
+	SceneManager::Scene* testLevelScene = new SceneManager::PlaceholderLevel(level);
 
 
 	////-------------------------------------------------INIT SHADERS---------------------------------------------------------------------------------------------

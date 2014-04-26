@@ -5,6 +5,8 @@
 
 #include "Utilities/Image/ImageUtilities.h"
 #include "Utilities/BasicGeometry/BasicGeometryGenerator.h"
+#include "SceneManager/Objects/GameplayObjects/Platform.h"
+#include "SceneManager/Level/Level.h"
 
 
 namespace Atum
@@ -16,6 +18,49 @@ namespace SceneManager
 		,m_dummyCamera(NULL)
 	{
 		Init();
+	}
+
+	PlaceholderLevel::PlaceholderLevel(const Level& level)
+	{
+		int currentYPosition = 0;
+		float currentXPosition = 0;
+
+		int levelLength = level.GetLength();
+		int currentIndex = 0;
+
+		while (currentIndex < levelLength)
+		{
+			int currentPlatformLength = 0;
+
+			currentYPosition = level.m_height[currentIndex];
+			currentIndex++;
+			currentPlatformLength++;
+
+			if (currentIndex < levelLength && level.m_height[currentIndex] == JUMP_LEVEL_ID)
+			{
+				while (currentIndex < levelLength && level.m_height[currentIndex] == JUMP_LEVEL_ID)
+				{
+					currentIndex++;
+					currentXPosition++;
+				}
+
+				currentPlatformLength--;
+			}
+
+
+			currentYPosition = level.m_height[currentIndex];
+
+			while (currentIndex < levelLength && level.m_height[currentIndex] == currentYPosition)
+			{
+				currentIndex++;
+				currentPlatformLength++;
+			}
+			currentXPosition += currentPlatformLength;
+
+			Platform platform(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
+
+			//outCreatedScene->AddObject(platform);
+		}
 	}
 
 	PlaceholderLevel::~PlaceholderLevel()

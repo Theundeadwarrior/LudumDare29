@@ -13,7 +13,6 @@ namespace Atum
 namespace SceneManager
 {
 	class Scene;
-	class Level;
 
 	class SceneManager
 	{
@@ -34,9 +33,6 @@ namespace SceneManager
 		ShaderListManager* const GetShaderListManager();
 		GeometryManager* const GetGeometryManager();
         TextureManager* const GetTextureManager();
-
-
-		void SceneManager::CreateSceneFromLevel(Scene* outCreatedScene, const Level& level);
 
 	private:
 		SceneManager();
