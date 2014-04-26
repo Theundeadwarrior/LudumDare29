@@ -24,7 +24,7 @@ namespace SceneManager
 			WindSped
 		};
 
-		MainCharacter(MaterialID materialID, const Transform& transform);
+		MainCharacter();
 		~MainCharacter();
 
 		void GetPropertyList ( PropertyList& o_properties );
