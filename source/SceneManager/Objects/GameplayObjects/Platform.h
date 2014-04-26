@@ -3,7 +3,7 @@
 
 #include "SceneManager/Objects/Object.h"
 #include "SceneManager/Manager/TypedefID.h"
-#include "GamePlayObject.h"
+#include "SceneManager/Objects/GameplayObjects/GamePlayObject.h"
 
 namespace Atum
 {
@@ -14,6 +14,13 @@ namespace SceneManager
 	public:
 		Platform::Platform(glm::vec4 position, glm::vec4 scale);
 		~Platform() {}
+
+		virtual const GamePlayObjectType GetGameplayObjectType() const;
+
+		virtual TextureId GetTexture();
+
+		virtual MaterialID GetMaterial();
+
 	};
 } // namespace SceneManager
 } // namespace Atum

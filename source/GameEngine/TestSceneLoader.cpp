@@ -18,6 +18,7 @@
 #include "SceneManager/Scene/GameplayScenes/TitleScreen.h"
 #include "SceneManager/Scene/GameplayScenes/CreditScreen.h"
 #include "SceneManager/Scene/GameplayScenes/PlaceholderLevel.h"
+#include "../SceneManager/Level/Level.h"
 //#include "SceneManager/Objects/Cube.h"
 //#include "SceneManager/SkyBox/SkyBox.h"
 //#include "ParticleSystem/ParticleSystem.h"
@@ -53,6 +54,17 @@ TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_
 
 	m_sceneManager.AddScene(placeholder);
 
+
+
+	SceneManager::LevelGenerator::Parameters params;
+	params.LevelHeight = 12;
+	params.LevelWidth = 256;
+	params.PlatformLenghtRange[0] = 4;
+	params.PlatformLenghtRange[1] = 16;
+	SceneManager::LevelGenerator levelGen;
+
+	SceneManager::Level level = levelGen.GenerateLevel(params);
+	m_sceneManager.CreateSceneFromLevel(placeholder, level);
 
 
 	////-------------------------------------------------INIT SHADERS---------------------------------------------------------------------------------------------

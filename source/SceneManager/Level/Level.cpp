@@ -33,7 +33,7 @@ namespace SceneManager
 	{
 		for (unsigned i = 0; i < lenght; ++i)
 		{
-			level.m_height.push_back(-1);
+			level.m_height.push_back(JUMP_LEVEL_ID);
 		}
 	}
 

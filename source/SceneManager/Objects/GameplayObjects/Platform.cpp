@@ -13,5 +13,20 @@ namespace SceneManager
 	{
 	}
 
+	const GamePlayObject::GamePlayObjectType Platform::GetGameplayObjectType() const
+	{
+		throw std::exception("The method or operation is not implemented.");
+	}
+
+	Atum::SceneManager::TextureId Platform::GetTexture()
+	{
+		throw std::exception("The method or operation is not implemented.");
+	}
+
+	Atum::SceneManager::MaterialID Platform::GetMaterial()
+	{
+		throw std::exception("The method or operation is not implemented.");
+	}
+
 } // namespace SceneManager
 } // namespace Atum

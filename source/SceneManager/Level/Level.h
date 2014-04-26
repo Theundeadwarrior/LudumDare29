@@ -4,12 +4,12 @@
 #include <vector>
 
 #define INVALID_UNSIGNED_INT (unsigned int)-1
+#define JUMP_LEVEL_ID -1
 
 namespace Atum
 {
 namespace SceneManager
 {
-
 	class Level
 	{
 	public:
