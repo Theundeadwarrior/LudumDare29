@@ -15,7 +15,7 @@ namespace SceneManager
 
 	const GamePlayObject::GamePlayObjectType Platform::GetGameplayObjectType() const
 	{
-		throw std::exception("The method or operation is not implemented.");
+		return GamePlayObjectType_Platform;
 	}
 
 
@@ -63,6 +63,17 @@ namespace SceneManager
 	void Platform::Uninit()
 	{
 		throw std::exception("The method or operation is not implemented.");
+	}
+
+	GamePlayObject::GamePlayObjectType Platform::Intersect(GamePlayObject* gameplayObject, GamePlayObject::CharacterState* state)
+	{
+		switch(gameplayObject->GetGameplayObjectType())
+		{
+		case GamePlayObject::GamePlayObjectType_MainCharacter:
+
+		default:
+			return GamePlayObject::GamePlayObjectType_Invalid;
+		}
 	}
 
 } // namespace SceneManager

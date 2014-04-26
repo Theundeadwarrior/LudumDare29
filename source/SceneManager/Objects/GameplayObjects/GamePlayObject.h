@@ -16,9 +16,20 @@ namespace SceneManager
 	public:
 		enum GamePlayObjectType
 		{
-			MainCharacter,
-			Platform,
-			Invalid
+			GamePlayObjectType_MainCharacter,
+			GamePlayObjectType_Platform,
+			GamePlayObjectType_Invalid
+		};
+
+		enum CharacterState
+		{
+			Normal,
+			Dead,
+			Falling,
+			Jumping,
+			GhostSlowed,
+			WindSlowed,
+			WindSped
 		};
 
 		GamePlayObject();
@@ -41,9 +52,9 @@ namespace SceneManager
 		void SetRelativeXY(float x, float y);
 		void SetRelativeScaleXY(float x, float y);
 
-		virtual const GamePlayObjectType Intersect(const GamePlayObject& gameplayObject)const{return gameplayObject.GetGameplayObjectType();}
+		virtual GamePlayObjectType Intersect(GamePlayObject* gameplayObject, CharacterState* state = NULL){return GamePlayObjectType_Invalid;}
 
-		virtual const GamePlayObjectType GetGameplayObjectType()const =0{return Invalid;}
+		virtual const GamePlayObjectType GetGameplayObjectType()const =0{return GamePlayObjectType_Invalid;}
 
 		virtual TextureId GetTextureID()=0{return -1;}
 		virtual MaterialID GetMaterialID()=0{return -1;}

@@ -50,7 +50,7 @@ namespace SceneManager
 
 		m_speed -= m_acceleration; 
 
-		SetRelativeXY(0.0f,m_speed);
+		SetRelativeXY(0.01f,m_speed);
 	}
 
 	void MainCharacter::Reset()
@@ -88,6 +88,17 @@ namespace SceneManager
 		}
 
 		return materialID;
+	}
+
+	GamePlayObject::GamePlayObjectType MainCharacter::Intersect(GamePlayObject* gameplayObject, GamePlayObject::CharacterState* state)
+	{
+		if(gameplayObject->GetGameplayObjectType() == GamePlayObject::GamePlayObjectType_MainCharacter)
+			return GamePlayObject::GamePlayObjectType_Invalid;
+
+		if(gameplayObject->Intersect(this, &m_currentState) != GamePlayObject::GamePlayObjectType_Invalid)
+		{
+			return gameplayObject->GetGameplayObjectType();
+	    }
 	}
 
 	void MainCharacter::NotifyKeyPressed(const Events::KeyboardEvent& event)

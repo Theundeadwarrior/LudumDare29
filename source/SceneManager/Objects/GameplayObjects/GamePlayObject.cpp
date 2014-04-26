@@ -1,6 +1,8 @@
 #include "SceneManager/Objects/GameplayObjects/GamePlayObject.h"
 #include "SceneManager/SceneManager.h"
 
+#include "SceneManager/Scene/Scene.h"
+
 #include "Utilities/BasicGeometry/BasicGeometryGenerator.h"
 
 namespace Atum
@@ -42,6 +44,16 @@ namespace SceneManager
 
 	void GamePlayObject::Update()
 	{
+		Scene* scene = SceneManager::GetInstance().GetCurrentScene();
+		
+		std::vector<Object*>::iterator it = scene->GetBeginObjectList();
+		std::vector<Object*>::iterator itEnd = scene->GetEndObjectList();
+
+		for(;it!=itEnd;++it)
+		{
+			if(GetGameplayObjectType() != GamePlayObjectType_Platform)
+				Intersect(static_cast<GamePlayObject*>(*it));
+		}
 	}
 
 	void GamePlayObject::SetXY(float x, float y)

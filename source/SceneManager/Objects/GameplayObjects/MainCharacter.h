@@ -15,17 +15,6 @@ namespace SceneManager
 	class MainCharacter : public GamePlayObject, public Events::InputKeyboardListener
 	{
 	public:
-		enum CharacterState
-		{
-			Normal,
-			Dead,
-			Falling,
-			Jumping,
-			GhostSlowed,
-			WindSlowed,
-			WindSped
-		};
-
 		MainCharacter();
 		~MainCharacter();
 
@@ -41,14 +30,16 @@ namespace SceneManager
 		virtual TextureId GetTextureID();
 		virtual MaterialID GetMaterialID();
 
-		virtual const GamePlayObjectType GetGameplayObjectType()const{return GamePlayObject::MainCharacter;}
+		virtual const GamePlayObject::GamePlayObjectType GetGameplayObjectType()const{return GamePlayObject::GamePlayObjectType_MainCharacter;}
+
+		virtual GamePlayObject::GamePlayObjectType Intersect(GamePlayObject* gameplayObject, GamePlayObject::CharacterState* state = NULL) override;
 
 		virtual void NotifyKeyPressed(const Events::KeyboardEvent& event);
 
 		void Jump();
 
 	private:
-		CharacterState m_currentState;
+		GamePlayObject::CharacterState m_currentState;
 		glm::vec4 m_colorBlend;
 
 		float m_acceleration;

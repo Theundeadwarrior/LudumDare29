@@ -168,8 +168,6 @@ void GraphicsEngine::DrawOpaqueObjects(SceneManager::Scene* scene)
 
     for(;it!=itEnd;++it)
     {
-        (*it)->Update();
-
 		// We use the corresponding shader
 		LowLevelGraphics::LowLevelAPI::BindShaders((*it)->GetMaterial()->GetShaderList());
 
