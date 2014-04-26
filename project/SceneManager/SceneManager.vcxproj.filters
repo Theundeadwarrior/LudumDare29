@@ -38,6 +38,9 @@
     <Filter Include="Source Files\Scene\GameplayScenes">
       <UniqueIdentifier>{3f39a18c-9138-43c3-85c0-00716c1207b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Level">
+      <UniqueIdentifier>{2f60499c-6584-4a96-bd63-e9f3ce190204}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\SceneManager\Objects\Object.h">
@@ -127,6 +130,9 @@
     <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\CreditScreen.h">
       <Filter>Source Files\Scene\GameplayScenes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\SceneManager\Level\Level.h">
+      <Filter>Source Files\Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\SceneManager\Objects\Object.cpp">
@@ -209,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\CreditScreen.cpp">
       <Filter>Source Files\Scene\GameplayScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\SceneManager\Level\Level.cpp">
+      <Filter>Source Files\Level</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
