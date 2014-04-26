@@ -15,11 +15,11 @@ namespace SceneManager
 		Platform::Platform(glm::vec4 position, glm::vec4 scale);
 		~Platform() {}
 
-		virtual const GamePlayObjectType GetGameplayObjectType() const;
+		virtual const GamePlayObjectType GetGameplayObjectType() const override;
 
-		virtual TextureId GetTexture();
+		virtual TextureId GetTextureID() override;
 
-		virtual MaterialID GetMaterial();
+		virtual MaterialID GetMaterialID() override; 
 
 	};
 } // namespace SceneManager

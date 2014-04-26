@@ -33,7 +33,7 @@ namespace SceneManager
 			Transform* const GetTransform();
 
 			void UpdateAABB();
-			void Update();
+			virtual void Update();
 
 		protected:
 			Object();

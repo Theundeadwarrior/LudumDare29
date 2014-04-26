@@ -18,12 +18,12 @@ namespace SceneManager
 		throw std::exception("The method or operation is not implemented.");
 	}
 
-	Atum::SceneManager::TextureId Platform::GetTexture()
+	Atum::SceneManager::TextureId Platform::GetTextureID()
 	{
 		throw std::exception("The method or operation is not implemented.");
 	}
 
-	Atum::SceneManager::MaterialID Platform::GetMaterial()
+	Atum::SceneManager::MaterialID Platform::GetMaterialID()
 	{
 		throw std::exception("The method or operation is not implemented.");
 	}

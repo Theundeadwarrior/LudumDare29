@@ -38,20 +38,16 @@ TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_
 	Events::EventManager::GetInstance().RegisterKeyboardListener(this);
 
 	SceneManager::Scene* titleScreen = new SceneManager::TitleScreen();
-
 	titleScreen->Init();
-
 	m_sceneManager.AddScene(titleScreen);
 	m_sceneManager.SetCurrentScene(0);
 
 	SceneManager::Scene* creditScreen = new SceneManager::CreditScreen();
-
 	creditScreen->Init();
-
 	m_sceneManager.AddScene(creditScreen);
 
 	SceneManager::Scene* placeholder = new SceneManager::PlaceholderLevel();
-
+	placeholder->Init();
 	m_sceneManager.AddScene(placeholder);
 
 
@@ -65,6 +61,8 @@ TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_
 
 	SceneManager::Level level = levelGen.GenerateLevel(params);
 	SceneManager::Scene* testLevelScene = new SceneManager::PlaceholderLevel(level);
+	testLevelScene->Init();
+	m_sceneManager.AddScene(testLevelScene);
 
 
 	////-------------------------------------------------INIT SHADERS---------------------------------------------------------------------------------------------
@@ -540,11 +538,11 @@ void TestSceneLoader::NotifyKeyPressed(const Events::KeyboardEvent& event)
 			m_sceneManager.SetCurrentScene(2);
 			//m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
 		}
-		//else if (event.GetKey() == '4')
-		//{
-		//	m_sceneManager.SetCurrentScene(3);
-		//	m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
-		//}
+		else if (event.GetKey() == '4')
+		{
+			m_sceneManager.SetCurrentScene(3);
+			//m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
+		}
 		//else if (event.GetKey() == '5')
 		//{
 		//	m_sceneManager.SetCurrentScene(4);

@@ -28,7 +28,7 @@ namespace SceneManager
 		int levelLength = level.GetLength();
 		int currentIndex = 0;
 
-		while (currentIndex < levelLength)
+		while (currentIndex +1 < levelLength)
 		{
 			int currentPlatformLength = 0;
 
@@ -57,9 +57,9 @@ namespace SceneManager
 			}
 			currentXPosition += currentPlatformLength;
 
-			Platform platform(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
-
-			//outCreatedScene->AddObject(platform);
+			Object* platform = new Platform(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
+			//((GamePlayObject*)platform)->Init();
+			//AddObject(platform);
 		}
 	}
 
