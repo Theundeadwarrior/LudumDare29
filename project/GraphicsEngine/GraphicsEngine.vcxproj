@@ -69,7 +69,6 @@
     <OutDir>$(SolutionDir)..\output\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\temp\$(Configuration)\$(ProjectName)\</IntDir>
     <TargetExt>.lib</TargetExt>
-    <IncludePath>C:\Users\Luc\Programmation\Library\includes;$(IncludePath);$(SolutionDir)..\source\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\output\$(Configuration)\</OutDir>

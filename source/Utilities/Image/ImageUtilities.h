@@ -80,7 +80,7 @@ namespace Image
 		cimg_library::CImg<T> screenshotImage(data,inputParams.width,inputParams.height,1,inputParams.spectrum,true);
 		screenshotImage.mirror('y');
 		screenshotImage.save(tpath);
-	}	
+	}
 
 	inline cimg_library::CImg<float> LoadImageFromFile(const char* path)
 	{

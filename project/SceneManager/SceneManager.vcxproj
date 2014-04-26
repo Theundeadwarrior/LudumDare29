@@ -208,6 +208,7 @@
     <ClInclude Include="..\..\source\SceneManager\Camera\Camera.h" />
     <ClInclude Include="..\..\source\SceneManager\Camera\PerspectiveCamera.h" />
     <ClInclude Include="..\..\source\SceneManager\Component\Component.h" />
+    <ClInclude Include="..\..\source\SceneManager\Level\Level.h" />
     <ClInclude Include="..\..\source\SceneManager\Lights\Light.h" />
     <ClInclude Include="..\..\source\SceneManager\Lights\PointLight.h" />
     <ClInclude Include="..\..\source\SceneManager\Manager\GeometryManager.h" />
@@ -239,6 +240,7 @@
     <ClCompile Include="..\..\source\SceneManager\Camera\Camera.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Camera\PerspectiveCamera.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Component\Component.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\Level\Level.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Lights\Light.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Lights\PointLight.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Manager\GeometryManager.cpp" />

@@ -112,7 +112,7 @@ void GraphicsEngine::Render(SceneManager::Scene* scene)
         }
         LowLevelGraphics::LowLevelAPI::DisableAlphaBlending();
     }
-	DrawSelectionBox(scene);
+	//DrawSelectionBox(scene);
     LowLevelGraphics::LowLevelAPI::DisableDepthRead();
     //LowLevelGraphics::LowLevelAPI::DeactivateWireframeMode();
 }

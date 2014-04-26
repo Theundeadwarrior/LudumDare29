@@ -113,6 +113,7 @@
 #pragma warning(disable:4800)
 #pragma warning(disable:4804)
 #pragma warning(disable:4996)
+#pragma warning(disable:4244)
 #define _CRT_SECURE_NO_DEPRECATE 1
 #define _CRT_NONSTDC_NO_DEPRECATE 1
 #endif
@@ -45515,6 +45516,9 @@ namespace cimg {
 
   // End of cimg_library:: namespace
 }
+
+#pragma warning(default:4244)
+
 
 //! Short alias name.
 namespace cil = cimg_library_suffixed;
