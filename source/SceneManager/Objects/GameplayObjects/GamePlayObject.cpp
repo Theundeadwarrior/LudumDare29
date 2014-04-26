@@ -10,11 +10,18 @@ namespace SceneManager
 	GamePlayObject::GamePlayObject()
 		: m_isPositionAffectedByLevel(true)
 	{
-		m_materialID = GetMaterial();
+
 	}
 
 	GamePlayObject::~GamePlayObject()
 	{}
+
+	void GamePlayObject::Init()
+	{
+		m_materialID = GetMaterial();
+		m_geometryID = GetQuad();
+		UpdateAABB();
+	}
 
 	void GamePlayObject::GetPropertyList( PropertyList& o_properties )
 	{

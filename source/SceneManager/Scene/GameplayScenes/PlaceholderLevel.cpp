@@ -15,6 +15,7 @@ namespace SceneManager
 		:m_titleScreenObject(NULL)
 		,m_dummyCamera(NULL)
 	{
+		Init();
 	}
 
 	PlaceholderLevel::~PlaceholderLevel()
@@ -35,20 +36,23 @@ namespace SceneManager
 
 	void PlaceholderLevel::CreateTitleScreenObject()
 	{
-		//m_titleScreenObject = new Object(GetMaterial(), GetQuad(), Transform());
-		//AddObject(m_titleScreenObject);
-		//	
-		//PerspectiveCameraParams params(45, 1024/768.0f, 0.1f, 1000.0f);
-		//m_dummyCamera = new PerspectiveCamera(params, glm::vec3(0,5,5), glm::vec3(0,0,-1), glm::vec3(0,5,-5));
+		m_titleScreenObject = new MainCharacter();
+		m_titleScreenObject->Init();
 
-		//AddCamera(m_dummyCamera);
-		//SetCurrentCamera(0);
+		//m_titleScreenObject = new Object(GetMaterial(), GetQuad(), Transform());
+		AddObject(m_titleScreenObject);
+		//	
+		PerspectiveCameraParams params(45, 1024/768.0f, 0.1f, 1000.0f);
+		m_dummyCamera = new PerspectiveCamera(params, glm::vec3(0,5,5), glm::vec3(0,0,-1), glm::vec3(0,5,-5));
+
+		AddCamera(m_dummyCamera);
+		SetCurrentCamera(0);
 	}
 
 	void PlaceholderLevel::RemoveTitleScreenObject()
 	{
-		//delete m_titleScreenObject;
-		//delete m_dummyCamera;
+		delete m_titleScreenObject;
+		delete m_dummyCamera;
 	}
 
 } // namespace SceneManager

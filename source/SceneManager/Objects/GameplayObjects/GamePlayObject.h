@@ -27,7 +27,7 @@ namespace SceneManager
 		void GetPropertyList ( PropertyList& o_properties );
 		void UpdatePropertyList ( PropertyList& i_properties );
 
-		virtual void Init(){}
+		virtual void Init();
 		virtual void Uninit(){}
 
 		virtual void Update(){}

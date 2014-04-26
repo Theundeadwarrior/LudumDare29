@@ -3,6 +3,7 @@
 
 #include "SceneManager/Scene/Scene.h"
 #include "SceneManager/Manager/TypedefID.h"
+#include "SceneManager/Objects/GameplayObjects/MainCharacter.h"
 
 namespace Atum
 {
@@ -23,7 +24,7 @@ public:
 	void RemoveTitleScreenObject();
 
 private:
-	Object* m_titleScreenObject;
+	MainCharacter* m_titleScreenObject;
 	Camera* m_dummyCamera;
 };
 

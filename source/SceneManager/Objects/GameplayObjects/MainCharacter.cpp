@@ -28,7 +28,7 @@ namespace SceneManager
 
 	void MainCharacter::Init()
 	{
-
+		GamePlayObject::Init();
 	}
 
 	void MainCharacter::Uninit()
