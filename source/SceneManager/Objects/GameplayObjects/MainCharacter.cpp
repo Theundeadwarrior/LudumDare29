@@ -26,5 +26,47 @@ namespace SceneManager
 		//update the child properties
 	}
 
+	void MainCharacter::Init()
+	{
+		GamePlayObject::Init();
+	}
+
+	void MainCharacter::Uninit()
+	{
+
+	}
+
+	void MainCharacter::Update()
+	{
+
+	}
+
+	void MainCharacter::Reset()
+	{
+
+	}
+
+	TextureId MainCharacter::GetTexture()
+	{
+		SceneManager& sceneManager = SceneManager::GetInstance();
+
+		Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
+		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/MainCharacter.png");
+		static TextureId textureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
+
+		return textureID;
+	}
+
+	MaterialID MainCharacter::GetMaterial()
+	{
+		TextureParameter textureParameter(GetTexture());
+		MaterialParameters materialParameters;
+		materialParameters.diffuseMapParam = textureParameter;
+
+		static MaterialID materialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters,GamePlayObject::GetShader());
+
+		return materialID;
+	}
+
 } // namespace SceneManager
 } // namespace Atum

@@ -17,6 +17,12 @@ namespace Atum
 {
 namespace SceneManager
 {
+	Object::Object()
+		:Component()
+	{
+		
+	}
+
 	Object::Object( MaterialID materialID, GeometryID geomId, const Transform& transform )
 		:Component(),
 		m_transform(transform),
