@@ -185,7 +185,7 @@ void GraphicsEngine::DrawOpaqueObjects(SceneManager::Scene* scene)
 		shaderProgram->UpdateShaderParameter(LowLevelGraphics::NORMALMATRIX, &normalMatrix[0][0], SHADER_MATRIX33);
 
         // We send the local parameters of the material to the shader
-        (*it)->GetMaterial()->BindShaderParameters();
+        (*it)->BindShaderParameters();
 
 		// We render
         LowLevelGraphics::LowLevelAPI::DrawCall((*it)->GetGeometry(),shaderProgram->GetProgramId());

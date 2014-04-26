@@ -87,6 +87,14 @@ namespace SceneManager
 		}
 	}
 
+	void Scene::UpdateAllObjects()
+	{
+		for(int i = 0; i<m_objectList.size(); i++)
+		{
+			m_objectList[i]->Update();
+		}
+	}
+
 	void Scene::NotifyMouseClicked( const Events::MouseEvent& event )
 	{
 		// If we are scrolling == Zooming

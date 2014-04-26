@@ -46,6 +46,8 @@ int main(int argc, char *argv[])
 		//physicsEngine.Advance(Utilities::Timer::GetInstance()->GetLapTime());
 		//physicsEngine.UpdateGraphicScene();
 
+		sceneManager.UpdateCurrentScene();
+
 		graphicsEngine->StartRendering(sceneManager.GetCurrentScene());
 		graphicsEngine->StopRendering();
 

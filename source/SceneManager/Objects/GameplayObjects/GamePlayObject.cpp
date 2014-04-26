@@ -32,6 +32,14 @@ namespace SceneManager
 		UpdateAABB();
 	}
 
+	void GamePlayObject::BindShaderParameters()
+	{
+		LowLevelGraphics::LowLevelAPI::BindShaders(SceneManager::GetInstance().GetShaderListManager()->GetShaderList(GetShaderID()));
+		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("translation", &m_currentPosition, SHADER_FLOAT4);
+		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("scale", &m_scale, SHADER_FLOAT4);
+		GetMaterial()->BindDiffuseMapToShader();
+	}
+
 	void GamePlayObject::Update()
 	{
 	}
@@ -40,28 +48,26 @@ namespace SceneManager
 	{
 		m_currentPosition[0] = x;
 		m_currentPosition[1] = y;
-		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("translation", &m_currentPosition, SHADER_FLOAT4);
+		
 	}
 
 	void GamePlayObject::SetScaleXY(float x, float y)
 	{
 		m_scale[0] = x;
 		m_scale[1] = y;
-		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("scale", &m_scale, SHADER_FLOAT4);
 	}
 
 	void GamePlayObject::SetRelativeXY(float x, float y)
 	{
 		m_currentPosition[0] += x;
 		m_currentPosition[1] += y;
-		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("translation", &m_currentPosition, SHADER_FLOAT4);
+		
 	}
 
 	void GamePlayObject::SetRelativeScaleXY(float x, float y)
 	{
 		m_scale[0] += x;
 		m_scale[1] += y;
-		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("scale", &m_scale, SHADER_FLOAT4);
 	}
 
 	void GamePlayObject::GetPropertyList( PropertyList& o_properties )
@@ -77,19 +83,9 @@ namespace SceneManager
 		//update the child properties
 	}
 	
-	namespace Hack
-	{
-		ShaderListID LocalLoadShader()
-		{
-			static ShaderListID standardGameplayObjectShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/StandardGameplayObject.vx", "../../data/shaders/AlphaTestedTexture.fg", NULL);
-			LowLevelGraphics::LowLevelAPI::BindShaders(SceneManager::GetInstance().GetShaderListManager()->GetShaderList(standardGameplayObjectShaderID));
-			return standardGameplayObjectShaderID;
-		}
-	}
-
 	ShaderListID GamePlayObject::GetShaderID()
 	{
-		static ShaderListID standardGameplayObjectShaderID = Hack::LocalLoadShader();
+		static ShaderListID standardGameplayObjectShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/StandardGameplayObject.vx", "../../data/shaders/AlphaTestedTexture.fg", NULL);;
 		return standardGameplayObjectShaderID;
 	}
 

@@ -26,6 +26,8 @@ namespace SceneManager
 		Scene* GetCurrentScene();
 		std::vector<Scene*> GetSceneList() { return m_sceneList; };
 
+		void UpdateCurrentScene();
+
 		void ClearAllResources();
 		void ClearAllScenes();
 

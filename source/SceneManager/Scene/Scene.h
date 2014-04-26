@@ -69,6 +69,7 @@ public:
 	//Lights update
 	//void UpdateIndexes(std::vector<Light*>* lights);
 	void UpdateAllPointLights();
+	void UpdateAllObjects();
 
 private:
     std::vector<Object*> m_objectList;

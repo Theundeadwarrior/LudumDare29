@@ -26,6 +26,8 @@ namespace SceneManager
 			virtual void GetPropertyList ( PropertyList& o_properties ) const;
 			virtual void UpdatePropertyList ( const PropertyList& i_properties );
 
+			virtual void BindShaderParameters(){GetMaterial()->BindShaderParameters();}
+
 			void SetMaterialID(MaterialID mId){m_materialID = mId;}
 
 			const LowLevelGraphics::Geometry* const GetGeometry();

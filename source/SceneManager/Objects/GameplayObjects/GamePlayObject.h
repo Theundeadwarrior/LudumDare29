@@ -28,6 +28,8 @@ namespace SceneManager
 		void GetPropertyList ( PropertyList& o_properties );
 		void UpdatePropertyList ( PropertyList& i_properties );
 
+		virtual void BindShaderParameters() override;
+
 		virtual void Init();
 		virtual void Uninit(){}
 

@@ -42,6 +42,8 @@ namespace SceneManager
 	void MainCharacter::Update()
 	{
 		GamePlayObject::Update();
+
+		//SetRelativeXY(0.0001f,0.0f);
 	}
 
 	void MainCharacter::Reset()
@@ -51,22 +53,32 @@ namespace SceneManager
 
 	TextureId MainCharacter::GetTextureID()
 	{
-		SceneManager& sceneManager = SceneManager::GetInstance();
+		static TextureId textureID = -1;
 
-		Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
-		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/MainCharacter.png");
-		static TextureId textureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA);
+		if(textureID == -1)
+		{
+			SceneManager& sceneManager = SceneManager::GetInstance();
+
+			Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
+			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/MainCharacter.png");
+			textureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA);
+		}
 
 		return textureID;
 	}
 
 	MaterialID MainCharacter::GetMaterialID()
 	{
-		TextureParameter textureParameter(GetTextureID());
-		MaterialParameters materialParameters;
-		materialParameters.diffuseMapParam = textureParameter;
+		static MaterialID materialID = -1;
 
-		static MaterialID materialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters,GamePlayObject::GetShaderID());
+		if(materialID == -1)
+		{
+			TextureParameter textureParameter(GetTextureID());
+			MaterialParameters materialParameters;
+			materialParameters.diffuseMapParam = textureParameter;
+
+			materialID = SceneManager::GetInstance().GetMaterialManager()->CreateMaterial(materialParameters,GamePlayObject::GetShaderID());
+		}
 
 		return materialID;
 	}

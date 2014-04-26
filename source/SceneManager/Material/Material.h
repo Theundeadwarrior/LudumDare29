@@ -106,6 +106,8 @@ namespace SceneManager
 		void GetEffectPropertyList(PropertyList& o_properties);
 		void UpdateEffectPropertyList(PropertyList& properties);
 
+		void BindDiffuseMapToShader();
+
     private:
 		Material(ShaderListID shaderListId); //use the MaterialManager to create a material
 		Material(const MaterialParameters& materialParameters, ShaderListID shaderListId);
@@ -113,7 +115,7 @@ namespace SceneManager
 		void UpdateShaderListID();
 
 		// Binding parameters to shader
-		void BindDiffuseMapToShader();
+		
 		void BindSkyBoxToShader();
 		void BindParallaxToShader();
 		void BindPhongToShader();

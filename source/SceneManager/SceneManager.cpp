@@ -1,6 +1,8 @@
 #include "SceneManager.h"
 #include "Utilities/Debug/Debug.h"
 
+#include "SceneManager/Scene/Scene.h"
+
 namespace Atum
 {
 namespace SceneManager
@@ -49,6 +51,11 @@ Scene* SceneManager::GetCurrentScene()
 {
 	ATUM_ASSERT_MESSAGE(m_currentScene, "There are no current scene. Please use SetCurrentScene.");
 	return m_currentScene;	
+}
+
+void SceneManager::UpdateCurrentScene()
+{
+	m_currentScene->UpdateAllObjects();
 }
 
 void SceneManager::ClearAllResources()
