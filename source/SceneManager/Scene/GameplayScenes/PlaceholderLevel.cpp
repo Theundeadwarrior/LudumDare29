@@ -16,7 +16,6 @@ namespace SceneManager
 	PlaceholderLevel::PlaceholderLevel()
 		: m_titleScreenObject(NULL)
 		, m_dummyCamera(NULL)
-		, m_currentPosition()
 	{
 		Init();
 	}
@@ -103,6 +102,17 @@ namespace SceneManager
 	{
 		delete m_titleScreenObject;
 		delete m_dummyCamera;
+	}
+
+
+	Level::Level()
+	{
+
+	}
+
+	Level::~Level()
+	{
+
 	}
 
 } // namespace SceneManager

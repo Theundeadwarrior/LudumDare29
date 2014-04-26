@@ -9,6 +9,7 @@
 #include "Events/InputMouseListener.h"
 #include "LowLevelGraphics/Material/Texture/TextureSkyBox.h"
 #include "ParticleSystem/ParticleSystem.h"
+#include <list>
 
 namespace Atum { namespace Events { class MouseEvent; }}
 
@@ -46,8 +47,8 @@ public:
 	void SetCurrentCamera(unsigned int id){m_currentCamera = m_cameraList[id];}
 
 	// iterator
-    std::vector<Object*>::iterator GetBeginObjectList(){return m_objectList.begin();}
-    std::vector<Object*>::iterator GetEndObjectList(){return m_objectList.end();}
+    std::list<Object*>::iterator GetBeginObjectList(){return m_objectList.begin();}
+	std::list<Object*>::iterator GetEndObjectList(){ return m_objectList.end(); }
 
 	std::vector<Object*>::iterator GetBeginPointCloudList(){return m_pointCloudList.begin();}
 	std::vector<Object*>::iterator GetEndPointCloudList(){return m_pointCloudList.end();}
@@ -72,7 +73,7 @@ public:
 	void UpdateAllObjects();
 
 private:
-    std::vector<Object*> m_objectList;
+    std::list<Object*> m_objectList;
 	std::vector<Object*> m_pointCloudList;
 	std::vector<Camera*> m_cameraList;
 	std::vector<PointLight*> m_pointLightList;

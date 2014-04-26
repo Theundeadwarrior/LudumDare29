@@ -12,6 +12,17 @@ namespace SceneManager
  
 class LevelLayout;
 
+class Level
+{
+public:
+	Level();
+	~Level();
+
+
+private:
+	glm::vec4 m_currentPosition; // used for scrolling
+};
+
 class PlaceholderLevel : public Scene
 {
 public:
@@ -27,11 +38,10 @@ public:
 	void RemoveTitleScreenObject();
 
 private:
-	glm::vec4 m_currentPosition; // used for scrolling
-
 	MainCharacter* m_titleScreenObject;
 	Camera* m_dummyCamera;
-
+	Level m_currentLevel;
+	Level m_nextLevel;
 };
 
 } // namespace SceneManager

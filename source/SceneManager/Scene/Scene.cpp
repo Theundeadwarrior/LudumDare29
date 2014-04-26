@@ -89,9 +89,12 @@ namespace SceneManager
 
 	void Scene::UpdateAllObjects()
 	{
-		for(int i = 0; i<m_objectList.size(); i++)
+		std::list<Object*>::iterator it = m_objectList.begin();
+		std::list<Object*>::iterator endit = m_objectList.end();
+
+		for (; it != endit; ++it)
 		{
-			m_objectList[i]->Update();
+			(*it)->Update();
 		}
 	}
 

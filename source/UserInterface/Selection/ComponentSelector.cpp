@@ -57,9 +57,9 @@ void ComponentSelector::ClearSelection()
 
 void ComponentSelector::FindIntersectedComponents( const Utilities::Ray& ray )
 {
-	std::vector<SceneManager::Object*>::iterator objIter = 
+	std::list<SceneManager::Object*>::iterator objIter = 
 		SceneManager::SceneManager::GetInstance().GetCurrentScene()->GetBeginObjectList();
-	std::vector<SceneManager::Object*>::iterator objIterEnd =
+	std::list<SceneManager::Object*>::iterator objIterEnd =
 		SceneManager::SceneManager::GetInstance().GetCurrentScene()->GetEndObjectList();
 
 	for ( ; objIter != objIterEnd; ++objIter )

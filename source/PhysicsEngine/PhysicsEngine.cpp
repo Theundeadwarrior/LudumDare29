@@ -59,8 +59,8 @@ namespace Atum
 			std::vector<PhysicsObject*>::iterator it = m_physicScene->GetBeginPhysicsObjectList();
 			std::vector<PhysicsObject*>::iterator itEnd = m_physicScene->GetEndPhysicsObjectList();
 
-			std::vector<SceneManager::Object*>::iterator itObject = m_graphicScene->GetBeginObjectList();
-			std::vector<SceneManager::Object*>::iterator itObjectEnd = m_graphicScene->GetEndObjectList();
+			std::list<SceneManager::Object*>::iterator itObject = m_graphicScene->GetBeginObjectList();
+			std::list<SceneManager::Object*>::iterator itObjectEnd = m_graphicScene->GetEndObjectList();
 			for(; it != itEnd; it++, itObject++)
 			{
 				physx::PxTransform transformPhysic = (*it)->GetActor()->getGlobalPose();
@@ -90,8 +90,8 @@ namespace Atum
 		void PhysicsEngine::SetScene(SceneManager::Scene * const scene)
 		{
 			 m_graphicScene = scene;
-			 std::vector<SceneManager::Object*>::iterator it = m_graphicScene->GetBeginObjectList();
-			 std::vector<SceneManager::Object*>::iterator itEnd = m_graphicScene->GetEndObjectList();
+			 std::list<SceneManager::Object*>::iterator it = m_graphicScene->GetBeginObjectList();
+			 std::list<SceneManager::Object*>::iterator itEnd = m_graphicScene->GetEndObjectList();
 
 			 physx::PxVec3 position;
 			 for(; it != itEnd; it++)
