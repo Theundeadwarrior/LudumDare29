@@ -3,6 +3,8 @@
 
 #include "SceneManager/Objects/GameplayObjects/GamePlayObject.h"
 
+#include "Events/EventManager.h"
+
 namespace Atum { namespace SceneManager { class PropertyList; }}
 
 namespace Atum
@@ -10,7 +12,7 @@ namespace Atum
 namespace SceneManager
 {
 
-	class MainCharacter : public GamePlayObject
+	class MainCharacter : public GamePlayObject, public Events::InputKeyboardListener
 	{
 	public:
 		enum CharacterState
@@ -41,9 +43,16 @@ namespace SceneManager
 
 		virtual const GamePlayObjectType GetGameplayObjectType()const{return GamePlayObject::MainCharacter;}
 
+		virtual void NotifyKeyPressed(const Events::KeyboardEvent& event);
+
+		void Jump();
+
 	private:
 		CharacterState m_currentState;
 		glm::vec4 m_colorBlend;
+
+		float m_acceleration;
+		float m_speed;
 	};
 
 } // namespace SceneManager

@@ -1,12 +1,17 @@
 #include "SceneManager/Objects/GameplayObjects/MainCharacter.h"
 #include "SceneManager/SceneManager.h"
 
+#define GRAVITY 0.0001f
+
 namespace Atum
 {
 namespace SceneManager
 {
 	MainCharacter::MainCharacter()
+		: m_acceleration(GRAVITY)
+        , m_speed(0)
 	{
+		Events::EventManager::GetInstance().RegisterKeyboardListener(this);
 		m_isPositionAffectedByLevel = false;
 	}
 
@@ -43,7 +48,9 @@ namespace SceneManager
 	{
 		GamePlayObject::Update();
 
-		//SetRelativeXY(0.0001f,0.0f);
+		m_speed -= m_acceleration; 
+
+		SetRelativeXY(0.0f,m_speed);
 	}
 
 	void MainCharacter::Reset()
@@ -81,6 +88,22 @@ namespace SceneManager
 		}
 
 		return materialID;
+	}
+
+	void MainCharacter::NotifyKeyPressed(const Events::KeyboardEvent& event)
+	{
+		if(event.GetEventType() == Events::KeyboardEventType::KEY_PRESSED)
+		{
+			if (event.GetKey() == ' ')
+			{
+				Jump();
+			}
+		}
+	}
+
+	void MainCharacter::Jump()
+	{
+		m_speed = 0.01f;
 	}
 
 } // namespace SceneManager
