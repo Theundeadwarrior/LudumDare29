@@ -38,11 +38,13 @@
     <Filter Include="Source Files\Scene\GameplayScenes">
       <UniqueIdentifier>{3f39a18c-9138-43c3-85c0-00716c1207b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Objects\GameplayObjects">
-      <UniqueIdentifier>{059c7854-c213-4336-8d54-a9965fba2927}</UniqueIdentifier>
-    </Filter>
+<<<<<<< HEAD
     <Filter Include="Source Files\Level">
       <UniqueIdentifier>{2f60499c-6584-4a96-bd63-e9f3ce190204}</UniqueIdentifier>
+=======
+    <Filter Include="Source Files\Objects\GameplayObjects">
+      <UniqueIdentifier>{059c7854-c213-4336-8d54-a9965fba2927}</UniqueIdentifier>
+>>>>>>> 1d6b1550e06b8d7448f2e5658c92c975cbfc3459
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -133,20 +135,16 @@
     <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\CreditScreen.h">
       <Filter>Source Files\Scene\GameplayScenes</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="..\..\source\SceneManager\Level\Level.h">
+      <Filter>Source Files\Level</Filter>
+=======
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\MainCharacter.h">
       <Filter>Source Files\Objects\GameplayObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.h">
       <Filter>Source Files\Objects\GameplayObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\SceneManager\Level\Level.h">
-      <Filter>Source Files\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\PlaceholderLevel.h">
-      <Filter>Source Files\Scene\GameplayScenes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\Platform.h">
-      <Filter>Source Files\Objects\GameplayObjects</Filter>
+>>>>>>> 1d6b1550e06b8d7448f2e5658c92c975cbfc3459
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -231,20 +229,16 @@
     <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\CreditScreen.cpp">
       <Filter>Source Files\Scene\GameplayScenes</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="..\..\source\SceneManager\Level\Level.cpp">
+      <Filter>Source Files\Level</Filter>
+=======
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\MainCharacter.cpp">
       <Filter>Source Files\Objects\GameplayObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.cpp">
       <Filter>Source Files\Objects\GameplayObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\SceneManager\Level\Level.cpp">
-      <Filter>Source Files\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\PlaceholderLevel.cpp">
-      <Filter>Source Files\Scene\GameplayScenes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\Platform.cpp">
-      <Filter>Source Files\Objects\GameplayObjects</Filter>
+>>>>>>> 1d6b1550e06b8d7448f2e5658c92c975cbfc3459
     </ClCompile>
   </ItemGroup>
 </Project>

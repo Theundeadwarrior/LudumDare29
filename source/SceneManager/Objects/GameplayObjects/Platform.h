@@ -1,16 +1,20 @@
-#ifndef SCENEMANAGER_GAMEPLAYOBJECT_H
-#define SCENEMANAGER_GAMEPLAYOBJECT_H
+#ifndef SCENEMANAGER_PLATFORM_H
+#define SCENEMANAGER_PLATFORM_H
 
 #include "SceneManager/Objects/Object.h"
 #include "SceneManager/Manager/TypedefID.h"
-
-namespace Atum { namespace SceneManager { class PropertyList; }}
+#include "GamePlayObject.h"
 
 namespace Atum
 {
 namespace SceneManager
 {
-
+	class Platform
+	{
+	public:
+		Platform() {}
+		~Platform() {}
+	};
 } // namespace SceneManager
 } // namespace Atum
 

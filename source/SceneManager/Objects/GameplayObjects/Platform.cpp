@@ -1,4 +1,4 @@
-#include "SceneManager/Objects/GameplayObjects/GamePlayObject.h"
+#include "SceneManager/Objects/GameplayObjects/Platform.h"
 #include "SceneManager/SceneManager.h"
 
 #include "Utilities/BasicGeometry/BasicGeometryGenerator.h"
