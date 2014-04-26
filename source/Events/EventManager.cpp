@@ -108,7 +108,7 @@ void EventManager::UpdateKeyboardListener( const KeyboardEvent& event )
 
 void EventManager::InputMouseGLUT( int button, int state, int x, int y )
 {
-	if ( ! UserInterface::UiManager::CallbackMouseTw(button, state, x,y) ) //event was not handled by AntTweakBar
+	//if ( ! UserInterface::UiManager::CallbackMouseTw(button, state, x,y) ) //event was not handled by AntTweakBar
 	{
 		MouseClick clickType = NO_CLICK;
 		MouseEventType eventType = MOUSE_MOTION_ONLY;
@@ -162,7 +162,7 @@ void  EventManager::InputMouseMotionGLUT( int x, int y )
 
 void EventManager::InputKeyboardPressedGLUT( unsigned char key, int x , int y )
 {
-	if ( ! UserInterface::UiManager::CallbackKeyboardInputTw(key,x,y) ) //event was not handled by AntTweakBar
+	//if ( ! UserInterface::UiManager::CallbackKeyboardInputTw(key,x,y) ) //event was not handled by AntTweakBar
 	{
 		KeyboardModifier modifier ( CreateKeyboardModifier() );
 		KeyboardEventType eventType = KEY_PRESSED;
@@ -200,7 +200,7 @@ void EventManager::InputKeyboardReleasedGLUT( unsigned char key, int x , int y )
 
 void EventManager::InputSpecialKeyboardPressedGLUT( int key, int x , int y )
 {
-	if ( ! UserInterface::UiManager::CallbackKeyboardSpecialTw(key,x,y) ) //event was not handled by AntTweakBar
+	//if ( ! UserInterface::UiManager::CallbackKeyboardSpecialTw(key,x,y) ) //event was not handled by AntTweakBar
 	{
 		KeyboardSpecialKey specialKey( CreateSpecialKeyboardKey(key) );
 

@@ -62,7 +62,7 @@ namespace SceneManager
 			AddObject(platform);
 		}
 
-		Object* platform = new Platform(glm::vec4(0, 0, 0, 1), glm::vec4(5, 1, 1, 1));
+		Object* platform = new Platform(glm::vec4(-1.5, -1.5, 0, 1), glm::vec4(0.1, 1, 1, 1));
 		((GamePlayObject*)platform)->Init();
 		AddObject(platform);
 	}
@@ -89,7 +89,7 @@ namespace SceneManager
 		m_titleScreenObject->Init();
 
 		//m_titleScreenObject = new Object(GetMaterial(), GetQuad(), Transform());
-		//AddObject(m_titleScreenObject);
+		AddObject(m_titleScreenObject);
 
 		PerspectiveCameraParams params(45, 1024/768.0f, 0.1f, 1000.0f);
 		m_dummyCamera = new PerspectiveCamera(params, glm::vec3(0,5,5), glm::vec3(0,0,-1), glm::vec3(0,5,-5));

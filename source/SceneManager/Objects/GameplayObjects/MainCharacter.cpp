@@ -31,7 +31,7 @@ namespace SceneManager
 		GamePlayObject::Init();
 
 		SetXY(-0.4f, -0.2f);
-		SetScaleXY(0.2f , 0.2f);
+		SetScaleXY(0.5f , 0.5f);
 	}
 
 	void MainCharacter::Uninit()

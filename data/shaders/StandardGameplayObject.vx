@@ -11,5 +11,5 @@ uniform vec4 scale;
 void main(void)
 {
 	var_uv = texCoords;
-	gl_Position = position*scale + translation;
+	gl_Position = vec4(position*scale + translation) * vec4(0.1f, 0.1f, 0.2f, 1.0f);
 }
