@@ -13,6 +13,7 @@ namespace Atum
 namespace SceneManager
 {
 	class Scene;
+	class Level;
 
 	class SceneManager
 	{
@@ -34,11 +35,13 @@ namespace SceneManager
 		GeometryManager* const GetGeometryManager();
         TextureManager* const GetTextureManager();
 
+
+		void SceneManager::CreateSceneFromLevel(Scene* outCreatedScene, const Level& level);
+
 	private:
 		SceneManager();
 		SceneManager(SceneManager const&); //don't implement
 		void operator=(SceneManager const&); //don't implement
-
 		std::vector<Scene*> m_sceneList;
 		ShaderListManager m_shaderListManager;
 		MaterialManager m_materialManager;

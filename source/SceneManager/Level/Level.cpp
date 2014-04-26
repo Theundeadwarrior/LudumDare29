@@ -63,7 +63,7 @@ namespace SceneManager
 		}
 
 
-		while (level.GetWidth() < params.LevelWidth)
+		while (level.GetLength() < params.LevelWidth)
 		{
 			// Add a new platform
 			unsigned int length = GenerateRandomNumber(params.PlatformLenghtRange[0], params.PlatformLenghtRange[1]);

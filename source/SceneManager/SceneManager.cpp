@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "Utilities/Debug/Debug.h"
+#include "SceneManager/Level/Level.h"
 
 namespace Atum
 {
@@ -64,6 +65,31 @@ void SceneManager::ClearAllScenes()
 {
 	m_currentScene = NULL;
 	m_sceneList.clear();
+}
+
+
+void SceneManager::CreateSceneFromLevel(Scene* outCreatedScene, const Level& level)
+{
+	int currentXPosition = 0;
+	int currentYposition = 0;
+	int currentPlatformLength = 0;
+
+	int levelLength = level.GetLength();
+	int currentIndex = 0;
+
+	while (currentIndex < levelLength)
+	{
+		currentYposition = level.m_height[currentIndex];
+		currentIndex++;
+		currentPlatformLength++;
+		while (level.m_height[currentIndex] == currentYposition)
+		{
+			currentPlatformLength++;
+		}
+
+
+		currentPlatformLength = 0;
+	}
 }
 
 } // namespace SceneManager

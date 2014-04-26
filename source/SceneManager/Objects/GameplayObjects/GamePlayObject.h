@@ -22,6 +22,7 @@ namespace SceneManager
 		};
 
 		GamePlayObject();
+		GamePlayObject(const glm::vec4& position, const glm::vec4& scale);
 		virtual ~GamePlayObject();
 
 		void GetPropertyList ( PropertyList& o_properties );

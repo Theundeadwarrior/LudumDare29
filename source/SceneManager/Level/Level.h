@@ -17,7 +17,7 @@ namespace SceneManager
 		~Level() {};
 
 		void Update();
-		unsigned int GetWidth(){ return m_height.size(); }
+		unsigned int GetLength() const { return m_height.size(); }
 		
 		std::vector<int> m_height;
 		std::vector<unsigned int> m_specialTiles;

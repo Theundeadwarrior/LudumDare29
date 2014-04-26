@@ -10,7 +10,15 @@ namespace SceneManager
 	GamePlayObject::GamePlayObject()
 		: m_isPositionAffectedByLevel(true)
 		, m_currentPosition(glm::vec4(0,0,0,1))
-	    , m_scale(1.0f)
+	    , m_scale(glm::vec4(1,1,1,1))
+	{
+
+	}
+
+	GamePlayObject::GamePlayObject(const glm::vec4& position, const glm::vec4& scale)
+		: m_isPositionAffectedByLevel(true)
+		, m_currentPosition(position)
+		, m_scale(scale)
 	{
 
 	}

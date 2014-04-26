@@ -9,10 +9,10 @@ namespace Atum
 {
 namespace SceneManager
 {
-	class Platform
+	class Platform : public GamePlayObject
 	{
 	public:
-		Platform() {}
+		Platform::Platform(glm::vec4 position, glm::vec4 scale);
 		~Platform() {}
 	};
 } // namespace SceneManager
