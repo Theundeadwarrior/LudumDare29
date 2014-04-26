@@ -13,10 +13,13 @@ namespace SceneManager
 	class Level
 	{
 	public:
-		Level();
-		~Level();
+		Level(unsigned int width = 0);
+		~Level() {};
 
 		void Update();
+		unsigned int GetWidth(){ return m_height.size(); }
+		void AddPlatform(unsigned int height, unsigned int width);
+		
 
 	private:
 		std::vector<unsigned int> m_height;
