@@ -5,8 +5,11 @@ out vec2 var_uv;
 in vec4 position;
 in vec2 texCoords;
 
+uniform vec4 translation;
+uniform float scale;
+
 void main(void)
 {
 	var_uv = texCoords;
-	gl_Position = position;;
+	gl_Position = position;
 }
