@@ -1,5 +1,5 @@
-#ifndef SCENEMANAGER_TITLESCREEN_H
-#define SCENEMANAGER_TITLESCREEN_H
+#ifndef SCENEMANAGER_PLACEHOLDERLEVEL_H
+#define SCENEMANAGER_PLACEHOLDERLEVEL_H
 
 #include "SceneManager/Scene/Scene.h"
 #include "SceneManager/Manager/TypedefID.h"
@@ -9,19 +9,14 @@ namespace Atum
 namespace SceneManager
 {
     
-class TitleScreen : public Scene
+class PlaceholderLevel : public Scene
 {
 public:
-    TitleScreen();
-    ~TitleScreen();
+    PlaceholderLevel();
+    ~PlaceholderLevel();
 
 	virtual void Init();
 	virtual void Uninit();
-
-    static ShaderListID GetShader();
-    static TextureId GetTexture();
-	static GeometryID GetQuad();
-	static MaterialID GetMaterial();
 
 	void CreateTitleScreenObject();
 

@@ -138,9 +138,12 @@
     </ClInclude>
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.h">
       <Filter>Source Files\Objects\GameplayObjects</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="..\..\source\SceneManager\Level\Level.h">
       <Filter>Source Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\PlaceholderLevel.h">
+      <Filter>Source Files\Scene\GameplayScenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\SceneManager\Level\Level.cpp">
       <Filter>Source Files\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\PlaceholderLevel.cpp">
+      <Filter>Source Files\Scene\GameplayScenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
