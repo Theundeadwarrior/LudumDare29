@@ -1,7 +1,7 @@
 #include "SceneManager/Objects/GameplayObjects/MainCharacter.h"
 #include "SceneManager/SceneManager.h"
 
-#define GRAVITY 0.0001f
+#define GRAVITY 0.0002f
 
 namespace Atum
 {
@@ -35,7 +35,7 @@ namespace SceneManager
 	{
 		GamePlayObject::Init();
 
-		SetXY(-0.4f, -0.2f);
+		SetXY(-4.0f, -0.2f);
 		SetScaleXY(0.5f , 0.5f);
 	}
 
@@ -50,7 +50,7 @@ namespace SceneManager
 
 		m_speed -= m_acceleration; 
 
-		SetRelativeXY(0.01f,m_speed);
+		SetRelativeXY(0,m_speed);
 	}
 
 	void MainCharacter::Reset()
@@ -114,7 +114,7 @@ namespace SceneManager
 
 	void MainCharacter::Jump()
 	{
-		m_speed = 0.01f;
+		m_speed = 0.015f;
 	}
 
 } // namespace SceneManager

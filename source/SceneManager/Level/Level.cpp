@@ -16,12 +16,12 @@ namespace SceneManager
 	}
 
 
-	Level::Level(unsigned int width)
+	LevelLayout::LevelLayout(unsigned int width)
 	{
 		m_height.reserve(width);
 	}
 
-	void LevelGenerator::AddPlatform(Level& level, unsigned int height, unsigned int width)
+	void LevelLayoutGenerator::AddPlatform(LevelLayout& level, unsigned int height, unsigned int width)
 	{
 		for (unsigned int i = 0; i < width; ++i)
 		{
@@ -29,7 +29,7 @@ namespace SceneManager
 		}
 	}
 
-	void LevelGenerator::AddJump(Level& level, unsigned int lenght)
+	void LevelLayoutGenerator::AddJump(LevelLayout& level, unsigned int lenght)
 	{
 		for (unsigned i = 0; i < lenght; ++i)
 		{
@@ -38,19 +38,19 @@ namespace SceneManager
 	}
 
 
-	LevelGenerator::LevelGenerator()
+	LevelLayoutGenerator::LevelLayoutGenerator()
 	{
 
 	}
 
-	LevelGenerator::~LevelGenerator()
+	LevelLayoutGenerator::~LevelLayoutGenerator()
 	{
 
 	}
 
-	Atum::SceneManager::Level LevelGenerator::GenerateLevel(const Parameters& params, unsigned int startingHeight)
+	Atum::SceneManager::LevelLayout LevelLayoutGenerator::GenerateLevel(const Parameters& params, unsigned int startingHeight)
 	{
-		Level level(params.LevelWidth);
+		LevelLayout level(params.LevelWidth);
 		unsigned int currentHeight = startingHeight;
 		unsigned int totalLength = 0;
 
@@ -93,7 +93,7 @@ namespace SceneManager
 		return level;
 	}
 
-	int LevelGenerator::GetNextJumpHeight(unsigned int currentHeight, const Parameters &params)
+	int LevelLayoutGenerator::GetNextJumpHeight(unsigned int currentHeight, const Parameters &params)
 	{
 		int jumpHeight = 0;
 		if (currentHeight + 2 >= params.LevelHeight)
@@ -112,7 +112,7 @@ namespace SceneManager
 		return jumpHeight;
 	}
 
-	int LevelGenerator::GetNextJumpLength(int jumpHeight)
+	int LevelLayoutGenerator::GetNextJumpLength(int jumpHeight)
 	{
 		int jumpLength = 0;
 

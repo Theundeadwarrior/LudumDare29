@@ -52,14 +52,14 @@ TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_
 
 
 
-	SceneManager::LevelGenerator::Parameters params;
+	SceneManager::LevelLayoutGenerator::Parameters params;
 	params.LevelHeight = 12;
 	params.LevelWidth = 256;
 	params.PlatformLenghtRange[0] = 4;
 	params.PlatformLenghtRange[1] = 16;
-	SceneManager::LevelGenerator levelGen;
+	SceneManager::LevelLayoutGenerator levelGen;
 
-	SceneManager::Level level = levelGen.GenerateLevel(params);
+	SceneManager::LevelLayout level = levelGen.GenerateLevel(params);
 	SceneManager::Scene* testLevelScene = new SceneManager::PlaceholderLevel(level);
 	testLevelScene->Init();
 	m_sceneManager.AddScene(testLevelScene);

@@ -10,13 +10,13 @@ namespace Atum
 namespace SceneManager
 {
  
-class Level;
+class LevelLayout;
 
 class PlaceholderLevel : public Scene
 {
 public:
     PlaceholderLevel();
-	PlaceholderLevel(const Level& level);
+	PlaceholderLevel(const LevelLayout& level);
 	~PlaceholderLevel();
 
 	virtual void Init();
@@ -27,8 +27,11 @@ public:
 	void RemoveTitleScreenObject();
 
 private:
+	glm::vec4 m_currentPosition; // used for scrolling
+
 	MainCharacter* m_titleScreenObject;
 	Camera* m_dummyCamera;
+
 };
 
 } // namespace SceneManager

@@ -10,11 +10,11 @@ namespace Atum
 {
 namespace SceneManager
 {
-	class Level
+	class LevelLayout
 	{
 	public:
-		Level(unsigned int width = 0);
-		~Level() {};
+		LevelLayout(unsigned int width = 0);
+		~LevelLayout() {};
 
 		void Update();
 		unsigned int GetLength() const { return m_height.size(); }
@@ -24,7 +24,7 @@ namespace SceneManager
 
 	};
 
-	class LevelGenerator
+	class LevelLayoutGenerator
 	{
 	public:
 		struct Parameters
@@ -44,10 +44,10 @@ namespace SceneManager
 		};
 	
 	public:
-		LevelGenerator();
-		~LevelGenerator();
+		LevelLayoutGenerator();
+		~LevelLayoutGenerator();
 
-		Level GenerateLevel(const Parameters& params, unsigned int currentHeight = INVALID_UNSIGNED_INT);
+		LevelLayout GenerateLevel(const Parameters& params, unsigned int currentHeight = INVALID_UNSIGNED_INT);
 
 		int GetNextJumpLength(int jumpHeight);
 		int GetNextJumpHeight(unsigned int currentHeight, const Parameters &params);
@@ -55,8 +55,8 @@ namespace SceneManager
 
 	private:
 
-		void AddJump(Level& level, unsigned int lenght);
-		void AddPlatform(Level& level, unsigned int height, unsigned int width);
+		void AddJump(LevelLayout& level, unsigned int lenght);
+		void AddPlatform(LevelLayout& level, unsigned int height, unsigned int width);
 	
 	};
 } // namespace SceneManager

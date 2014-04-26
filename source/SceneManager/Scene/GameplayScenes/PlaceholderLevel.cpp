@@ -14,13 +14,14 @@ namespace Atum
 namespace SceneManager
 {
 	PlaceholderLevel::PlaceholderLevel()
-		:m_titleScreenObject(NULL)
-		,m_dummyCamera(NULL)
+		: m_titleScreenObject(NULL)
+		, m_dummyCamera(NULL)
+		, m_currentPosition()
 	{
 		Init();
 	}
 
-	PlaceholderLevel::PlaceholderLevel(const Level& level)
+	PlaceholderLevel::PlaceholderLevel(const LevelLayout& level)
 	{
 		int currentYPosition = 0;
 		float currentXPosition = 0;
