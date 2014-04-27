@@ -36,7 +36,7 @@ namespace SceneManager
 
 	ShaderListID Foreground::GetShaderID()
 	{
-		static ShaderListID alphaTexturedQuadShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/BackGroundObject.vx", "../../data/shaders/ForeGroundObject.fg", NULL);
+		static ShaderListID alphaTexturedQuadShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/ForeGroundObject.vx", "../../data/shaders/ForeGroundObject.fg", NULL);
 		return alphaTexturedQuadShaderID;
 	}
 
