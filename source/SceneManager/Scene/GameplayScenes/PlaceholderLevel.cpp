@@ -20,6 +20,7 @@ namespace SceneManager
 {
 	PlaceholderLevel::PlaceholderLevel()
 		: m_mainCharacter(NULL)
+		, m_background(NULL)
 		, m_dummyCamera(NULL)
 	{
 		//Init();
@@ -40,6 +41,11 @@ namespace SceneManager
 
 		InitLevel(m_currentLevel);
 		InitLevel(m_nextLevel);
+
+		m_background = new Background();
+		m_background->Init();
+
+		AddObject(m_background);
 
 		// HACKATHON!!! 
 		m_currentLevel->Translate(glm::vec4(POSITION_FIRST_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
@@ -69,6 +75,7 @@ namespace SceneManager
 	void PlaceholderLevel::RemoveTitleScreenObject()
 	{
 		delete m_mainCharacter;
+		delete m_background;
 		delete m_dummyCamera;
 	}
 
@@ -76,6 +83,8 @@ namespace SceneManager
 	{
 		if(m_mainCharacter->GetCharacterState() != GamePlayObject::WallStop)
 		{
+			m_background->Move();
+
 			m_currentLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
 			m_nextLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
 

@@ -12,7 +12,7 @@ namespace SceneManager
 class Background : public GamePlayObject
 {
 public:
-    Background();
+    Background();   
     ~Background();
 
 	virtual const GamePlayObject::GamePlayObjectType GetGameplayObjectType()const{return GamePlayObject::GamePlayObjectType_Invalid;}
@@ -21,6 +21,13 @@ public:
 
 	virtual TextureId GetTextureID();
 	virtual MaterialID GetMaterialID();
+
+	void Move();
+
+	virtual void BindShaderParameters() override;
+
+private:
+	float m_uOffset;
 };
 
 } // namespace SceneManager
