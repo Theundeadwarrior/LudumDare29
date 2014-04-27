@@ -63,14 +63,14 @@ namespace SceneManager
 		return titleScreenMaterialID;
 	}
 
-	void Foreground::Move()
+	void Foreground::Move() 
 	{
-		m_uOffset += 0.005f;
-
-		if(m_uOffset > 1.0f)
+		if(m_uOffset >= 2.0f)
 		{
 			m_uOffset = 0.0f;
 		}
+
+		m_uOffset += 0.005f;
 	}
 
 } // namespace SceneManager

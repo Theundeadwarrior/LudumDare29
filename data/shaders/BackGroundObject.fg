@@ -9,9 +9,9 @@ uniform float uOffset;
 void main(void)
 {
         float newV = var_uv.y + uOffset;
-        if(newV > 1.0f)
+        if(newV >= 1.0f)
         {
-            newV -= 1.0f;
+            newV = abs(2.0f-newV);
         }
 
 	vec4 diffuseMapColor = texture2D(DiffuseMap,vec2(var_uv.x, newV));
