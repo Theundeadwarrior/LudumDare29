@@ -15,7 +15,7 @@ namespace SceneManager
 		:m_uOffset(0.0f)
 	{
 		SetScaleXY(2.2f,1.3f);
-		SetXY(0.f,-0.8f); 
+		SetXY(0.f,-1.2f); 
 		m_isPositionAffectedByLevel = false;
 	}
 
