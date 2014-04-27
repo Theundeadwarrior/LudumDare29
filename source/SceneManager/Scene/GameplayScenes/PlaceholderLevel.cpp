@@ -57,12 +57,12 @@ namespace SceneManager
 			}
 			currentXPosition += currentPlatformLength;
 
-			Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
+			Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition, 0, 0)*0.5f, glm::vec4(currentPlatformLength*0.5f, 1*0.5, 1, 1));
 			((GamePlayObject*)platform)->Init();
 			AddObject(platform);
 		}
 
-		Object* platform = new PlatformCanyon(glm::vec4(-1.5, -1.5, 0, 1), glm::vec4(0.1, 1, 1, 1));
+		Object* platform = new PlatformCanyon(glm::vec4(-1.5, -1.5, 0, 0), glm::vec4(0.1, 1, 1, 1));
 		((GamePlayObject*)platform)->Init();
 		AddObject(platform);
 	}

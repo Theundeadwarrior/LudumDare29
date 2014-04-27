@@ -12,6 +12,13 @@ namespace SceneManager
 	class Platform : public GamePlayObject
 	{
 	public:
+		enum IntersectionResult
+		{
+			IntersectionResult_Top,
+			IntersectionResult_Left,
+			IntersectionResult_None
+		};
+
 		Platform::Platform(glm::vec4 position, glm::vec4 scale);
 		~Platform() {}
 
@@ -26,6 +33,9 @@ namespace SceneManager
 		virtual void Uninit();
 
 		virtual GamePlayObject::GamePlayObjectType Intersect(GamePlayObject* gameplayObject, GamePlayObject::CharacterState* state = NULL) override;
+
+		IntersectionResult IntersectMainCharacter(GamePlayObject* gameplayObject);
+		IntersectionResult IntersectMainCharacterWithPosition(const glm::vec4& position, const glm::vec4& scale, bool upperBound);
 	};
 } // namespace SceneManager
 } // namespace Atum

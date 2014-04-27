@@ -52,7 +52,12 @@ namespace SceneManager
 		for(;it!=itEnd;++it)
 		{
 			if(GetGameplayObjectType() != GamePlayObjectType_Platform)
-				Intersect(static_cast<GamePlayObject*>(*it));
+			{
+				if(Intersect(static_cast<GamePlayObject*>(*it)) != GamePlayObjectType_Invalid)
+				{
+					break;
+				}
+			}
 		}
 	}
 
