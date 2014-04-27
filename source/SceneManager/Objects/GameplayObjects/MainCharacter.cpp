@@ -50,15 +50,23 @@ namespace SceneManager
 	{
 		GamePlayObject::Update();
 
-		if(m_currentState == GamePlayObject::Jumping || m_currentState == GamePlayObject::Falling)
+		if(m_currentState == GamePlayObject::Jumping)
 		{
 			if(m_speed >= MAX_FALLING_SPEED)
 				m_speed -= GRAVITY; 
 
-			if(m_currentState == GamePlayObject::Jumping && m_speed < 0.0f)
+			if(m_speed < 0.0f)
 			{
 				m_currentState = GamePlayObject::Falling;
 			}
+		}
+		else if(m_currentState == GamePlayObject::Falling || m_currentState == GamePlayObject::WallStop)
+		{
+			if(m_speed >= 0.0f)
+				m_speed = 0.0f;
+
+			if(m_speed >= MAX_FALLING_SPEED)
+				m_speed -= GRAVITY; 
 		}
 		else
 		{

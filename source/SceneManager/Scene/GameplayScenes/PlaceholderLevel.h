@@ -54,7 +54,7 @@ public:
 	virtual void Update();
 
 private:
-	MainCharacter* m_titleScreenObject;
+	MainCharacter* m_mainCharacter;
 	Camera* m_dummyCamera;
 	//std::list<Level*> m_levels; // levels that go from left to right
 	Level* m_currentLevel;

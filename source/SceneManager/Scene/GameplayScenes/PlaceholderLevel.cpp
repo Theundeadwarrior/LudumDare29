@@ -19,7 +19,7 @@ namespace Atum
 namespace SceneManager
 {
 	PlaceholderLevel::PlaceholderLevel()
-		: m_titleScreenObject(NULL)
+		: m_mainCharacter(NULL)
 		, m_dummyCamera(NULL)
 	{
 		//Init();
@@ -54,10 +54,10 @@ namespace SceneManager
 
 	void PlaceholderLevel::CreateTitleScreenObject()
 	{
-		m_titleScreenObject = new MainCharacter();
-		m_titleScreenObject->Init();
+		m_mainCharacter = new MainCharacter();
+		m_mainCharacter->Init();
 
-		AddObject(m_titleScreenObject);
+		AddObject(m_mainCharacter);
 
 		PerspectiveCameraParams params(45, 1280/720.0f, 0.1f, 1000.0f);
 		m_dummyCamera = new PerspectiveCamera(params, glm::vec3(0,5,5), glm::vec3(0,0,-1), glm::vec3(0,5,-5));
@@ -68,25 +68,28 @@ namespace SceneManager
 
 	void PlaceholderLevel::RemoveTitleScreenObject()
 	{
-		delete m_titleScreenObject;
+		delete m_mainCharacter;
 		delete m_dummyCamera;
 	}
 
 	void PlaceholderLevel::Update()
 	{
-		m_currentLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
-		m_nextLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
-
-		// Needs to generate a new level if the current one is getting out of the screen.
-		if (m_currentLevel->GetPosition().x < POSITION_TO_DELETE)
+		if(m_mainCharacter->GetCharacterState() != GamePlayObject::WallStop)
 		{
-			Level* levelToDel = m_currentLevel;
-			m_currentLevel = m_nextLevel;
-			delete levelToDel;
+			m_currentLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
+			m_nextLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
 
-			m_nextLevel = new Level();
-			InitLevel(m_nextLevel);
-			m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
+			// Needs to generate a new level if the current one is getting out of the screen.
+			if (m_currentLevel->GetPosition().x < POSITION_TO_DELETE)
+			{
+				Level* levelToDel = m_currentLevel;
+				m_currentLevel = m_nextLevel;
+				delete levelToDel;
+
+				m_nextLevel = new Level();
+				InitLevel(m_nextLevel);
+				m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
+			}
 		}
 
 		// Calls the update on base class for updating all objects

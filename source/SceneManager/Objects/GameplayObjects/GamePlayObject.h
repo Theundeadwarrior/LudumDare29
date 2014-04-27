@@ -29,7 +29,8 @@ namespace SceneManager
 			Jumping,
 			GhostSlowed,
 			WindSlowed,
-			WindSped
+			WindSped,
+			WallStop
 		};
 
 		GamePlayObject();
