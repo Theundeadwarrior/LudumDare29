@@ -9,30 +9,26 @@
 #include "SceneManager/Level/Level.h"
 
 
-#define SCROLLING_DISTANCE_PER_FRAME -0.1f
-#define POSITION_TO_DELETE -256.0f
+#define SCROLLING_DISTANCE_PER_FRAME -0.3f
+#define POSITION_TO_DELETE -256.0F
+#define POSITION_TO_SPAWN 256.0F
+//#define POSITION_TO_SPAWN 256.0f
 
 namespace Atum
 {
 namespace SceneManager
 {
 	PlaceholderLevel::PlaceholderLevel()
-		: m_titleScreenObject(NULL)
-		, m_dummyCamera(NULL)
+	: m_titleScreenObject(NULL)
+	, m_dummyCamera(NULL)
 	{
-		Init();
-
-		// buffers 3 levels
-		Level* level1 = new Level();
-		Level* level2 = new Level();
-
-		m_levels.push_back(level1);
-		m_levels.push_back(level2);
+		//Init();
+		m_currentLevel = new Level();
+		m_nextLevel = new Level();
 	}
 
 	PlaceholderLevel::~PlaceholderLevel()
 	{
-		
 		Uninit();
 	}
 
@@ -42,14 +38,11 @@ namespace SceneManager
 
 		int currentShift = 0;
 		
-		auto it = m_levels.begin();
-		auto endIt = m_levels.end();
-		for (; it != endIt; ++it)
-		{
-			InitLevel(*it);
-			(*it)->ScrollSideways(glm::vec4(currentShift, 0, 0, 0));
-			currentShift += 256;
-		}
+		InitLevel(m_currentLevel);
+		InitLevel(m_nextLevel);
+
+		// HACKATHON!!! 
+		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 	}
 
 	void PlaceholderLevel::Uninit()
@@ -80,25 +73,19 @@ namespace SceneManager
 
 	void PlaceholderLevel::Update()
 	{
-
-		auto it = m_levels.begin();
-		auto itend = m_levels.end();
-		for (; it != itend; ++it)
-		{
-			(*it)->ScrollSideways(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
-		}
+		m_currentLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
+		m_nextLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
 
 		// Needs to generate a new level if the current one is getting out of the screen.
-		if (m_levels.empty() == false && m_levels.front()->GetCurrentPosition().x < POSITION_TO_DELETE)
+		if (m_currentLevel->GetCurrentPosition().x < POSITION_TO_DELETE)
 		{
-			Level* levelToDel = m_levels.front();
+			Level* levelToDel = m_currentLevel;
+			m_currentLevel = m_nextLevel;
 			delete levelToDel;
-			m_levels.pop_front();
 
-			Level* level = new Level();
-			InitLevel(level);
-			m_levels.push_back(level);
-			level->ScrollSideways(glm::vec4(256, 0, 0, 0));
+			m_nextLevel = new Level();
+			InitLevel(m_nextLevel);
+			m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 		}
 
 		// Calls the update on base class for updating all objects
@@ -198,7 +185,7 @@ namespace SceneManager
 		}
 	}
 
-	void Level::ScrollSideways(const glm::vec4& translation)
+	void Level::Translate(const glm::vec4& translation)
 	{
 		m_currentPosition += translation;
 
@@ -206,8 +193,18 @@ namespace SceneManager
 		auto itend = m_objectList.end();
 		for (; it != itend; ++it)
 		{
-			((GamePlayObject*)*it)->SetRelativeXY(translation.x, 0);
+			((GamePlayObject*)*it)->SetRelativeXY(translation.x, translation.y);
 		}
+	}
+
+	float Level::GetLastPlatformYPosition()
+	{
+		return m_objectList.empty() ? 0 : ((GamePlayObject*)m_objectList.back())->GetCurrentPosition().y;
+	}
+
+	float Level::GetFirstPlatformYPosition()
+	{
+		return m_objectList.empty() ? 0 : ((GamePlayObject*)m_objectList.front())->GetCurrentPosition().y;
 	}
 
 } // namespace SceneManager

@@ -24,12 +24,14 @@ public:
 
 
 	glm::vec4& GetCurrentPosition() { return m_currentPosition;  }
-	void ScrollSideways(const glm::vec4& translation);;
+	float GetLastPlatformYPosition();
+	float GetFirstPlatformYPosition();
+	void Translate(const glm::vec4& translation);
 
 private:
 	std::vector<Object*> m_objectList;
 
-	glm::vec4 m_currentPosition; // used for scrolling. 
+	glm::vec4 m_currentPosition; // used for scrolling.
 };
 
 class PlaceholderLevel : public Scene
@@ -54,7 +56,10 @@ public:
 private:
 	MainCharacter* m_titleScreenObject;
 	Camera* m_dummyCamera;
-	std::list<Level*> m_levels; // levels that go from left to right
+	//std::list<Level*> m_levels; // levels that go from left to right
+	Level* m_currentLevel;
+	Level* m_nextLevel;
+
 };
 
 } // namespace SceneManager

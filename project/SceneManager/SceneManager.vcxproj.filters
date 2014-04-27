@@ -151,6 +151,9 @@
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformCanyon.h">
       <Filter>Source Files\Objects\GameplayObjects</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformBridge.h">
+      <Filter>Source Files\Objects\GameplayObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\SceneManager\Objects\Object.cpp">
@@ -250,6 +253,9 @@
       <Filter>Source Files\Objects\GameplayObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformCanyon.cpp">
+      <Filter>Source Files\Objects\GameplayObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformBridge.cpp">
       <Filter>Source Files\Objects\GameplayObjects</Filter>
     </ClCompile>
   </ItemGroup>

@@ -222,6 +222,7 @@
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\MainCharacter.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\Platform.h" />
+    <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformBridge.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformCanyon.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\Mesh.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\Object.h" />
@@ -257,6 +258,7 @@
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\MainCharacter.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\Platform.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformBridge.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformCanyon.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\Mesh.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\Object.cpp" />

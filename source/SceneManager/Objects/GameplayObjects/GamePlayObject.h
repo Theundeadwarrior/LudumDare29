@@ -62,6 +62,8 @@ namespace SceneManager
 		static ShaderListID GetShaderID();
 		static GeometryID GetQuadID();
 
+		glm::vec4 GetCurrentPosition() { return m_currentPosition; }
+
 	protected:
 		bool m_isPositionAffectedByLevel;
 		glm::vec4 m_currentPosition;
