@@ -6,6 +6,7 @@
 #include "Utilities/Image/ImageUtilities.h"
 #include "Utilities/BasicGeometry/BasicGeometryGenerator.h"
 #include "SceneManager/Objects/GameplayObjects/PlatformCanyon.h"
+#include "SceneManager/Objects/GameplayObjects/PlatformRuins.h"
 #include "SceneManager/Level/Level.h"
 
 #define SCROLLING_DISTANCE_PER_FRAME -0.05f
@@ -42,7 +43,6 @@ namespace SceneManager
 
 		// HACKATHON!!! 
 		m_currentLevel->Translate(glm::vec4(POSITION_FIRST_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
-
 		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 	}
 
@@ -134,6 +134,7 @@ namespace SceneManager
 		params.LevelWidth = 256;
 		params.PlatformLenghtRange[0] = 8;
 		params.PlatformLenghtRange[1] = 24;
+		params.IsUnderGround = true;
 		LevelLayoutGenerator levelGen(params);
 
 		LevelLayout level = levelGen.GenerateLevel();
@@ -183,9 +184,18 @@ namespace SceneManager
 				continue;
 			}
 
-			Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition - 8, 0, 0)*0.5f, glm::vec4(currentPlatformLength*0.5f, 0.5f, 1, 1));
-			((GamePlayObject*)platform)->Init();
-			m_objectList.push_back(platform);
+			if (params.IsUnderGround == false)
+			{
+				Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition - 8, 0, 0)*0.5f, glm::vec4(currentPlatformLength*0.5f, 0.5f, 1, 1));
+				((GamePlayObject*)platform)->Init();
+				m_objectList.push_back(platform);
+			}
+			else
+			{
+				Object* platform = new PlatformRuins(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition - 8, 0, 0)*0.5f, glm::vec4(currentPlatformLength*0.5f, 0.5f, 1, 1));
+				((GamePlayObject*)platform)->Init();
+				m_objectList.push_back(platform);
+			}
 		}
 	}
 

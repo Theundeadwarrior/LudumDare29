@@ -43,7 +43,7 @@ namespace SceneManager
 			// unsigned int ObjectFromTheGroundProbabilityRange[2];
 			// unsigned int ProbabilityOfGoingUpRange[2];
 
-			// bool IsUnderGround;
+			bool IsUnderGround;
 		};
 	
 	public:

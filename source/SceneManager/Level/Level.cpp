@@ -18,6 +18,7 @@ namespace SceneManager
 
 	LevelLayoutGenerator::Parameters::Parameters()
 		: BridgeProbability(0.8f)
+		, IsUnderGround(false)
 	{
 
 	}
