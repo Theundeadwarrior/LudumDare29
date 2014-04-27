@@ -1,0 +1,25 @@
+#version 140
+
+in vec2 var_uv;
+
+uniform sampler2D DiffuseMap;
+
+uniform float uOffset;
+
+void main(void)
+{
+        float newV = var_uv.y + uOffset;
+        if(newV >= 1.0f)
+        {
+            newV -= 1.0f;
+        }
+
+	vec4 diffuseMapColor = texture2D(DiffuseMap,vec2(var_uv.x, newV));
+
+        if (diffuseMapColor.a < 0.5)
+        {
+             discard;
+        }
+
+	gl_FragColor = diffuseMapColor;
+}

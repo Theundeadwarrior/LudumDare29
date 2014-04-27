@@ -72,29 +72,32 @@ namespace SceneManager
 		{
 		case GamePlayObject::GamePlayObjectType_MainCharacter:
 
-			switch(IntersectMainCharacter(gameplayObject))
+			if(*state != GamePlayObject::WallStop)
 			{
-			case IntersectionResult_Top:
+				switch(IntersectMainCharacter(gameplayObject))
 				{
-					if(*state != Jumping)
+				case IntersectionResult_Top:
 					{
-						*state = GamePlayObject::Normal;
+						if(*state != Jumping)
+						{
+							*state = GamePlayObject::Normal;
+							return GetGameplayObjectType();
+						}
+						break;
+					}
+				case IntersectionResult_Left:
+					{
+						*state = GamePlayObject::WallStop;
 						return GetGameplayObjectType();
 					}
-					break;
-				}
-			//case IntersectionResult_Left:
-			//	{
-			//		*state = GamePlayObject::Falling;
-			//		return GetGameplayObjectType();
-			//	}
-			case IntersectionResult_None:
-				{
-					if(*state != GamePlayObject::Jumping)
-						*state = GamePlayObject::Falling;
-					break;
-				}
-			}	
+				case IntersectionResult_None:
+					{
+						if(*state != GamePlayObject::Jumping)
+							*state = GamePlayObject::Falling;
+						break;
+					}
+				}	
+			}
 		}
 		return GamePlayObject::GamePlayObjectType_Invalid;
 	}
@@ -104,7 +107,7 @@ namespace SceneManager
 		IntersectionResult result = IntersectMainCharacterWithPosition(gameplayObject->GetPosition(), gameplayObject->GetScale(), true);
 		if(result == IntersectionResult_None)
 		{
-			result == IntersectMainCharacterWithPosition(gameplayObject->GetNextPosition(), gameplayObject->GetScale(), false);
+			result = IntersectMainCharacterWithPosition(gameplayObject->GetNextPosition(), gameplayObject->GetScale(), false);
 			if(result == IntersectionResult_Top && gameplayObject->GetCharacterState() != Jumping)
 			{
 				gameplayObject->SetXY(gameplayObject->GetPosition()[0],GetPosition()[1]+GetScale()[1]);
@@ -125,7 +128,17 @@ namespace SceneManager
 	Platform::IntersectionResult Platform::IntersectMainCharacterWithPosition(const glm::vec4& position, const glm::vec4& scale, bool upperBound)
 	{
 		float diffx = position[0]-GetPosition()[0];
-		if(diffx > -(GetScale()[0]*0.5f+scale[0]*0.5f) && diffx < GetScale()[0]*0.5f+scale[0]*0.5f)
+
+		if(abs(diffx+(GetScale()[0]*0.5f+scale[0]*0.5f)) < 0.01f)
+		{
+			float diffy = position[1]-GetPosition()[1];
+			if(diffy > -(GetScale()[1]*0.5f+scale[1]*0.5f) && diffy < GetScale()[1]*0.5f+scale[1]*0.5f)
+			{	
+				return IntersectionResult_Left;
+			}
+		}
+
+		if(diffx > -(GetScale()[0]*0.5f+scale[0]*0.5f)+0.01f && diffx < GetScale()[0]*0.5f+scale[0]*0.5f)
 		{			
 			if(upperBound)
 			{
@@ -140,9 +153,6 @@ namespace SceneManager
 					return IntersectionResult_Top;
 			}
 		}
-
-		//if(abs(diffx+scale[0]*0.5f-scale[0]*0.5f) < 0.1f)
-		//	return IntersectionResult_Left;
 
 		return IntersectionResult_None;
 	}

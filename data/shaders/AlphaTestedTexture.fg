@@ -13,5 +13,5 @@ void main(void)
              discard;
         }
 
-	gl_FragColor = texture2D(DiffuseMap,var_uv);
+	gl_FragColor = diffuseMapColor;
 }

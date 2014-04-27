@@ -160,6 +160,9 @@
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformRuins.h">
       <Filter>Source Files\Objects\GameplayObjects</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\ForeGround.h">
+      <Filter>Source Files\Objects\GameplayObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\SceneManager\Objects\Object.cpp">
@@ -268,6 +271,9 @@
       <Filter>Source Files\Objects\GameplayObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformRuins.cpp">
+      <Filter>Source Files\Objects\GameplayObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\ForeGround.cpp">
       <Filter>Source Files\Objects\GameplayObjects</Filter>
     </ClCompile>
   </ItemGroup>
