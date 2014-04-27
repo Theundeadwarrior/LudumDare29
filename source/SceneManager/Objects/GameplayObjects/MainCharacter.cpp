@@ -2,7 +2,7 @@
 #include "SceneManager/SceneManager.h"
 
 #define GRAVITY 0.0020f
-#define MAX_FALLING_SPEED -1.2f
+#define MAX_FALLING_SPEED -0.010f
 #define JUMPING_SPEED 0.08f
 #define STARTING_X -4.0f
 #define STARTING_Y -0.2f
@@ -105,6 +105,7 @@ namespace SceneManager
 		SetXY(STARTING_X, STARTING_Y);
 		SetScaleXY(0.5f, 0.5f);
 		m_cameraDiff = STARTING_Y;
+		ms_cameraY = 0;
 	}
 
 	TextureId MainCharacter::GetTextureID()

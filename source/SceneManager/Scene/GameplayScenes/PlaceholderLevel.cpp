@@ -10,7 +10,7 @@
 #include "SceneManager/Level/Level.h"
 #include "../../Objects/GameplayObjects/PlatformBridge.h"
 
-#define SCROLLING_DISTANCE_PER_FRAME -0.08f
+#define SCROLLING_DISTANCE_PER_FRAME -0.05f
 #define POSITION_TO_DELETE -148.0F
 #define POSITION_TO_SPAWN 108.0F
 #define POSITION_FIRST_SPAWN (POSITION_TO_SPAWN - 128.0F)
@@ -112,7 +112,7 @@ namespace SceneManager
 			// Might have to switch level if we fall down
 			if (m_mainCharacter->GetPosition().y < SURFACE_HEIGHT_POSITION && m_currentLevel->IsUnderGround() == false)
 			{
-				GoBeneathTheSurface();
+  				GoBeneathTheSurface();
 			}
 
 			if (m_mainCharacter->GetPosition().y < DEATH_HEIGHT)
