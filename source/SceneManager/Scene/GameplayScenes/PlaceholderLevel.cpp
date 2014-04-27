@@ -8,6 +8,7 @@
 #include "SceneManager/Objects/GameplayObjects/PlatformCanyon.h"
 #include "SceneManager/Objects/GameplayObjects/PlatformRuins.h"
 #include "SceneManager/Level/Level.h"
+#include "../../Objects/GameplayObjects/PlatformBridge.h"
 
 #define SCROLLING_DISTANCE_PER_FRAME -0.05f
 #define POSITION_TO_DELETE -148.0F
@@ -134,68 +135,42 @@ namespace SceneManager
 		params.LevelWidth = 256;
 		params.PlatformLenghtRange[0] = 8;
 		params.PlatformLenghtRange[1] = 24;
-		params.IsUnderGround = true;
+		params.IsUnderGround = false;
 		LevelLayoutGenerator levelGen(params);
 
 		LevelLayout level = levelGen.GenerateLevel();
 
-		// debug only
-		// level.Dump();
 
-		// Creates the objects and put them in the objectList;
-		int currentYPosition = 0;
+		auto it = level.m_platforms.begin();
+		auto endit = level.m_platforms.end();
+
 		float currentXPosition = 0;
 
-		int levelLength = level.GetLength();
-		int currentIndex = 0;
-
-		while (currentIndex + 1 < levelLength)
+		for (; it < endit; ++it)
 		{
-			int currentPlatformLength = 0;
+			float platformLength = it->Length;
+			float platformHeight = it->Height;
 
-			currentYPosition = level.m_height[currentIndex];
-			currentIndex++;
-			currentPlatformLength++;
-
-			if (currentIndex < levelLength && level.m_height[currentIndex] == JUMP_LEVEL_ID)
+			if (it->Type == PlatformInfo::E_Canyon)
 			{
-				while (currentIndex < levelLength && level.m_height[currentIndex] == JUMP_LEVEL_ID)
-				{
-					currentIndex++;
-					currentXPosition++;
-				}
-
-				currentIndex--;
-				currentXPosition--;
-			}
-
-			currentYPosition = level.m_height[currentIndex];
-
-			while (currentIndex < levelLength && level.m_height[currentIndex] == currentYPosition)
-			{
-				currentIndex++;
-				currentPlatformLength++;
-			}
-			currentXPosition += currentPlatformLength;
-
-			// FUCKING HACK DE LA MORT POUR PAS DESSINER LES PLATFORMES DU BAS!!
-			if (currentYPosition == JUMP_LEVEL_ID)
-			{
-				continue;
-			}
-
-			if (params.IsUnderGround == false)
-			{
-				Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition - 8, 0, 0)*0.5f, glm::vec4(currentPlatformLength*0.5f, 0.5f, 1, 1));
+				Object* platform = new PlatformCanyon(glm::vec4(currentXPosition + platformLength / 2.0f, platformHeight - 8, 0, 0)*0.5f, glm::vec4(platformLength*0.5f, 0.5f, 1, 1));
 				((GamePlayObject*)platform)->Init();
 				m_objectList.push_back(platform);
 			}
-			else
+			else if (it->Type == PlatformInfo::E_Ruins)
 			{
-				Object* platform = new PlatformRuins(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition - 8, 0, 0)*0.5f, glm::vec4(currentPlatformLength*0.5f, 0.5f, 1, 1));
+				Object* platform = new PlatformRuins(glm::vec4(currentXPosition + platformLength / 2.0f, platformHeight - 8, 0, 0)*0.5f, glm::vec4(platformLength*0.5f, 0.5f, 1, 1));
 				((GamePlayObject*)platform)->Init();
 				m_objectList.push_back(platform);
 			}
+			else if (it->Type == PlatformInfo::E_Bridge)
+			{
+				Object* platform = new PlatformBridge(glm::vec4(currentXPosition + platformLength / 2.0f, platformHeight - 8, 0, 0)*0.5f, glm::vec4(platformLength*0.5f, 0.5f, 1, 1));
+				((GamePlayObject*)platform)->Init();
+				m_objectList.push_back(platform);
+			}
+
+			currentXPosition += platformLength;
 		}
 	}
 

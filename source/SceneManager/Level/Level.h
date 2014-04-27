@@ -11,6 +11,25 @@ namespace Atum
 {
 namespace SceneManager
 {
+
+	struct PlatformInfo
+	{
+
+		enum PlatformType
+		{
+			E_Jump,
+			E_Canyon,
+			E_Ruins,
+			E_Bridge
+		};
+
+		PlatformInfo(PlatformType type, unsigned int height, unsigned int length) : Type(type), Height(height), Length(length) {}
+
+		PlatformType Type;
+		unsigned int Length;
+		unsigned int Height;
+	};
+
 	class LevelLayout
 	{
 	public:
@@ -18,12 +37,8 @@ namespace SceneManager
 		~LevelLayout() {};
 
 		void Update();
-		unsigned int GetLength() const { return m_height.size(); }
-		void Dump();
 
-		std::vector<int> m_height;
-		std::vector<unsigned int> m_specialTiles;
-
+		std::vector<PlatformInfo> m_platforms;
 	};
 
 	class LevelLayoutGenerator
@@ -60,7 +75,9 @@ namespace SceneManager
 		void AddJump(LevelLayout& level, unsigned int lenght);
 		void AddPlatform(LevelLayout& level, unsigned int height, unsigned int width);
 		void GenerateBridge(LevelLayout& level);
-		void CreateBridge(LevelLayout& level, unsigned int indexOfFirstJumpTile, unsigned int currentIndex);
+
+		// new system
+		void CreateBridge(LevelLayout& level, unsigned int indexOfPlatform);
 
 	private:
 		Parameters m_params;

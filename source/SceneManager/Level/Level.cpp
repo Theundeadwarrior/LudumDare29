@@ -17,7 +17,7 @@ namespace SceneManager
 	}
 
 	LevelLayoutGenerator::Parameters::Parameters()
-		: BridgeProbability(0.8f)
+		: BridgeProbability(0.2f)
 		, IsUnderGround(false)
 	{
 
@@ -25,44 +25,17 @@ namespace SceneManager
 
 	LevelLayout::LevelLayout(unsigned int width)
 	{
-		m_height.reserve(width);
-		m_specialTiles.resize(width, 0);
-	}
-
-	void LevelLayout::Dump()
-	{
-		std::ofstream myfile("../../LevelDump.txt");
-		if (myfile.is_open())
-		{
-			for (int i = 0; i < m_height.size(); ++i)
-			{
-				myfile << (m_height[i] == -1 ? 'x' : (m_height[i] > 9 ? 'T' : m_height[i]));
-			}
-
-			myfile << std::endl;
-
-			for (int i = 0; i < m_height.size(); ++i)
-			{
-				myfile << m_specialTiles[i];
-			}
-		}
-		myfile.close();
 	}
 
 	void LevelLayoutGenerator::AddPlatform(LevelLayout& level, unsigned int height, unsigned int width)
 	{
-		for (unsigned int i = 0; i < width; ++i)
-		{
-			level.m_height.push_back(height);
-		}
+
+		level.m_platforms.push_back(PlatformInfo(m_params.IsUnderGround ? PlatformInfo::E_Ruins : PlatformInfo::E_Canyon, height, width));
 	}
 
 	void LevelLayoutGenerator::AddJump(LevelLayout& level, unsigned int lenght)
 	{
-		for (unsigned i = 0; i < lenght; ++i)
-		{
-			level.m_height.push_back(JUMP_LEVEL_ID);
-		}
+		level.m_platforms.push_back(PlatformInfo(PlatformInfo::E_Jump, 0, lenght));
 	}
 
 
@@ -84,14 +57,12 @@ namespace SceneManager
 
 		// If no height is specified, then we know that it's the first level generated which means we can randomly
 		// choose the starting point of it
-		
 		if (currentHeight == INVALID_UNSIGNED_INT)
 		{
 			currentHeight = GenerateRandomNumber(3, m_params.LevelHeight - 2);
 		}
 
-
-		while (level.GetLength() < m_params.LevelWidth)
+		while (totalLength < m_params.LevelWidth)
 		{
 			// Add a new platform
 			unsigned int length = GenerateRandomNumber(m_params.PlatformLenghtRange[0], m_params.PlatformLenghtRange[1]);
@@ -149,11 +120,11 @@ namespace SceneManager
 
 		if (jumpHeight == -1)
 		{
-			jumpLength = GenerateRandomNumber(4, 8);
+			jumpLength = GenerateRandomNumber(4, 9);
 		}
 		else if (jumpHeight == 0)
 		{
-			jumpLength = GenerateRandomNumber(4, 6);
+			jumpLength = GenerateRandomNumber(4, 8);
 		}
 		else if (jumpHeight == 1)
 		{
@@ -162,50 +133,32 @@ namespace SceneManager
 		else
 		{
 			ATUM_ASSERT_MESSAGE(false, "Unmanaged jump height generated");
-		}	return jumpLength;
+		}	
+		return jumpLength;
 	}
 
 	void LevelLayoutGenerator::GenerateBridge(LevelLayout& levelLayout)
 	{
-		unsigned int currentIndex = 0;
-		unsigned int indexOfFirstJumpTile = 0;
-		int currentHeight = levelLayout.m_height[currentIndex];
-		while (currentIndex < levelLayout.m_height.size())
+		// New data
+		for (int i = 0; i + 2 < levelLayout.m_platforms.size(); ++i)
 		{
-			currentIndex++;
-			while (currentIndex < levelLayout.m_height.size() && currentHeight == levelLayout.m_height[currentIndex])
+			if (levelLayout.m_platforms[i].Type != PlatformInfo::E_Jump && levelLayout.m_platforms[i + 1].Type == PlatformInfo::E_Jump
+				&& levelLayout.m_platforms[i + 2].Type != PlatformInfo::E_Jump && levelLayout.m_platforms[i].Height == levelLayout.m_platforms[i + 2].Height)
 			{
-				currentIndex++;
+				CreateBridge(levelLayout, i+1);
 			}
-
-			indexOfFirstJumpTile = currentIndex;
-			while (currentIndex < levelLayout.m_height.size() && levelLayout.m_height[currentIndex] == JUMP_LEVEL_ID)
-			{
-				currentIndex++;
-			}
-
-			if (currentIndex < levelLayout.m_height.size() && levelLayout.m_height[currentIndex] == currentHeight)
-			{
-				CreateBridge(levelLayout, indexOfFirstJumpTile, currentIndex);
-			}
-			currentIndex++;
-
 		}
-		//throw std::exception("The method or operation is not implemented.");
 	}
 
-	void LevelLayoutGenerator::CreateBridge(LevelLayout& levelLayout, unsigned int indexOfFirstJumpTile, unsigned int currentIndex)
+	void LevelLayoutGenerator::CreateBridge(LevelLayout& level, unsigned int indexOfPlatform)
 	{
 		int randomNumber = GenerateRandomNumber(0, 100);
 
 		if (randomNumber < m_params.BridgeProbability * 100)
 		{
-			for (unsigned int i = indexOfFirstJumpTile; i < currentIndex; ++i)
-			{
-				levelLayout.m_specialTiles[i] = SPECIAL_TILE_BRIDGE;
-			}
+			level.m_platforms[indexOfPlatform].Type = PlatformInfo::E_Bridge;
+			level.m_platforms[indexOfPlatform].Height = level.m_platforms[indexOfPlatform - 1].Height;
 		}
-		//throw std::exception("The method or operation is not implemented.");
 	}
 
 }
