@@ -32,6 +32,9 @@
 //#include "ParticleSystem/Behavior/MultiColorBehavior.h"
 //#include "ParticleSystem/Behavior/ExplodingSizeBehavior.h"
 
+#define INTRO_SCENE_ID 0
+#define GAME_SCENE_ID 2
+#define GAMEOVER_SCENE_ID 1
 
 TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_sceneManager(sceneManager)
 {
@@ -40,7 +43,7 @@ TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_
 	SceneManager::Scene* titleScreen = new SceneManager::TitleScreen();
 	titleScreen->Init();
 	m_sceneManager.AddScene(titleScreen);
-	m_sceneManager.SetCurrentScene(0);
+	//m_sceneManager.SetCurrentScene(0);
 
 	SceneManager::Scene* creditScreen = new SceneManager::CreditScreen();
 	creditScreen->Init();
@@ -50,6 +53,11 @@ TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_
 	placeholder->Init();
 	m_sceneManager.AddScene(placeholder);
 
+
+	sceneManager.SetCurrentScene(INTRO_SCENE_ID);
+
+	m_sceneManager.RemoveScene(2);
+	m_sceneManager.AddScene(placeholder);
 
 	////-------------------------------------------------INIT SHADERS---------------------------------------------------------------------------------------------
 	//// Init Phong shader
@@ -509,7 +517,24 @@ void TestSceneLoader::NotifyKeyPressed(const Events::KeyboardEvent& event)
 {
 	if(event.GetEventType() == Events::KeyboardEventType::KEY_PRESSED)
 	{
-		if (event.GetKey() == '1')
+		if (event.GetKey() == ' ')
+		{
+			if (m_sceneManager.GetCurrentSceneId() == INTRO_SCENE_ID)
+			{
+				m_sceneManager.SetCurrentScene(GAME_SCENE_ID);
+			}
+			else if (m_sceneManager.GetCurrentSceneId() == GAMEOVER_SCENE_ID)
+			{
+				// HACK TO RETRIEVE GAMEPLAY SCENE
+				
+				//m_sceneManager.SetCurrentScene(GAME_SCENE_ID);
+				//SceneManager::Scene* currentScene = m_sceneManager.GetCurrentScene();
+				//currentScene->Init();
+				m_sceneManager.SetCurrentScene(INTRO_SCENE_ID);
+			}
+		}
+
+	/*	if (event.GetKey() == '1')
 		{
 			m_sceneManager.SetCurrentScene(0);
 		}
@@ -520,6 +545,6 @@ void TestSceneLoader::NotifyKeyPressed(const Events::KeyboardEvent& event)
 		else if (event.GetKey() == '3')
 		{
 			m_sceneManager.SetCurrentScene(2);
-		}
+		}*/
 	}
 }

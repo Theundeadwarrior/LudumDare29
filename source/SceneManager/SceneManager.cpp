@@ -73,5 +73,17 @@ void SceneManager::ClearAllScenes()
 	m_sceneList.clear();
 }
 
+void SceneManager::RemoveScene(int id)
+{
+	if (id != m_sceneList.size() - 1)
+	{
+		for (int i = id; i - 1 < m_sceneList.size(); ++i)
+		{
+			m_sceneList[i] = m_sceneList[i + 1];
+		}
+	}
+	m_sceneList.pop_back();
+}
+
 } // namespace SceneManager
 } // namespace Atum

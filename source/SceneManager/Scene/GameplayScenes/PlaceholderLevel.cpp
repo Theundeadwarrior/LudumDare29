@@ -10,11 +10,12 @@
 #include "SceneManager/Level/Level.h"
 #include "../../Objects/GameplayObjects/PlatformBridge.h"
 
-#define SCROLLING_DISTANCE_PER_FRAME -0.05f
+#define SCROLLING_DISTANCE_PER_FRAME -0.2f
 #define POSITION_TO_DELETE -148.0F
 #define POSITION_TO_SPAWN 108.0F
 #define POSITION_FIRST_SPAWN (POSITION_TO_SPAWN - 128.0F)
 #define SURFACE_HEIGHT_POSITION -20.0f
+#define DEATH_HEIGHT -40.0f
 
 namespace Atum
 {
@@ -26,7 +27,6 @@ namespace SceneManager
 		, m_movingBackground(NULL)
 		, m_dummyCamera(NULL)
 	{
-		//Init();
 		m_currentLevel = new Level();
 		m_nextLevel = new Level();
 	}
@@ -45,8 +45,6 @@ namespace SceneManager
 
 		CreateTitleScreenObject();
 
-		int currentShift = 0;
-
 		InitLevel(m_currentLevel);
 		InitLevel(m_nextLevel);
 
@@ -60,6 +58,11 @@ namespace SceneManager
 
 		AddObject(m_background);
 
+		ResetLevelsPosition();
+	}
+
+	void PlaceholderLevel::ResetLevelsPosition()
+	{
 		// HACKATHON!!! 
 		m_currentLevel->Translate(glm::vec4(POSITION_FIRST_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
@@ -117,7 +120,27 @@ namespace SceneManager
 			// Might have to switch level if we fall down
 			if (m_mainCharacter->GetPosition().y < SURFACE_HEIGHT_POSITION && m_currentLevel->IsUnderGround() == false)
 			{
-				GoBeneathTheSurface();
+  				GoBeneathTheSurface();
+			}
+
+			if (m_mainCharacter->GetPosition().y < DEATH_HEIGHT)
+			{
+				delete m_currentLevel;
+				delete m_nextLevel;
+				m_mainCharacter->SetCharacterState(GamePlayObject::Dead);
+
+				// reset level - HOLY COW SO MUCH HAAAAAAAAXXXXX
+				m_currentLevel = new Level();
+				m_nextLevel = new Level();
+
+				InitLevel(m_currentLevel);
+				InitLevel(m_nextLevel);
+
+				ResetLevelsPosition();
+
+				m_mainCharacter->Reset();
+
+				SceneManager::GetInstance().SetCurrentScene(1); // GameOver Screen (so testsceneloader can manage space on screen)
 			}
 		}
 
@@ -153,9 +176,9 @@ namespace SceneManager
 
 		// HACKATHON!!! 
 		m_currentLevel->Translate(glm::vec4(POSITION_FIRST_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition() - 26, 0, 0));
-		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
+ 		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 
-		m_mainCharacter->GoBeneathTheSurface();
+ 		m_mainCharacter->GoBeneathTheSurface();
 
 		//throw std::exception("The method or operation is not implemented.");
 	}

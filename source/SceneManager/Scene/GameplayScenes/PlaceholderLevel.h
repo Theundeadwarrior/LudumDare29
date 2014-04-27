@@ -58,6 +58,7 @@ public:
 
 private:
 	void GoBeneathTheSurface();
+	void ResetLevelsPosition();
 
 private:
 	MainCharacter* m_mainCharacter;

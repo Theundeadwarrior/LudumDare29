@@ -69,28 +69,28 @@ namespace SceneManager
 
 	void GamePlayObject::SetXY(float x, float y)
 	{
-		m_currentPosition[0] = x;
-		m_currentPosition[1] = y;
+		m_currentPosition.x = x;
+		m_currentPosition.y = y;
 		
 	}
 
 	void GamePlayObject::SetScaleXY(float x, float y)
 	{
-		m_scale[0] = x;
-		m_scale[1] = y;
+		m_scale.x = x;
+		m_scale.y = y;
 	}
 
 	void GamePlayObject::SetRelativeXY(float x, float y)
 	{
-		m_currentPosition[0] += x;
-		m_currentPosition[1] += y;
+		m_currentPosition.x += x;
+		m_currentPosition.y += y;
 		
 	}
 
 	void GamePlayObject::SetRelativeScaleXY(float x, float y)
 	{
-		m_scale[0] += x;
-		m_scale[1] += y;
+		m_scale.x += x;
+		m_scale.y += y;
 	}
 
 	void GamePlayObject::GetPropertyList( PropertyList& o_properties )

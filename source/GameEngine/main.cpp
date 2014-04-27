@@ -11,6 +11,7 @@
 #include "Utilities/Timer/Timer.h"
 
 #define GLM_PRECISION_HIGHP_FLOAT
+#define MILLISECOND_FRAME_TIME 16.66666666666667
 
 using namespace Atum;
 
@@ -24,35 +25,26 @@ int main(int argc, char *argv[])
 
 	TestSceneLoader sceneTestLoader(sceneManager);
 
-	//PhysicsEngine::PhysicsEngine& physicsEngine = PhysicsEngine::PhysicsEngine::GetInstance();
-	
 	std::vector<SceneManager::Scene*> scenes = sceneManager.GetSceneList();
-	//if (scenes.size() > 3)
-	//{
-	//	physicsEngine.SetScene(scenes[3]);
-	//}
-
-	//ray-picking
-	//UserInterface::UiManager::GetInstance().EnableCompleteUi();
 
 	unsigned long long int lastTicks = GetTickCount64();
 	unsigned long long int elapsedTicks;
 
 	while(windowManager.GetCurrentWindowId() != 0)
 	{
+
 		Utilities::Timer::GetInstance()->MarkLap();
 		Utilities::Timer::GetInstance()->ResetTimer();
-
-		//physicsEngine.Advance(Utilities::Timer::GetInstance()->GetLapTime());
-		//physicsEngine.UpdateGraphicScene();
 
 		sceneManager.UpdateCurrentScene();
 
 		graphicsEngine->StartRendering(sceneManager.GetCurrentScene());
 		graphicsEngine->StopRendering();
 
+		double testtime = Utilities::Timer::GetInstance()->GetLapTime();
+
 		// todo : use something else to avoid draining the processor
-		Sleep(1);
+		Sleep(MILLISECOND_FRAME_TIME - testtime);
 		/////////////////////////////////////////////////////////////
 	}
 	delete graphicsEngine;
