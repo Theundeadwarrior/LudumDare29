@@ -96,7 +96,7 @@ namespace SceneManager
 			if (m_currentLevel->GetPosition().x < POSITION_TO_DELETE)
 			{
 				// Are we currently beneath the surface?
-				bool isBeneath = m_currentLevel->IsUnderGround();
+ 				bool isBeneath = m_currentLevel->IsUnderGround();
 				Level* levelToDel = m_currentLevel;
 				m_currentLevel = m_nextLevel;
 				delete levelToDel;
@@ -145,9 +145,9 @@ namespace SceneManager
 
 		// HACKATHON!!! 
 		m_currentLevel->Translate(glm::vec4(POSITION_FIRST_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition() - 26, 0, 0));
-		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition() - 26, 0, 0));
+		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 
-
+		m_mainCharacter->GoBeneathTheSurface();
 
 		//throw std::exception("The method or operation is not implemented.");
 	}
@@ -177,12 +177,25 @@ namespace SceneManager
 	{
 		// Generate parameters and layout
 		LevelLayoutGenerator::Parameters params;
-		params.LevelHeight = 12;
-		params.LevelWidth = 256;
-		params.PlatformLenghtRange[0] = 8;
-		params.PlatformLenghtRange[1] = 24;
-		params.IsUnderGround = false;
+		if (IsUnderGround() == false)
+		{
+			params.LevelHeight = 12;
+			params.LevelWidth = 256;
+			params.PlatformLenghtRange[0] = 8;
+			params.PlatformLenghtRange[1] = 24;
+			params.IsUnderGround = false;
+		}
+		else
+		{
+			params.LevelHeight = 12;
+			params.LevelWidth = 256;
+			params.PlatformLenghtRange[0] = 8;
+			params.PlatformLenghtRange[1] = 24;
+			params.IsUnderGround = true;
+		}
+
 		LevelLayoutGenerator levelGen(params);
+
 
 		LevelLayout level = levelGen.GenerateLevel();
 

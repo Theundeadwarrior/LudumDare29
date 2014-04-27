@@ -27,6 +27,10 @@ namespace SceneManager
 		virtual void Update();
 		virtual void Reset();
 
+		// Used when changing surface
+
+		void GoBeneathTheSurface();
+
 		virtual TextureId GetTextureID();
 		virtual MaterialID GetMaterialID();
 
@@ -43,7 +47,6 @@ namespace SceneManager
 		virtual glm::vec4 GetNextPosition()const{return glm::vec4(m_currentPosition[0], m_currentPosition[1]+m_speed,0,0);}
 
 		virtual CharacterState GetCharacterState(){return m_currentState;}
-
 	private:
 		GamePlayObject::CharacterState m_currentState;
 		glm::vec4 m_colorBlend;

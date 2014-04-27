@@ -81,14 +81,14 @@ namespace SceneManager
 
 		SetRelativeXY(0.0f,m_speed);
 
-		float diff = m_currentPosition[1]-m_cameraDiff;
+		float diff = m_currentPosition.y - m_cameraDiff;
 		if(diff > CAMERA_SOFT_THRESHOLD)
 		{
 			GamePlayObject::ms_cameraY -= CAMERA_MOVEMENT*abs(diff);
 			m_cameraDiff += CAMERA_STABILISATION*abs(diff);
 		}
 
-		else if(m_currentPosition[1]-m_cameraDiff < -CAMERA_SOFT_THRESHOLD)
+		else if(m_currentPosition.y - m_cameraDiff < -CAMERA_SOFT_THRESHOLD)
 		{
 			GamePlayObject::ms_cameraY += CAMERA_MOVEMENT*abs(diff);
 			m_cameraDiff -= CAMERA_STABILISATION*abs(diff);
@@ -165,6 +165,14 @@ namespace SceneManager
  			m_speed = JUMPING_SPEED;
 			m_currentState = GamePlayObject::Jumping;
 		}
+	}
+
+	void MainCharacter::GoBeneathTheSurface()
+	{
+		ms_cameraY = 0;
+		m_speed = 0;
+		m_cameraDiff = 14;
+		m_currentPosition.y = -20;
 	}
 
 } // namespace SceneManager
