@@ -95,11 +95,13 @@ namespace SceneManager
 			// Needs to generate a new level if the current one is getting out of the screen.
 			if (m_currentLevel->GetPosition().x < POSITION_TO_DELETE)
 			{
+				// Are we currently beneath the surface?
+				bool isBeneath = m_currentLevel->IsUnderGround();
 				Level* levelToDel = m_currentLevel;
 				m_currentLevel = m_nextLevel;
 				delete levelToDel;
 
-				m_nextLevel = new Level();
+				m_nextLevel = new Level(isBeneath);
 				InitLevel(m_nextLevel);
 				m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 			}
@@ -107,7 +109,7 @@ namespace SceneManager
 			// Might have to switch level if we fall down
 			if (m_mainCharacter->GetPosition().y < SURFACE_HEIGHT_POSITION && m_currentLevel->IsUnderGround() == false)
 			{
-				ForceCreationNewLevels();
+				GoBeneathTheSurface();
 			}
 		}
 
@@ -128,9 +130,26 @@ namespace SceneManager
 		}
 	}
 
-	void PlaceholderLevel::ForceCreationNewLevels()
+	void PlaceholderLevel::GoBeneathTheSurface()
 	{
-		throw std::exception("The method or operation is not implemented.");
+		// We need to generate new levels for the underworld and delete the old ones (surface world).
+		delete m_currentLevel;
+		delete m_nextLevel;
+
+		m_currentLevel = new Level(true);
+		m_nextLevel = new Level(true);
+
+		InitLevel(m_currentLevel);
+		InitLevel(m_nextLevel);
+
+
+		// HACKATHON!!! 
+		m_currentLevel->Translate(glm::vec4(POSITION_FIRST_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition() - 26, 0, 0));
+		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition() - 26, 0, 0));
+
+
+
+		//throw std::exception("The method or operation is not implemented.");
 	}
 
 

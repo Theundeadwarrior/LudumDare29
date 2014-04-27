@@ -56,7 +56,7 @@ public:
 	void CreateTitleScreenObject();
 
 private:
-	void ForceCreationNewLevels();
+	void GoBeneathTheSurface();
 
 private:
 	MainCharacter* m_mainCharacter;
