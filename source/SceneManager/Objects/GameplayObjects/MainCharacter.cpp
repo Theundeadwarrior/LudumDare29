@@ -1,7 +1,7 @@
 #include "SceneManager/Objects/GameplayObjects/MainCharacter.h"
 #include "SceneManager/SceneManager.h"
 
-#define GRAVITY 0.0075f
+#define GRAVITY 0.0020f
 
 namespace Atum
 {
@@ -128,11 +128,11 @@ namespace SceneManager
 
 	void MainCharacter::Jump()
 	{
-		if(m_currentState != GamePlayObject::Jumping &&
-			m_currentState != GamePlayObject::Falling && 
-			m_currentState != GamePlayObject::Dead)
+		//if(m_currentState != GamePlayObject::Jumping &&
+		//	m_currentState != GamePlayObject::Falling && 
+		//	m_currentState != GamePlayObject::Dead)
 		{
- 			m_speed = 0.27f;
+ 			m_speed = 0.08f;
 			m_currentState = GamePlayObject::Jumping;
 		}
 	}

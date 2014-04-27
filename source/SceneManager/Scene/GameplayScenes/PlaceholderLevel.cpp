@@ -8,9 +8,10 @@
 #include "SceneManager/Objects/GameplayObjects/PlatformCanyon.h"
 #include "SceneManager/Level/Level.h"
 
-#define SCROLLING_DISTANCE_PER_FRAME -0.3f
-#define POSITION_TO_DELETE -256.0F
-#define POSITION_TO_SPAWN 256.0F
+#define SCROLLING_DISTANCE_PER_FRAME -0.05f
+//#define SCROLLING_DISTANCE_PER_FRAME -0.15f
+#define POSITION_TO_DELETE -128.0F
+#define POSITION_TO_SPAWN 128.0F
 //#define POSITION_TO_SPAWN 256.0f
 
 namespace Atum

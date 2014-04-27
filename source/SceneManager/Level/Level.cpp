@@ -148,11 +148,11 @@ namespace SceneManager
 
 		if (jumpHeight == -1)
 		{
-			jumpLength = GenerateRandomNumber(2, 8);
+			jumpLength = GenerateRandomNumber(4, 8);
 		}
 		else if (jumpHeight == 0)
 		{
-			jumpLength = GenerateRandomNumber(2, 6);
+			jumpLength = GenerateRandomNumber(4, 6);
 		}
 		else if (jumpHeight == 1)
 		{
