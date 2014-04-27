@@ -10,6 +10,7 @@
 
 
 #define SCROLLING_DISTANCE_PER_FRAME -0.1f
+#define POSITION_TO_DELETE -256.0f
 
 namespace Atum
 {
@@ -22,17 +23,12 @@ namespace SceneManager
 		Init();
 
 		// buffers 3 levels
-		m_levels.push_back(new Level());
-		m_levels.push_back(new Level());
-		m_levels.push_back(new Level());
-	}
+		Level* level1 = new Level();
+		Level* level2 = new Level();
 
-	//PlaceholderLevel::PlaceholderLevel(const LevelLayout& level)
-	//{
-	//	Object* platform = new PlatformCanyon(glm::vec4(-1.5, -1.5, 0, 1), glm::vec4(0.1, 1, 1, 1));
-	//	((GamePlayObject*)platform)->Init();
-	//	AddObject(platform);
-	//}
+		m_levels.push_back(level1);
+		m_levels.push_back(level2);
+	}
 
 	PlaceholderLevel::~PlaceholderLevel()
 	{
@@ -43,13 +39,16 @@ namespace SceneManager
 	void PlaceholderLevel::Init()
 	{
 		CreateTitleScreenObject();
+
+		int currentShift = 0;
 		
 		auto it = m_levels.begin();
 		auto endIt = m_levels.end();
 		for (; it != endIt; ++it)
 		{
 			InitLevel(*it);
-
+			(*it)->ScrollSideways(glm::vec4(currentShift, 0, 0, 0));
+			currentShift += 256;
 		}
 	}
 
@@ -64,7 +63,6 @@ namespace SceneManager
 		m_titleScreenObject = new MainCharacter();
 		m_titleScreenObject->Init();
 
-		//m_titleScreenObject = new Object(GetMaterial(), GetQuad(), Transform());
 		AddObject(m_titleScreenObject);
 
 		PerspectiveCameraParams params(45, 1280/720.0f, 0.1f, 1000.0f);
@@ -91,7 +89,7 @@ namespace SceneManager
 		}
 
 		// Needs to generate a new level if the current one is getting out of the screen.
-		if (m_levels.empty() == false && m_levels.front()->GetCurrentPosition().x < -20)
+		if (m_levels.empty() == false && m_levels.front()->GetCurrentPosition().x < POSITION_TO_DELETE)
 		{
 			Level* levelToDel = m_levels.front();
 			delete levelToDel;
@@ -100,6 +98,7 @@ namespace SceneManager
 			Level* level = new Level();
 			InitLevel(level);
 			m_levels.push_back(level);
+			level->ScrollSideways(glm::vec4(256, 0, 0, 0));
 		}
 
 		// Calls the update on base class for updating all objects
@@ -118,6 +117,8 @@ namespace SceneManager
 			AddObject(*itObj);
 		}
 	}
+
+
 
 
 	Level::Level()
@@ -148,7 +149,6 @@ namespace SceneManager
 
 		LevelLayout level = levelGen.GenerateLevel(params);
 
-
 		// Creates the objects and put them in the objectList;
 		int currentYPosition = 0;
 		float currentXPosition = 0;
@@ -171,8 +171,9 @@ namespace SceneManager
 					currentIndex++;
 					currentXPosition++;
 				}
-
-				currentPlatformLength--;
+				
+				currentIndex--;
+				currentXPosition--;
 			}
 
 			currentYPosition = level.m_height[currentIndex];
@@ -184,10 +185,28 @@ namespace SceneManager
 			}
 			currentXPosition += currentPlatformLength;
 
-			Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
+			// FUCKING HACK DE LA MORT POUR PAS DESSINER LES PLATFORMES DU BAS!!
+			if (currentYPosition == JUMP_LEVEL_ID)
+			{
+				continue;
+			}
+
+			Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition - 8, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
 			((GamePlayObject*)platform)->Init();
 
 			m_objectList.push_back(platform);
+		}
+	}
+
+	void Level::ScrollSideways(const glm::vec4& translation)
+	{
+		m_currentPosition += translation;
+
+		auto it = m_objectList.begin();
+		auto itend = m_objectList.end();
+		for (; it != itend; ++it)
+		{
+			((GamePlayObject*)*it)->SetRelativeXY(translation.x, 0);
 		}
 	}
 

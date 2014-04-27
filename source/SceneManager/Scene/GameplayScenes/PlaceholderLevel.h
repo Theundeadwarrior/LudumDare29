@@ -24,7 +24,7 @@ public:
 
 
 	glm::vec4& GetCurrentPosition() { return m_currentPosition;  }
-	void ScrollSideways(const glm::vec4& translation) { m_currentPosition += translation; };
+	void ScrollSideways(const glm::vec4& translation);;
 
 private:
 	std::vector<Object*> m_objectList;
