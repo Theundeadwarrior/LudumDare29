@@ -107,7 +107,6 @@ namespace SceneManager
 
 
 
-
 	Level::Level()
 	: m_currentPosition()
 	{
