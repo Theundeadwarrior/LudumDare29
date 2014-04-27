@@ -1,30 +1,32 @@
-#ifndef SCENEMANAGER_TEXTURE_MANAGER_H
-#define SCENEMANAGER_TEXTURE_MANAGER_H
+#ifndef SCENEMANAGER_SOUND_MANAGER_H
+#define SCENEMANAGER_SOUND_MANAGER_H
 
-#include <map>
-#include "SceneManager/Manager/TypedefID.h"
-#include "LowLevelGraphics/LowLevelAPI/GPUAPI/LowLevelGPUAPI.h"
-#include "LowLevelGraphics/LowLevelAPI/ShaderAPI/LowLevelShaderAPI.h"
-#include "Utilities/Image/ImageUtilities.h"
+#include "irrKlang/include/irrKlang.h"
 
 namespace Atum
 {
-namespace LowLevelGraphics{class Texture;}
-namespace LowLevelGraphics{class TextureSkyBox;}
 
 namespace SceneManager
 {
-typedef std::map<TextureId, LowLevelGraphics::Texture*> TextureMap;
-typedef std::map<TextureId, LowLevelGraphics::TextureSkyBox*> TextureSkyBoxMap;
 
 class SoundManager
 {
 public:
-	SoundManager();
+	static SoundManager& GetInstance();
 	~SoundManager();
 
+	void StartMusic();
+	bool IncrementSwitchMusic(bool underworld);
+	void StopMusic();
+
 private:
-    SoundManager(SoundManager const&);
+	SoundManager();
+	SoundManager(SoundManager const&); //don't implement
+	void operator=(SoundManager const&); //don't implement
+
+	irrklang::ISoundEngine* m_engine;
+    irrklang::ISound* m_currentMusic;
+	irrklang::ISound* m_currentMusicUnder;
 };
 
 }

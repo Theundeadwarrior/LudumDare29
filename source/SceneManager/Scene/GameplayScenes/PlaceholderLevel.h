@@ -68,6 +68,7 @@ private:
 	Camera* m_dummyCamera;
 	Level* m_currentLevel;
 	Level* m_nextLevel;
+	bool m_switchMusic;
 
 };
 

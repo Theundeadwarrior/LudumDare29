@@ -13,7 +13,6 @@ SceneManager::SceneManager()
 : m_currentScene(NULL)
 {
 
-
 }
 
 SceneManager& SceneManager::GetInstance()

@@ -9,6 +9,7 @@
 #include "SceneManager/Objects/GameplayObjects/PlatformRuins.h"
 #include "SceneManager/Level/Level.h"
 #include "../../Objects/GameplayObjects/PlatformBridge.h"
+#include "SceneManager/Manager/SoundManager.h"
 
 #define SCROLLING_DISTANCE_PER_FRAME -0.2f
 #define POSITION_TO_DELETE -148.0F
@@ -26,6 +27,7 @@ namespace SceneManager
 		, m_background(NULL)
 		, m_movingBackground(NULL)
 		, m_dummyCamera(NULL)
+		, m_switchMusic(false)
 	{
 		m_currentLevel = new Level();
 		m_nextLevel = new Level();
@@ -144,6 +146,11 @@ namespace SceneManager
 			}
 		}
 
+		if(m_switchMusic)
+		{
+			m_switchMusic = SoundManager::GetInstance().IncrementSwitchMusic(true);
+		}
+
 		// Calls the update on base class for updating all objects
 		Scene::Update();
 	}
@@ -173,7 +180,6 @@ namespace SceneManager
 		InitLevel(m_currentLevel);
 		InitLevel(m_nextLevel);
 
-
 		// HACKATHON!!! 
 		m_currentLevel->Translate(glm::vec4(POSITION_FIRST_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition() - 26, 0, 0));
  		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
@@ -181,6 +187,8 @@ namespace SceneManager
  		m_mainCharacter->GoBeneathTheSurface();
 
 		//throw std::exception("The method or operation is not implemented.");
+
+		m_switchMusic = true;
 	}
 
 

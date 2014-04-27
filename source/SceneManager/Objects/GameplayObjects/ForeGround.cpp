@@ -15,7 +15,7 @@ namespace SceneManager
 		:m_uOffset(0.0f)
 	{
 		SetScaleXY(2.2f,2.2f);
-		SetXY(0.f,-0.5f); 
+		SetXY(0.f,-0.4f); 
 		m_isPositionAffectedByLevel = false;
 	}
 
@@ -72,7 +72,7 @@ namespace SceneManager
 			m_uOffset = 0.0f;
 		}
 
-		m_uOffset += 0.003f;
+		m_uOffset += 0.012f;
 	}
 
 } // namespace SceneManager

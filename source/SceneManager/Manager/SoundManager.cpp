@@ -1,106 +1,81 @@
-//#include "SceneManager/Manager/TextureManager.h"
-//
-//#include "LowLevelGraphics/Material/Texture/Texture.h"
-//#include "LowLevelGraphics/Material/Texture/TextureSkyBox.h"
-//#include "Utilities/IdGenerator/IdGenerator.h"
-//
-//namespace Atum
-//{
-//namespace SceneManager
-//{
-//
-////-----------------------------------------------------------------------------
-//TextureManager::TextureManager()
-//{
-//}
-//
-////-----------------------------------------------------------------------------
-//TextureManager::~TextureManager()
-//{
-//	ClearAll();
-//}
-//
-////-----------------------------------------------------------------------------
-//TextureId TextureManager::CreateTexture(const Utilities::Image::ImageParameters<unsigned char>& imageParameters, const LowLevelGraphics::LowLevelAPI::TextureFormat& format)
-//{
-//    LowLevelGraphics::Texture* texture = new LowLevelGraphics::Texture(imageParameters, format);
-//    return InsertTexture(texture);
-//}
-//
-//TextureId TextureManager::CreateTextureSkyBox(const std::vector<Utilities::Image::ImageParameters<unsigned char>>& imageParameters, const LowLevelGraphics::LowLevelAPI::TextureFormat& format)
-//{
-//	LowLevelGraphics::TextureSkyBox* texture = new LowLevelGraphics::TextureSkyBox(imageParameters, format);
-//	return InsertTextureSkyBox(texture);
-//}
-//
-////-----------------------------------------------------------------------------
-//void TextureManager::RemoveTexture (TextureId textureID)
-//{
-//    TextureMap::iterator it (m_textureMap.find(textureID));
-//    if (it != m_textureMap.end()) //id exists!
-//    {
-//        delete (*it).second;
-//        m_textureMap.erase(it);
-//    }
-//}
-//
-////-----------------------------------------------------------------------------
-//LowLevelGraphics::Texture* const TextureManager::GetTexture(TextureId textureID)
-//{
-//    if (m_textureMap.find(textureID) != m_textureMap.end()) //id exists!
-//    {
-//        return m_textureMap[textureID];
-//    }
-//    else
-//    {
-//        return 0;
-//    }
-//}
-//
-////-----------------------------------------------------------------------------
-//LowLevelGraphics::TextureSkyBox* const TextureManager::GetSkyBox(TextureId textureId)
-//{
-//	if (m_textureSkyBoxMap.find(textureId) != m_textureSkyBoxMap.end()) //id exists!
-//	{
-//		return m_textureSkyBoxMap[textureId];
-//	}
-//	else
-//	{
-//		return 0;
-//	}
-//}
-//
-////-----------------------------------------------------------------------------
-//TextureId TextureManager::InsertTexture(LowLevelGraphics::Texture* const texture)
-//{
-//    TextureId id = Utilities::IdGenerator::GetInstance().GenerateId();
-//    m_textureMap[id] = texture;
-//    return id;
-//}
-//
-////-----------------------------------------------------------------------------
-//TextureId TextureManager::InsertTextureSkyBox(LowLevelGraphics::TextureSkyBox* const textureSkyBox)
-//{
-//	TextureId id = Utilities::IdGenerator::GetInstance().GenerateId();
-//	m_textureSkyBoxMap[id] = textureSkyBox;
-//	return id;
-//}
-//
-//void TextureManager::ClearAll()
-//{
-//	TextureMap::iterator it(m_textureMap.begin());
-//	for(; it != m_textureMap.end(); it++)
-//	{
-//		delete (*it).second;
-//	}
-//	TextureSkyBoxMap::iterator itSkybox(m_textureSkyBoxMap.begin());
-//	for(; itSkybox != m_textureSkyBoxMap.end(); itSkybox++)
-//	{
-//		delete (*itSkybox).second;
-//	}
-//	m_textureMap.clear();
-//	m_textureSkyBoxMap.clear();
-//}
-//
-//}
-//}
+#include "SceneManager/Manager/SoundManager.h"
+#include "windows.h"
+
+namespace Atum
+{
+	namespace SceneManager
+	{
+		SoundManager::SoundManager()
+			:m_currentMusic(0x00000000)
+			,m_currentMusicUnder(0x00000000)
+		{
+			m_engine = irrklang::createIrrKlangDevice();
+		}
+   
+		SoundManager& SoundManager::GetInstance()
+		{
+			static SoundManager instance;
+			return instance;
+		}
+		SoundManager::~SoundManager()
+		{
+			if(m_currentMusic)
+			{
+				m_currentMusic->drop();
+			}
+			if(m_currentMusicUnder)
+			{
+				m_currentMusicUnder->drop();
+			}
+			m_engine->drop();
+		} 
+
+		void SoundManager::StartMusic()
+		{	
+			if(!m_currentMusic)
+			{
+				m_currentMusic = m_engine->play2D("../../data/sounds/AboveTheSurface.ogg", true, false, true, irrklang::ESM_AUTO_DETECT, true);
+			}
+			if(!m_currentMusicUnder)
+			{
+				m_currentMusicUnder = m_engine->play2D("../../data/sounds/BeneathTheSurface.ogg", true, false, true, irrklang::ESM_AUTO_DETECT, true);
+			}
+			m_currentMusicUnder->setPlayPosition(0.0f);
+			m_currentMusicUnder->setVolume(0.0f);
+			m_currentMusicUnder->setIsPaused(false);
+			m_currentMusic->setPlayPosition(0.0f);
+			m_currentMusic->setVolume(1.0f);
+			m_currentMusic->setIsPaused(false);
+		}
+
+		bool SoundManager::IncrementSwitchMusic(bool underworld)
+		{
+			if(underworld && m_currentMusicUnder->getVolume() < 0.99f)
+			{
+				m_currentMusic->setVolume(m_currentMusic->getVolume()-0.025f);
+				m_currentMusicUnder->setVolume(m_currentMusicUnder->getVolume()+0.025f);
+				return true;
+			}
+			else if(!underworld && m_currentMusic->getVolume() < 0.99f)
+			{
+				m_currentMusic->setVolume(m_currentMusic->getVolume()+0.025f);
+				m_currentMusicUnder->setVolume(m_currentMusicUnder->getVolume()-0.025f);
+				return true;
+			}
+			return false;
+		}
+
+		void SoundManager::StopMusic()
+		{	
+			if(m_currentMusic)
+			{
+				m_currentMusic->setIsPaused(true);
+			}
+			if(m_currentMusicUnder)
+			{
+				m_currentMusicUnder->setIsPaused(true);
+			}
+		}
+
+	}
+}
