@@ -8,8 +8,7 @@ namespace Atum
 namespace SceneManager
 {
 	MainCharacter::MainCharacter()
-		: m_acceleration(GRAVITY)
-        , m_speed(0)
+		: m_speed(0)
 		, m_currentState(GamePlayObject::Falling)
 	{
 		Events::EventManager::GetInstance().RegisterKeyboardListener(this);
@@ -52,7 +51,7 @@ namespace SceneManager
 		if(m_currentState == GamePlayObject::Jumping || m_currentState == GamePlayObject::Falling)
 		{
 			if(m_speed >= -1.2f)
-				m_speed -= m_acceleration; 
+				m_speed -= GRAVITY; 
 
 			if(m_currentState == GamePlayObject::Jumping && m_speed < 0.0f)
 			{
