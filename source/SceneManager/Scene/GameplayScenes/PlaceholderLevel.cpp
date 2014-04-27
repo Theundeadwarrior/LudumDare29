@@ -35,6 +35,11 @@ namespace SceneManager
 
 	void PlaceholderLevel::Init()
 	{
+		m_foreground = new Foreground();
+		m_foreground->Init();
+
+		AddObject(m_foreground);
+
 		CreateTitleScreenObject();
 
 		int currentShift = 0;
@@ -76,6 +81,7 @@ namespace SceneManager
 	{
 		delete m_mainCharacter;
 		delete m_background;
+		delete m_foreground;
 		delete m_dummyCamera;
 	}
 
@@ -84,6 +90,7 @@ namespace SceneManager
 		if(m_mainCharacter->GetCharacterState() != GamePlayObject::WallStop)
 		{
 			m_background->Move();
+			m_foreground->Move();
 
 			m_currentLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
 			m_nextLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));

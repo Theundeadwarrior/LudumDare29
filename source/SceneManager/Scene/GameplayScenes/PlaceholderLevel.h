@@ -6,6 +6,7 @@
 #include "SceneManager/Objects/GameplayObjects/MainCharacter.h"
 
 #include "SceneManager/Objects/GameplayObjects/Background.h"
+#include "SceneManager/Objects/GameplayObjects/ForeGround.h"
 
 namespace Atum
 {
@@ -58,6 +59,7 @@ public:
 private:
 	MainCharacter* m_mainCharacter;
 	Background* m_background;
+	Foreground* m_foreground;
 	Camera* m_dummyCamera;
 	//std::list<Level*> m_levels; // levels that go from left to right
 	Level* m_currentLevel;
