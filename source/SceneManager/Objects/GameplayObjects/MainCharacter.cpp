@@ -2,6 +2,8 @@
 #include "SceneManager/SceneManager.h"
 
 #define GRAVITY 0.0020f
+#define MAX_FALLING_SPEED -1.2f
+#define JUMPING_SPEED 0.08f
 
 namespace Atum
 {
@@ -51,7 +53,7 @@ namespace SceneManager
 
 		if(m_currentState == GamePlayObject::Jumping || m_currentState == GamePlayObject::Falling)
 		{
-			if(m_speed >= -1.2f)
+			if(m_speed >= MAX_FALLING_SPEED)
 				m_speed -= m_acceleration; 
 
 			if(m_currentState == GamePlayObject::Jumping && m_speed < 0.0f)
@@ -74,9 +76,9 @@ namespace SceneManager
 
 	TextureId MainCharacter::GetTextureID()
 	{
-		static TextureId textureID = -1;
+		static TextureId textureID = INVALID_TEXTURE_ID;
 
-		if(textureID == -1)
+		if (textureID == INVALID_TEXTURE_ID)
 		{
 			SceneManager& sceneManager = SceneManager::GetInstance();
 
@@ -90,9 +92,9 @@ namespace SceneManager
 
 	MaterialID MainCharacter::GetMaterialID()
 	{
-		static MaterialID materialID = -1;
+		static MaterialID materialID = INVALID_MATERIAL_ID;
 
-		if(materialID == -1)
+		if (materialID == INVALID_MATERIAL_ID)
 		{
 			TextureParameter textureParameter(GetTextureID());
 			MaterialParameters materialParameters;
@@ -134,7 +136,7 @@ namespace SceneManager
 		//	m_currentState != GamePlayObject::Falling && 
 		//	m_currentState != GamePlayObject::Dead)
 		{
- 			m_speed = 0.08f;
+ 			m_speed = JUMPING_SPEED;
 			m_currentState = GamePlayObject::Jumping;
 		}
 	}
