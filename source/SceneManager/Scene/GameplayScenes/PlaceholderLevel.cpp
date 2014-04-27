@@ -131,8 +131,8 @@ namespace SceneManager
 		LevelLayoutGenerator::Parameters params;
 		params.LevelHeight = 12;
 		params.LevelWidth = 256;
-		params.PlatformLenghtRange[0] = 4;
-		params.PlatformLenghtRange[1] = 16;
+		params.PlatformLenghtRange[0] = 8;
+		params.PlatformLenghtRange[1] = 24;
 		LevelLayoutGenerator levelGen(params);
 
 		LevelLayout level = levelGen.GenerateLevel();
