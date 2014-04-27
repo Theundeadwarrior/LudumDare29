@@ -23,6 +23,7 @@ namespace SceneManager
 	PlaceholderLevel::PlaceholderLevel()
 		: m_mainCharacter(NULL)
 		, m_background(NULL)
+		, m_movingBackground(NULL)
 		, m_dummyCamera(NULL)
 	{
 		//Init();
@@ -49,6 +50,11 @@ namespace SceneManager
 		InitLevel(m_currentLevel);
 		InitLevel(m_nextLevel);
 
+		m_movingBackground = new MovingBackground();
+		m_movingBackground->Init();
+
+		AddObject(m_movingBackground);
+
 		m_background = new Background();
 		m_background->Init();
 
@@ -63,6 +69,7 @@ namespace SceneManager
 	{
 		delete m_mainCharacter;
 		delete m_background;
+		delete m_movingBackground;
 		delete m_foreground;
 		delete m_dummyCamera;
 	}
@@ -87,6 +94,7 @@ namespace SceneManager
 		if(m_mainCharacter->GetCharacterState() != GamePlayObject::WallStop)
 		{
 			m_background->Move();
+			m_movingBackground->Move();
 			m_foreground->Move();
 
 			m_currentLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));

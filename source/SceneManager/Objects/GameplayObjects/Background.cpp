@@ -47,9 +47,9 @@ namespace SceneManager
 		SceneManager& sceneManager = SceneManager::GetInstance();
 
 		Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
-		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/desertbackground.bmp");
+		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/background.png");
 
-		static TextureId titleScreenTextureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
+		static TextureId titleScreenTextureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA);
 
 		return titleScreenTextureID;
 	}

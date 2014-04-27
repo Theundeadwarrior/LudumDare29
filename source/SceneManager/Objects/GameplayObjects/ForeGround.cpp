@@ -14,8 +14,8 @@ namespace SceneManager
 	Foreground::Foreground()
 		:m_uOffset(0.0f)
 	{
-		SetScaleXY(2.2f,1.3f);
-		SetXY(0.f,-1.2f); 
+		SetScaleXY(2.2f,2.2f);
+		SetXY(0.f,-0.5f); 
 		m_isPositionAffectedByLevel = false;
 	}
 
@@ -72,7 +72,7 @@ namespace SceneManager
 			m_uOffset = 0.0f;
 		}
 
-		m_uOffset += 0.005f;
+		m_uOffset += 0.003f;
 	}
 
 } // namespace SceneManager

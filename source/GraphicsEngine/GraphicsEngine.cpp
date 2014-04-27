@@ -12,6 +12,10 @@
 
 #include "UserInterface/Ui/UiManager.h"
 
+#include "SceneManager/Objects/GameplayObjects/Background.h"
+#include "SceneManager/Objects/GameplayObjects/ForeGround.h"
+#include "SceneManager/Objects/GameplayObjects/MovingBackground.h"
+
 namespace Atum
 {
 
@@ -51,70 +55,89 @@ void GraphicsEngine::Preprocess()
 //-----------------------------------------------------------------------------
 void GraphicsEngine::Render(SceneManager::Scene* scene)
 {
-    //todo : add visibility system outside and iterate on visible objects only
+	   LowLevelGraphics::LowLevelAPI::EnableDepthRead();
+	   {
+			LowLevelGraphics::LowLevelAPI::EnableBackFaceCulling();
+			{
+				LowLevelGraphics::LowLevelAPI::EnableDepthWrite();
+				DrawOpaqueObjects(scene);
+				LowLevelGraphics::LowLevelAPI::DisableDepthWrite();
 
-    //-----------------------------------------------------------------------------
-    //Skybox
-    DrawSkyBox(scene);
-    //draw
-
-    //-----------------------------------------------------------------------------
-    //LowLevelGraphics::LowLevelAPI::ActivateWireframeMode();
-    
-    LowLevelGraphics::LowLevelAPI::EnableDepthRead();
-    {
-        //-----------------------------------------------------------------------------
-        //Opaque objects
-        LowLevelGraphics::LowLevelAPI::EnableDepthWrite();
-        {
-            LowLevelGraphics::LowLevelAPI::EnableBackFaceCulling();
-            {
-                DrawOpaqueObjects(scene);
-            }
-            LowLevelGraphics::LowLevelAPI::DisableBackFaceCulling();
-
-            //-----------------------------------------------------------------------------
-            //Opaque objects with holes (if we know the information?)
-            //draw
-        }
-		DrawPointLightSphere(scene);
-        LowLevelGraphics::LowLevelAPI::DisableDepthWrite();
-
-        //-----------------------------------------------------------------------------
-        //Alpha
-        LowLevelGraphics::LowLevelAPI::EnableAlphaBlending();
-        {
-            //-----------------------------------------------------------------------------
-            //Points
-            LowLevelGraphics::LowLevelAPI::UnlockShaderPointSize();
-            {
-				//-----------------------------------------------------------------------------
-				//Point clouds
-				LowLevelGraphics::LowLevelAPI::SetAlphaBlendFunc();
-				DrawPointClouds(scene);
-
-				//-----------------------------------------------------------------------------
-				//Particles
-				LowLevelGraphics::LowLevelAPI::SetAdditiveBlendFunc();
-				DrawParticles(scene);
+				LowLevelGraphics::LowLevelAPI::EnableAlphaBlending();
+				{
+					LowLevelGraphics::LowLevelAPI::SetAlphaBlendFunc();
+					DrawAlphaObjects(scene);
+				}
+				LowLevelGraphics::LowLevelAPI::DisableAlphaBlending();
 			}
-			LowLevelGraphics::LowLevelAPI::LockShaderPointSize();
+			LowLevelGraphics::LowLevelAPI::DisableBackFaceCulling();
+	   }
+	   LowLevelGraphics::LowLevelAPI::DisableDepthRead();
 
-            //-----------------------------------------------------------------------------
-            // draw alpha objects
-            //-----------------------------------------------------------------------------
-			/////////////////////
-			LowLevelGraphics::LowLevelAPI::SetAlphaBlendFunc();
+ //   //todo : add visibility system outside and iterate on visible objects only
 
-            /////////////////////
-            //draw alpha objects
+ //   //-----------------------------------------------------------------------------
+ //   //Skybox
+ //   DrawSkyBox(scene);
+ //   //draw
 
-        }
-        LowLevelGraphics::LowLevelAPI::DisableAlphaBlending();
-    }
-	//DrawSelectionBox(scene);
-    LowLevelGraphics::LowLevelAPI::DisableDepthRead();
-    //LowLevelGraphics::LowLevelAPI::DeactivateWireframeMode();
+ //   //-----------------------------------------------------------------------------
+ //   //LowLevelGraphics::LowLevelAPI::ActivateWireframeMode();
+ //   
+ //   LowLevelGraphics::LowLevelAPI::EnableDepthRead();
+ //   {
+ //       //-----------------------------------------------------------------------------
+ //       //Opaque objects
+ //       LowLevelGraphics::LowLevelAPI::EnableDepthWrite();
+ //       {
+ //           LowLevelGraphics::LowLevelAPI::EnableBackFaceCulling();
+ //           {
+ //               DrawOpaqueObjects(scene);
+ //           }
+ //           LowLevelGraphics::LowLevelAPI::DisableBackFaceCulling();
+
+ //           //-----------------------------------------------------------------------------
+ //           //Opaque objects with holes (if we know the information?)
+ //           //draw
+ //       }
+	//	DrawPointLightSphere(scene);
+ //       LowLevelGraphics::LowLevelAPI::DisableDepthWrite();
+
+ //       //-----------------------------------------------------------------------------
+ //       //Alpha
+ //       LowLevelGraphics::LowLevelAPI::EnableAlphaBlending();
+ //       {
+ //           //-----------------------------------------------------------------------------
+ //           //Points
+ //           LowLevelGraphics::LowLevelAPI::UnlockShaderPointSize();
+ //           {
+	//			//-----------------------------------------------------------------------------
+	//			//Point clouds
+	//			LowLevelGraphics::LowLevelAPI::SetAlphaBlendFunc();
+	//			DrawPointClouds(scene);
+
+	//			//-----------------------------------------------------------------------------
+	//			//Particles
+	//			LowLevelGraphics::LowLevelAPI::SetAdditiveBlendFunc();
+	//			DrawParticles(scene);
+	//		}
+	//		LowLevelGraphics::LowLevelAPI::LockShaderPointSize();
+
+ //           //-----------------------------------------------------------------------------
+ //           // draw alpha objects
+ //           //-----------------------------------------------------------------------------
+	//		/////////////////////
+	//		LowLevelGraphics::LowLevelAPI::SetAlphaBlendFunc();
+
+ //           /////////////////////
+ //           //draw alpha objects
+
+ //       }
+ //       LowLevelGraphics::LowLevelAPI::DisableAlphaBlending();
+ //   }
+	////DrawSelectionBox(scene);
+ //   LowLevelGraphics::LowLevelAPI::DisableDepthRead();
+ //   //LowLevelGraphics::LowLevelAPI::DeactivateWireframeMode();
 }
 
 //-----------------------------------------------------------------------------
@@ -158,6 +181,45 @@ void GraphicsEngine::DrawSkyBox(SceneManager::Scene* scene)
 }
 
 //-----------------------------------------------------------------------------
+void GraphicsEngine::DrawAlphaObjects(SceneManager::Scene* scene)
+{
+	std::list<SceneManager::Object*>::iterator it = scene->GetBeginObjectList();
+	std::list<SceneManager::Object*>::iterator itEnd = scene->GetEndObjectList();
+
+	SceneManager::Camera* const cam = scene->GetCurrentCamera();
+	glm::mat4x4 viewMatrix = cam->GetViewMatrix();
+
+	for(;it!=itEnd;++it)
+	{
+		if(dynamic_cast<SceneManager::MovingBackground*>(*it))
+		{
+			// We use the corresponding shader
+			LowLevelGraphics::LowLevelAPI::BindShaders((*it)->GetMaterial()->GetShaderList());
+
+			LowLevelGraphics::ShaderProgram* shaderProgram = (*it)->GetMaterial()->GetShaderList()->GetShaderProgram();
+
+			// Here, we send the global parameters to the shader
+			glm::mat4x4 modelMatrix;
+			(*it)->GetTransform()->GetMatrix(modelMatrix);
+			shaderProgram->UpdateShaderParameter(LowLevelGraphics::MODELMATRIX, &modelMatrix[0][0], SHADER_MATRIX44);
+			glm::mat4x4 modelViewMatrix =  viewMatrix * modelMatrix;
+			shaderProgram->UpdateShaderParameter(LowLevelGraphics::MODELVIEWMATRIX, &modelViewMatrix[0][0], SHADER_MATRIX44);
+			glm::mat3x3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(modelViewMatrix)));
+			shaderProgram->UpdateShaderParameter(LowLevelGraphics::NORMALMATRIX, &normalMatrix[0][0], SHADER_MATRIX33);
+
+			// We send the local parameters of the material to the shader
+			(*it)->BindShaderParameters();
+
+			// We render
+			LowLevelGraphics::LowLevelAPI::DrawCall((*it)->GetGeometry(),shaderProgram->GetProgramId());
+
+			(*it)->GetMaterial()->UnbindShaderParameters();
+			LowLevelGraphics::LowLevelAPI::UnbindShaders();
+		}
+	}
+}
+
+//-----------------------------------------------------------------------------
 void GraphicsEngine::DrawOpaqueObjects(SceneManager::Scene* scene)
 {
     std::list<SceneManager::Object*>::iterator it = scene->GetBeginObjectList();
@@ -168,28 +230,31 @@ void GraphicsEngine::DrawOpaqueObjects(SceneManager::Scene* scene)
 
     for(;it!=itEnd;++it)
     {
-		// We use the corresponding shader
-		LowLevelGraphics::LowLevelAPI::BindShaders((*it)->GetMaterial()->GetShaderList());
+		if(!dynamic_cast<SceneManager::MovingBackground*>(*it))
+		{
+			// We use the corresponding shader
+			LowLevelGraphics::LowLevelAPI::BindShaders((*it)->GetMaterial()->GetShaderList());
 
-		LowLevelGraphics::ShaderProgram* shaderProgram = (*it)->GetMaterial()->GetShaderList()->GetShaderProgram();
+			LowLevelGraphics::ShaderProgram* shaderProgram = (*it)->GetMaterial()->GetShaderList()->GetShaderProgram();
 
-		// Here, we send the global parameters to the shader
-        glm::mat4x4 modelMatrix;
-        (*it)->GetTransform()->GetMatrix(modelMatrix);
-        shaderProgram->UpdateShaderParameter(LowLevelGraphics::MODELMATRIX, &modelMatrix[0][0], SHADER_MATRIX44);
-        glm::mat4x4 modelViewMatrix =  viewMatrix * modelMatrix;
-		shaderProgram->UpdateShaderParameter(LowLevelGraphics::MODELVIEWMATRIX, &modelViewMatrix[0][0], SHADER_MATRIX44);
-        glm::mat3x3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(modelViewMatrix)));
-		shaderProgram->UpdateShaderParameter(LowLevelGraphics::NORMALMATRIX, &normalMatrix[0][0], SHADER_MATRIX33);
+			// Here, we send the global parameters to the shader
+			glm::mat4x4 modelMatrix;
+			(*it)->GetTransform()->GetMatrix(modelMatrix);
+			shaderProgram->UpdateShaderParameter(LowLevelGraphics::MODELMATRIX, &modelMatrix[0][0], SHADER_MATRIX44);
+			glm::mat4x4 modelViewMatrix =  viewMatrix * modelMatrix;
+			shaderProgram->UpdateShaderParameter(LowLevelGraphics::MODELVIEWMATRIX, &modelViewMatrix[0][0], SHADER_MATRIX44);
+			glm::mat3x3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(modelViewMatrix)));
+			shaderProgram->UpdateShaderParameter(LowLevelGraphics::NORMALMATRIX, &normalMatrix[0][0], SHADER_MATRIX33);
 
-        // We send the local parameters of the material to the shader
-        (*it)->BindShaderParameters();
+			// We send the local parameters of the material to the shader
+			(*it)->BindShaderParameters();
 
-		// We render
-        LowLevelGraphics::LowLevelAPI::DrawCall((*it)->GetGeometry(),shaderProgram->GetProgramId());
+			// We render
+			LowLevelGraphics::LowLevelAPI::DrawCall((*it)->GetGeometry(),shaderProgram->GetProgramId());
 
-		(*it)->GetMaterial()->UnbindShaderParameters();
-        LowLevelGraphics::LowLevelAPI::UnbindShaders();
+			(*it)->GetMaterial()->UnbindShaderParameters();
+			LowLevelGraphics::LowLevelAPI::UnbindShaders();
+		}
     }
 }
 

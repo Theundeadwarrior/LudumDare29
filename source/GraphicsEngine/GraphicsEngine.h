@@ -29,6 +29,7 @@ private:
 	void DrawSelectionBox(SceneManager::Scene* scene);
 	void DrawPointLightSphere(SceneManager::Scene* scene);
     void DrawOpaqueObjects(SceneManager::Scene* scene);
+	void DrawAlphaObjects(SceneManager::Scene* scene);
     void DrawPointClouds(SceneManager::Scene* scene);
 	void DrawSkyBox(SceneManager::Scene* scene);
 	void DrawParticles(SceneManager::Scene* scene);

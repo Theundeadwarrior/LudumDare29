@@ -7,6 +7,7 @@
 
 #include "SceneManager/Objects/GameplayObjects/Background.h"
 #include "SceneManager/Objects/GameplayObjects/ForeGround.h"
+#include "SceneManager/Objects/GameplayObjects/MovingBackground.h"
 
 namespace Atum
 {
@@ -62,6 +63,7 @@ private:
 	MainCharacter* m_mainCharacter;
 	Background* m_background;
 	Foreground* m_foreground;
+    MovingBackground* m_movingBackground;
 	Camera* m_dummyCamera;
 	Level* m_currentLevel;
 	Level* m_nextLevel;

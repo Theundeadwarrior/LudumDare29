@@ -44,7 +44,7 @@ namespace SceneManager
 		GamePlayObject::Init();
 
 		SetXY(STARTING_X, STARTING_Y);
-		SetScaleXY(0.5f , 0.5f);
+		SetScaleXY(0.5f , 0.7993f);
 	}
 
 	void MainCharacter::Uninit()
@@ -54,7 +54,7 @@ namespace SceneManager
 
 	void MainCharacter::Update()
 	{
-		GamePlayObject::Update();
+		GamePlayObject::Update();  
 
 		if(m_currentState == GamePlayObject::Jumping)
 		{
