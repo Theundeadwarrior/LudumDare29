@@ -9,10 +9,9 @@
 #include "SceneManager/Level/Level.h"
 
 #define SCROLLING_DISTANCE_PER_FRAME -0.05f
-//#define SCROLLING_DISTANCE_PER_FRAME -0.15f
-#define POSITION_TO_DELETE -128.0F
-#define POSITION_TO_SPAWN 128.0F
-//#define POSITION_TO_SPAWN 256.0f
+#define POSITION_TO_DELETE -148.0F
+#define POSITION_TO_SPAWN 108.0F
+#define POSITION_FIRST_SPAWN (POSITION_TO_SPAWN - 128.0F)
 
 namespace Atum
 {
@@ -42,6 +41,8 @@ namespace SceneManager
 		InitLevel(m_nextLevel);
 
 		// HACKATHON!!! 
+		m_currentLevel->Translate(glm::vec4(POSITION_FIRST_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
+
 		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 	}
 
