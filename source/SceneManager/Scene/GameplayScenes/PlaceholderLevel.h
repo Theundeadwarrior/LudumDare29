@@ -18,23 +18,25 @@ class LevelLayout;
 class Level
 {
 public:
-	Level();
+	Level(bool isUnderGround = false);
 	~Level();
 
 	void Level::BuildObjectsFromLevelLayout();
 	std::vector<Object*>::iterator GetObjectListBegin(){ return m_objectList.begin(); }
 	std::vector<Object*>::iterator GetObjectListEnd(){ return m_objectList.end(); }
 
-
 	glm::vec4& GetPosition() { return m_currentPosition;  }
 	float GetLastPlatformYPosition();
 	float GetFirstPlatformYPosition();
+	
+	bool IsUnderGround() { return m_isUnderGround; }
+
 	void Translate(const glm::vec4& translation);
 
 private:
 	std::vector<Object*> m_objectList;
-
 	glm::vec4 m_currentPosition; // used for scrolling.
+	bool m_isUnderGround;
 };
 
 class PlaceholderLevel : public Scene
@@ -45,23 +47,22 @@ public:
 	~PlaceholderLevel();
 
 	virtual void Init();
-
 	void InitLevel(Level* level);
-
 	virtual void Uninit();
+
+	virtual void Update();
+
 
 	void CreateTitleScreenObject();
 
-	void RemoveTitleScreenObject();
-
-	virtual void Update();
+private:
+	void ForceCreationNewLevels();
 
 private:
 	MainCharacter* m_mainCharacter;
 	Background* m_background;
 	Foreground* m_foreground;
 	Camera* m_dummyCamera;
-	//std::list<Level*> m_levels; // levels that go from left to right
 	Level* m_currentLevel;
 	Level* m_nextLevel;
 

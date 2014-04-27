@@ -512,31 +512,14 @@ void TestSceneLoader::NotifyKeyPressed(const Events::KeyboardEvent& event)
 		if (event.GetKey() == '1')
 		{
 			m_sceneManager.SetCurrentScene(0);
-			//m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
 		}
 		else if (event.GetKey() == '2')
 		{
 			m_sceneManager.SetCurrentScene(1);
-			//m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
 		}
 		else if (event.GetKey() == '3')
 		{
 			m_sceneManager.SetCurrentScene(2);
-			//m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
 		}
-		//else if (event.GetKey() == '4')
-		//{
-		//	m_sceneManager.SetCurrentScene(3);
-		//	//m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
-		//}
-		//else if (event.GetKey() == '5')
-		//{
-		//	m_sceneManager.SetCurrentScene(4);
-		//	m_sceneManager.GetCurrentScene()->UpdateAllPointLights();
-		//}
-		//else if (event.GetKey() == '6')
-		//{
-		//	m_sceneManager.SetCurrentScene(5);
-		//}
 	}
 }

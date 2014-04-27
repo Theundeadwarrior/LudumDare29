@@ -14,6 +14,7 @@
 #define POSITION_TO_DELETE -148.0F
 #define POSITION_TO_SPAWN 108.0F
 #define POSITION_FIRST_SPAWN (POSITION_TO_SPAWN - 128.0F)
+#define SURFACE_HEIGHT_POSITION -20.0f
 
 namespace Atum
 {
@@ -60,7 +61,10 @@ namespace SceneManager
 
 	void PlaceholderLevel::Uninit()
 	{
-		RemoveTitleScreenObject();
+		delete m_mainCharacter;
+		delete m_background;
+		delete m_foreground;
+		delete m_dummyCamera;
 	}
 
 
@@ -76,14 +80,6 @@ namespace SceneManager
 
 		AddCamera(m_dummyCamera);
 		SetCurrentCamera(0);
-	}
-
-	void PlaceholderLevel::RemoveTitleScreenObject()
-	{
-		delete m_mainCharacter;
-		delete m_background;
-		delete m_foreground;
-		delete m_dummyCamera;
 	}
 
 	void PlaceholderLevel::Update()
@@ -107,6 +103,12 @@ namespace SceneManager
 				InitLevel(m_nextLevel);
 				m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 			}
+
+			// Might have to switch level if we fall down
+			if (m_mainCharacter->GetPosition().y < SURFACE_HEIGHT_POSITION && m_currentLevel->IsUnderGround() == false)
+			{
+				ForceCreationNewLevels();
+			}
 		}
 
 		// Calls the update on base class for updating all objects
@@ -126,9 +128,15 @@ namespace SceneManager
 		}
 	}
 
+	void PlaceholderLevel::ForceCreationNewLevels()
+	{
+		throw std::exception("The method or operation is not implemented.");
+	}
 
-	Level::Level()
+
+	Level::Level(bool isUnderGround)
     : m_currentPosition()
+	, m_isUnderGround(isUnderGround)
 	{
 
 	}
