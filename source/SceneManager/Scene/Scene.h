@@ -21,7 +21,6 @@ namespace SceneManager
 class Scene : public Events::InputMouseListener
 {
 public:
-
 	enum CameraMode
 	{
 		CAMERA_NONE = 0,

@@ -114,109 +114,109 @@ namespace SceneManager
 
 	void Scene::NotifyMouseClicked( const Events::MouseEvent& event )
 	{
-		// If we are scrolling == Zooming
-		if(event.GetType() == Events::MouseEventType::SCROLL_DOWN)
-		{
-			glm::vec3 currentPosition = m_currentCamera->GetPosition();
-			m_currentCamera->SetPosition(currentPosition - 0.5f * m_currentCamera->GetLookAt());
-		}
-		else if(event.GetType() == Events::MouseEventType::SCROLL_UP)
-		{
-			glm::vec3 currentPosition = m_currentCamera->GetPosition();
-			m_currentCamera->SetPosition(currentPosition + 0.5f * m_currentCamera->GetLookAt());
-		}
+		//// If we are scrolling == Zooming
+		//if(event.GetType() == Events::MouseEventType::SCROLL_DOWN)
+		//{
+		//	glm::vec3 currentPosition = m_currentCamera->GetPosition();
+		//	m_currentCamera->SetPosition(currentPosition - 0.5f * m_currentCamera->GetLookAt());
+		//}
+		//else if(event.GetType() == Events::MouseEventType::SCROLL_UP)
+		//{
+		//	glm::vec3 currentPosition = m_currentCamera->GetPosition();
+		//	m_currentCamera->SetPosition(currentPosition + 0.5f * m_currentCamera->GetLookAt());
+		//}
 
-		// if we are clicking right and dragging == rotate
-		if(event.GetClickType() == Events::MouseClick::RIGHT_CLICK && event.GetType() == Events::MouseEventType::MOUSE_DOWN)
-		{
-			m_cameraMode = CAMERA_ROTATION;	
-			m_mouseClickPositionX = event.GetXPosition();
-			m_mouseClickPositionY = event.GetYPosition();
-		}
+		//// if we are clicking right and dragging == rotate
+		//if(event.GetClickType() == Events::MouseClick::RIGHT_CLICK && event.GetType() == Events::MouseEventType::MOUSE_DOWN)
+		//{
+		//	m_cameraMode = CAMERA_ROTATION;	
+		//	m_mouseClickPositionX = event.GetXPosition();
+		//	m_mouseClickPositionY = event.GetYPosition();
+		//}
 
-		if(event.GetClickType() == Events::MouseClick::MIDDLE_CLICK && event.GetType() == Events::MouseEventType::MOUSE_DOWN)
-		{
-			m_cameraMode = CAMERA_TRANSLATION;
-			m_mouseClickPositionX = event.GetXPosition();
-			m_mouseClickPositionY = event.GetYPosition();
-		}
+		//if(event.GetClickType() == Events::MouseClick::MIDDLE_CLICK && event.GetType() == Events::MouseEventType::MOUSE_DOWN)
+		//{
+		//	m_cameraMode = CAMERA_TRANSLATION;
+		//	m_mouseClickPositionX = event.GetXPosition();
+		//	m_mouseClickPositionY = event.GetYPosition();
+		//}
 
-		if((event.GetClickType() == Events::MouseClick::RIGHT_CLICK || event.GetClickType() == Events::MouseClick::MIDDLE_CLICK)
-			&& event.GetType() == Events::MouseEventType::MOUSE_UP)
-		{
-			m_cameraMode = CAMERA_NONE;	
-			m_mouseClickPositionX = -1;
-			m_mouseClickPositionY = -1;
-		}
+		//if((event.GetClickType() == Events::MouseClick::RIGHT_CLICK || event.GetClickType() == Events::MouseClick::MIDDLE_CLICK)
+		//	&& event.GetType() == Events::MouseEventType::MOUSE_UP)
+		//{
+		//	m_cameraMode = CAMERA_NONE;	
+		//	m_mouseClickPositionX = -1;
+		//	m_mouseClickPositionY = -1;
+		//}
 
-		LowLevelGraphics::ShaderProgram::UpdateGlobalShaderParameter(LowLevelGraphics::VIEWMATRIX, &m_currentCamera->GetViewMatrix(), SHADER_MATRIX44);
+		//LowLevelGraphics::ShaderProgram::UpdateGlobalShaderParameter(LowLevelGraphics::VIEWMATRIX, &m_currentCamera->GetViewMatrix(), SHADER_MATRIX44);
 	}
 
 	void Scene::NotifyMouseMoved( const Events::MouseEvent& event )
 	{
-		const float PI = 3.1415926535897932384626433832795f;
-		const float EPSILON = 0.001;
+		//const float PI = 3.1415926535897932384626433832795f;
+		//const float EPSILON = 0.001;
 
-		// TRANSLATION
-		if(event.GetType() == Events::MouseEventType::MOUSE_MOTION_ONLY && m_cameraMode == CAMERA_TRANSLATION)
-		{
-			const float sensibility = 1/100.0f;
+		//// TRANSLATION
+		//if(event.GetType() == Events::MouseEventType::MOUSE_MOTION_ONLY && m_cameraMode == CAMERA_TRANSLATION)
+		//{
+		//	const float sensibility = 1/100.0f;
 
-			float deltaX = event.GetXPosition() - m_mouseClickPositionX; 
-			float deltaY = event.GetYPosition() - m_mouseClickPositionY; 
-			m_mouseClickPositionX = event.GetXPosition();
-			m_mouseClickPositionY = event.GetYPosition();
+		//	float deltaX = event.GetXPosition() - m_mouseClickPositionX; 
+		//	float deltaY = event.GetYPosition() - m_mouseClickPositionY; 
+		//	m_mouseClickPositionX = event.GetXPosition();
+		//	m_mouseClickPositionY = event.GetYPosition();
 
-			glm::vec3 currentUp = glm::normalize(m_currentCamera->GetUp());
-			glm::vec3 currenRight = glm::normalize(glm::cross(m_currentCamera->GetLookAt(),currentUp));
+		//	glm::vec3 currentUp = glm::normalize(m_currentCamera->GetUp());
+		//	glm::vec3 currenRight = glm::normalize(glm::cross(m_currentCamera->GetLookAt(),currentUp));
 
-			glm::vec3 newPosition = m_currentCamera->GetPosition() -deltaX * sensibility * currenRight + deltaY * sensibility * currentUp;
-			glm::vec3 newPOI = m_currentCamera->GetPOI() - deltaX * sensibility * currenRight + deltaY * sensibility * currentUp;
+		//	glm::vec3 newPosition = m_currentCamera->GetPosition() -deltaX * sensibility * currenRight + deltaY * sensibility * currentUp;
+		//	glm::vec3 newPOI = m_currentCamera->GetPOI() - deltaX * sensibility * currenRight + deltaY * sensibility * currentUp;
 
-			m_currentCamera->SetViewMatrix(newPosition, newPOI, currentUp);
-			LowLevelGraphics::ShaderProgram::UpdateGlobalShaderParameter(LowLevelGraphics::VIEWMATRIX, &m_currentCamera->GetViewMatrix(), SHADER_MATRIX44);			
-		}
+		//	m_currentCamera->SetViewMatrix(newPosition, newPOI, currentUp);
+		//	LowLevelGraphics::ShaderProgram::UpdateGlobalShaderParameter(LowLevelGraphics::VIEWMATRIX, &m_currentCamera->GetViewMatrix(), SHADER_MATRIX44);			
+		//}
 
-		// ROTATION
-		if(event.GetType() == Events::MouseEventType::MOUSE_MOTION_ONLY && m_cameraMode == CAMERA_ROTATION)
-		{
-			float deltaX = event.GetXPosition() - m_mouseClickPositionX; 
-			float deltaY = event.GetYPosition() - m_mouseClickPositionY; 
-			m_mouseClickPositionX = event.GetXPosition();
-			m_mouseClickPositionY = event.GetYPosition();
+		//// ROTATION
+		//if(event.GetType() == Events::MouseEventType::MOUSE_MOTION_ONLY && m_cameraMode == CAMERA_ROTATION)
+		//{
+		//	float deltaX = event.GetXPosition() - m_mouseClickPositionX; 
+		//	float deltaY = event.GetYPosition() - m_mouseClickPositionY; 
+		//	m_mouseClickPositionX = event.GetXPosition();
+		//	m_mouseClickPositionY = event.GetYPosition();
 
-			glm::vec3 camPosition = m_currentCamera->GetPosition();
-			glm::vec3 currentLookAt = m_currentCamera->GetLookAt();
+		//	glm::vec3 camPosition = m_currentCamera->GetPosition();
+		//	glm::vec3 currentLookAt = m_currentCamera->GetLookAt();
 
-			float t = -camPosition.y / currentLookAt.y;
-			glm::vec3 POI(camPosition + t * currentLookAt);
-			glm::vec3 relativePosition = camPosition - POI;
+		//	float t = -camPosition.y / currentLookAt.y;
+		//	glm::vec3 POI(camPosition + t * currentLookAt);
+		//	glm::vec3 relativePosition = camPosition - POI;
 
-			// We go into spherical coordinate system
-			float r = sqrt(pow(relativePosition.x,2) + pow(relativePosition.y,2) + pow(relativePosition.z,2));
-			float theta = acos(relativePosition.y / r);
-			float phi = atan2(relativePosition.x, relativePosition.z);
+		//	// We go into spherical coordinate system
+		//	float r = sqrt(pow(relativePosition.x,2) + pow(relativePosition.y,2) + pow(relativePosition.z,2));
+		//	float theta = acos(relativePosition.y / r);
+		//	float phi = atan2(relativePosition.x, relativePosition.z);
 
-			phi -= deltaX/200.0f;
-			theta -= deltaY/100.0f;
+		//	phi -= deltaX/200.0f;
+		//	theta -= deltaY/100.0f;
 
-			if(theta < 0)
-			{
-				theta  = EPSILON;
-			}
-			else if(theta > PI)
-			{
-				theta = PI - EPSILON;
-			}
+		//	if(theta < 0)
+		//	{
+		//		theta  = EPSILON;
+		//	}
+		//	else if(theta > PI)
+		//	{
+		//		theta = PI - EPSILON;
+		//	}
 
-			glm::vec3 newPosition( r * sin(theta) * sin(phi) + POI.x, r * cos(theta) + POI.y, r * sin(theta) * cos(phi) + POI.z);
-			glm::vec3 newLookAt(glm::normalize(POI - newPosition));
-			glm::vec3 newRight = glm::normalize(glm::cross(newLookAt, glm::vec3(0,1,0)));
-			glm::vec3 newUp = glm::cross(newRight,newLookAt);
+		//	glm::vec3 newPosition( r * sin(theta) * sin(phi) + POI.x, r * cos(theta) + POI.y, r * sin(theta) * cos(phi) + POI.z);
+		//	glm::vec3 newLookAt(glm::normalize(POI - newPosition));
+		//	glm::vec3 newRight = glm::normalize(glm::cross(newLookAt, glm::vec3(0,1,0)));
+		//	glm::vec3 newUp = glm::cross(newRight,newLookAt);
 
-			m_currentCamera->SetViewMatrix(newPosition, POI, newUp);
-			LowLevelGraphics::ShaderProgram::UpdateGlobalShaderParameter(LowLevelGraphics::VIEWMATRIX, &m_currentCamera->GetViewMatrix(), SHADER_MATRIX44);
-		}
+		//	m_currentCamera->SetViewMatrix(newPosition, POI, newUp);
+		//	LowLevelGraphics::ShaderProgram::UpdateGlobalShaderParameter(LowLevelGraphics::VIEWMATRIX, &m_currentCamera->GetViewMatrix(), SHADER_MATRIX44);
+		//}
 	}
 
 	Camera* const Scene::GetCurrentCamera() const

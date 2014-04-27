@@ -46,7 +46,9 @@ namespace SceneManager
 
 		virtual glm::vec4 GetNextPosition()const{return glm::vec4(m_currentPosition[0], m_currentPosition[1]+m_speed,0,0);}
 
-		virtual CharacterState GetCharacterState(){return m_currentState;}
+		virtual CharacterState GetCharacterState(){ return m_currentState; }
+		void SetCharacterState(CharacterState state){ m_currentState = state; }
+
 	private:
 		GamePlayObject::CharacterState m_currentState;
 		glm::vec4 m_colorBlend;

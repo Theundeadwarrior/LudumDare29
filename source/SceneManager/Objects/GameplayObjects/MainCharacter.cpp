@@ -43,8 +43,7 @@ namespace SceneManager
 	{
 		GamePlayObject::Init();
 
-		SetXY(STARTING_X, STARTING_Y);
-		SetScaleXY(0.5f , 0.5f);
+		Reset();
 	}
 
 	void MainCharacter::Uninit()
@@ -54,6 +53,11 @@ namespace SceneManager
 
 	void MainCharacter::Update()
 	{
+		if (m_currentState == GamePlayObject::Dead)
+		{
+			return;
+		}
+
 		GamePlayObject::Update();
 
 		if(m_currentState == GamePlayObject::Jumping)
@@ -97,7 +101,10 @@ namespace SceneManager
 
 	void MainCharacter::Reset()
 	{
-
+		m_speed = 0;
+		SetXY(STARTING_X, STARTING_Y);
+		SetScaleXY(0.5f, 0.5f);
+		m_cameraDiff = STARTING_Y;
 	}
 
 	TextureId MainCharacter::GetTextureID()

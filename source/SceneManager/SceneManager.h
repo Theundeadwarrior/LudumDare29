@@ -22,8 +22,9 @@ namespace SceneManager
 		
 		void AddScene(Scene* scene){m_sceneList.push_back(scene);}
 		void RemoveScene(int id);
-		void SetCurrentScene(int id) {m_currentScene = m_sceneList[id];}
+		void SetCurrentScene(int id) { m_currentScene = m_sceneList[id]; m_currentSceneId = id;  }
 		Scene* GetCurrentScene();
+		int GetCurrentSceneId() { return m_currentSceneId; }
 		std::vector<Scene*> GetSceneList() { return m_sceneList; };
 
 		void UpdateCurrentScene();
@@ -40,12 +41,14 @@ namespace SceneManager
 		SceneManager();
 		SceneManager(SceneManager const&); //don't implement
 		void operator=(SceneManager const&); //don't implement
+
 		std::vector<Scene*> m_sceneList;
 		ShaderListManager m_shaderListManager;
 		MaterialManager m_materialManager;
 		GeometryManager m_geometryManager;
         TextureManager m_textureManager;
 		Scene* m_currentScene;
+		int m_currentSceneId;
 	
 	};
 
