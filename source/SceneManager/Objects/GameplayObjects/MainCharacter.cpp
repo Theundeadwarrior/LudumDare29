@@ -113,6 +113,8 @@ namespace SceneManager
 		{
 			return gameplayObject->GetGameplayObjectType();
 	    }
+
+		return GamePlayObject::GamePlayObjectType_Invalid;
 	}
 
 	void MainCharacter::NotifyKeyPressed(const Events::KeyboardEvent& event)
