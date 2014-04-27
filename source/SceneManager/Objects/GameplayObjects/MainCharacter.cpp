@@ -4,6 +4,11 @@
 #define GRAVITY 0.0020f
 #define MAX_FALLING_SPEED -1.2f
 #define JUMPING_SPEED 0.08f
+#define STARTING_X -4.0f
+#define STARTING_Y -0.2f
+#define CAMERA_SOFT_THRESHOLD 1.0f
+#define CAMERA_MOVEMENT 0.006f
+#define CAMERA_STABILISATION 0.05f
 
 namespace Atum
 {
@@ -12,6 +17,7 @@ namespace SceneManager
 	MainCharacter::MainCharacter()
 		: m_speed(0)
 		, m_currentState(GamePlayObject::Falling)
+		, m_cameraDiff(STARTING_Y)
 	{
 		Events::EventManager::GetInstance().RegisterKeyboardListener(this);
 		m_isPositionAffectedByLevel = false;
@@ -37,7 +43,7 @@ namespace SceneManager
 	{
 		GamePlayObject::Init();
 
-		SetXY(-4.0f, -0.2f);
+		SetXY(STARTING_X, STARTING_Y);
 		SetScaleXY(0.5f , 0.5f);
 	}
 
@@ -74,6 +80,19 @@ namespace SceneManager
 		}
 
 		SetRelativeXY(0.0f,m_speed);
+
+		float diff = m_currentPosition[1]-m_cameraDiff;
+		if(diff > CAMERA_SOFT_THRESHOLD)
+		{
+			GamePlayObject::ms_cameraY -= CAMERA_MOVEMENT*abs(diff);
+			m_cameraDiff += CAMERA_STABILISATION*abs(diff);
+		}
+
+		else if(m_currentPosition[1]-m_cameraDiff < -CAMERA_SOFT_THRESHOLD)
+		{
+			GamePlayObject::ms_cameraY += CAMERA_MOVEMENT*abs(diff);
+			m_cameraDiff -= CAMERA_STABILISATION*abs(diff);
+		}
 	}
 
 	void MainCharacter::Reset()

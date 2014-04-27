@@ -7,9 +7,10 @@ in vec2 texCoords;
 
 uniform vec4 translation;
 uniform vec4 scale;
+uniform float cameraY;
 
 void main(void)
 {
 	var_uv = texCoords ;
-	gl_Position = (position+vec4(0.0,0.0,0.1,0.0))*scale+translation;
+	gl_Position = (position+vec4(0.0,0.0,0.1,0.0))*scale+translation+vec4(0.0f,cameraY,0.0f,0.0f);
 }

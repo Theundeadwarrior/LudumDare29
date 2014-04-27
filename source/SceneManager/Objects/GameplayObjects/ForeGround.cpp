@@ -31,6 +31,8 @@ namespace SceneManager
 
 		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("uOffset", &m_uOffset, SHADER_FLOAT);
 
+		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("cameraY", &GamePlayObject::ms_cameraY, SHADER_FLOAT);
+
 		GetMaterial()->BindDiffuseMapToShader();
 	}
 
