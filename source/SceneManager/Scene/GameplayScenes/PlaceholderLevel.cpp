@@ -131,9 +131,12 @@ namespace SceneManager
 		params.LevelWidth = 256;
 		params.PlatformLenghtRange[0] = 4;
 		params.PlatformLenghtRange[1] = 16;
-		LevelLayoutGenerator levelGen;
+		LevelLayoutGenerator levelGen(params);
 
-		LevelLayout level = levelGen.GenerateLevel(params);
+		LevelLayout level = levelGen.GenerateLevel();
+
+		// debug only
+		// level.Dump();
 
 		// Creates the objects and put them in the objectList;
 		int currentYPosition = 0;
@@ -177,10 +180,13 @@ namespace SceneManager
 				continue;
 			}
 
-			Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition - 8, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
-			((GamePlayObject*)platform)->Init();
+			{
+				Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition - 8, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
+				((GamePlayObject*)platform)->Init();
+				m_objectList.push_back(platform);
+			}
 
-			m_objectList.push_back(platform);
+			
 		}
 	}
 
