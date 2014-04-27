@@ -15,7 +15,7 @@ namespace SceneManager
 		:m_uOffset(0.0f)
 	{
 		SetScaleXY(2.2f,1.3f);
-		SetXY(0.f,-0.8f); 
+		SetXY(0.f,-1.2f); 
 		m_isPositionAffectedByLevel = false;
 	}
 
@@ -36,7 +36,7 @@ namespace SceneManager
 
 	ShaderListID Foreground::GetShaderID()
 	{
-		static ShaderListID alphaTexturedQuadShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/BackGroundObject.vx", "../../data/shaders/ForeGroundObject.fg", NULL);
+		static ShaderListID alphaTexturedQuadShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/ForeGroundObject.vx", "../../data/shaders/ForeGroundObject.fg", NULL);
 		return alphaTexturedQuadShaderID;
 	}
 
@@ -63,14 +63,14 @@ namespace SceneManager
 		return titleScreenMaterialID;
 	}
 
-	void Foreground::Move()
+	void Foreground::Move() 
 	{
-		m_uOffset += 0.005f;
-
-		if(m_uOffset > 1.0f)
+		if(m_uOffset >= 2.0f)
 		{
 			m_uOffset = 0.0f;
 		}
+
+		m_uOffset += 0.005f;
 	}
 
 } // namespace SceneManager

@@ -65,12 +65,12 @@ namespace SceneManager
 
 	void Background::Move()
 	{
-		m_uOffset += 0.0001f;
-
-		if(m_uOffset > 1.0f)
+		if(m_uOffset >= 2.0f)
 		{
 			m_uOffset = 0.0f;
 		}
+
+		m_uOffset += 0.0001f;
 	}
 
 } // namespace SceneManager
