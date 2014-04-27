@@ -11,6 +11,8 @@ namespace Atum
 {
 namespace SceneManager
 {
+	float GamePlayObject::ms_cameraY = 0.0f;
+
 	GamePlayObject::GamePlayObject()
 		: m_isPositionAffectedByLevel(true)
 		, m_currentPosition(glm::vec4(0,0,0,0))
@@ -41,6 +43,7 @@ namespace SceneManager
 		LowLevelGraphics::LowLevelAPI::BindShaders(SceneManager::GetInstance().GetShaderListManager()->GetShaderList(GetShaderID()));
 		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("translation", &m_currentPosition, SHADER_FLOAT4);
 		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("scale", &m_scale, SHADER_FLOAT4);
+		GetMaterial()->GetShaderList()->GetShaderProgram()->UpdateShaderParameterWithName("cameraY", &ms_cameraY, SHADER_FLOAT);
 
 		GetMaterial()->BindDiffuseMapToShader();
 	}

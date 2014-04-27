@@ -49,6 +49,7 @@ namespace SceneManager
 		glm::vec4 m_colorBlend;
 
 		float m_speed;
+		float m_cameraDiff;
 	};
 
 } // namespace SceneManager

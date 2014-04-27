@@ -74,6 +74,8 @@ namespace SceneManager
 		bool m_isPositionAffectedByLevel;
 		glm::vec4 m_currentPosition;
 		glm::vec4 m_scale;
+
+		static float ms_cameraY;
 	};
 
 } // namespace SceneManager
