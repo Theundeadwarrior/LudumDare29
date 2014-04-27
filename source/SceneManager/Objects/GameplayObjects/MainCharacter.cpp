@@ -1,14 +1,14 @@
 #include "SceneManager/Objects/GameplayObjects/MainCharacter.h"
 #include "SceneManager/SceneManager.h"
 
-#define GRAVITY 0.0020f
-#define MAX_FALLING_SPEED -0.010f
-#define JUMPING_SPEED 0.08f
+#define GRAVITY 0.015f
+#define MAX_FALLING_SPEED -0.5f
+#define JUMPING_SPEED 0.2f
 #define STARTING_X -4.0f
 #define STARTING_Y -0.2f
 #define CAMERA_SOFT_THRESHOLD 1.0f
-#define CAMERA_MOVEMENT 0.006f
-#define CAMERA_STABILISATION 0.05f
+#define CAMERA_MOVEMENT 0.01f
+#define CAMERA_STABILISATION 0.1f
 
 namespace Atum
 {
@@ -91,8 +91,7 @@ namespace SceneManager
 			GamePlayObject::ms_cameraY -= CAMERA_MOVEMENT*abs(diff);
 			m_cameraDiff += CAMERA_STABILISATION*abs(diff);
 		}
-
-		else if(m_currentPosition.y - m_cameraDiff < -CAMERA_SOFT_THRESHOLD)
+		else if(diff < -CAMERA_SOFT_THRESHOLD)
 		{
 			GamePlayObject::ms_cameraY += CAMERA_MOVEMENT*abs(diff);
 			m_cameraDiff -= CAMERA_STABILISATION*abs(diff);
@@ -179,7 +178,7 @@ namespace SceneManager
 	{
 		ms_cameraY = 0;
 		m_speed = 0;
-		m_cameraDiff = 14;
+		m_cameraDiff = 20;
 		m_currentPosition.y = -20;
 	}
 

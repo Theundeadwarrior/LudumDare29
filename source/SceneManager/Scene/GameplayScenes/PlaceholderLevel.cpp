@@ -10,7 +10,7 @@
 #include "SceneManager/Level/Level.h"
 #include "../../Objects/GameplayObjects/PlatformBridge.h"
 
-#define SCROLLING_DISTANCE_PER_FRAME -0.05f
+#define SCROLLING_DISTANCE_PER_FRAME -0.2f
 #define POSITION_TO_DELETE -148.0F
 #define POSITION_TO_SPAWN 108.0F
 #define POSITION_FIRST_SPAWN (POSITION_TO_SPAWN - 128.0F)
@@ -124,6 +124,10 @@ namespace SceneManager
 				// reset level - HOLY COW SO MUCH HAAAAAAAAXXXXX
 				m_currentLevel = new Level();
 				m_nextLevel = new Level();
+
+				InitLevel(m_currentLevel);
+				InitLevel(m_nextLevel);
+
 				ResetLevelsPosition();
 
 				m_mainCharacter->Reset();

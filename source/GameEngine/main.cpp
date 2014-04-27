@@ -11,8 +11,7 @@
 #include "Utilities/Timer/Timer.h"
 
 #define GLM_PRECISION_HIGHP_FLOAT
-
-
+#define MILLISECOND_FRAME_TIME 16.66666666666667
 
 using namespace Atum;
 
@@ -33,6 +32,7 @@ int main(int argc, char *argv[])
 
 	while(windowManager.GetCurrentWindowId() != 0)
 	{
+
 		Utilities::Timer::GetInstance()->MarkLap();
 		Utilities::Timer::GetInstance()->ResetTimer();
 
@@ -41,8 +41,10 @@ int main(int argc, char *argv[])
 		graphicsEngine->StartRendering(sceneManager.GetCurrentScene());
 		graphicsEngine->StopRendering();
 
+		double testtime = Utilities::Timer::GetInstance()->GetLapTime();
+
 		// todo : use something else to avoid draining the processor
-		Sleep(1);
+		Sleep(MILLISECOND_FRAME_TIME - testtime);
 		/////////////////////////////////////////////////////////////
 	}
 	delete graphicsEngine;
