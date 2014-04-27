@@ -23,7 +23,7 @@ GraphicsEngine::GraphicsEngine(int argc, char *argv[])
 {
     LowLevelGraphics::LowLevelAPI::Initialize(&argc, argv);
 
-    LowLevelGraphics::WindowParameters params("Graphic Engine", 1024, 768, 0, 0);
+    LowLevelGraphics::WindowParameters params("Graphic Engine", 1280, 720, 0, 0);
     LowLevelGraphics::WindowManager::GetInstance().AddWindow(params);
 }
 
@@ -160,8 +160,8 @@ void GraphicsEngine::DrawSkyBox(SceneManager::Scene* scene)
 //-----------------------------------------------------------------------------
 void GraphicsEngine::DrawOpaqueObjects(SceneManager::Scene* scene)
 {
-    std::vector<SceneManager::Object*>::iterator it = scene->GetBeginObjectList();
-    std::vector<SceneManager::Object*>::iterator itEnd = scene->GetEndObjectList();
+    std::list<SceneManager::Object*>::iterator it = scene->GetBeginObjectList();
+    std::list<SceneManager::Object*>::iterator itEnd = scene->GetEndObjectList();
 
     SceneManager::Camera* const cam = scene->GetCurrentCamera();
     glm::mat4x4 viewMatrix = cam->GetViewMatrix();

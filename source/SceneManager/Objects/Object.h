@@ -18,30 +18,42 @@ namespace SceneManager
 {
 	class Object : public Component
 	{
-		public:
-			Object(MaterialID materialID, GeometryID geomId, const Transform& transform);
-			Object(MaterialID materialID, GeometryID geomId, const Transform& transform, const Utilities::AABB & aabb);
-			virtual ~Object();
-			
-			virtual void GetPropertyList ( PropertyList& o_properties ) const;
-			virtual void UpdatePropertyList ( const PropertyList& i_properties );
+	public:
+		enum State
+		{
+			E_Ok,
+			E_Invalid,
+			E_ToDelete
+		};
+		
+		Object(MaterialID materialID, GeometryID geomId, const Transform& transform);
+		Object(MaterialID materialID, GeometryID geomId, const Transform& transform, const Utilities::AABB & aabb);
+		virtual ~Object();
 
-			virtual void BindShaderParameters(){GetMaterial()->BindShaderParameters();}
+		virtual void GetPropertyList(PropertyList& o_properties) const;
+		virtual void UpdatePropertyList(const PropertyList& i_properties);
 
-			void SetMaterialID(MaterialID mId){m_materialID = mId;}
+		virtual void BindShaderParameters(){ GetMaterial()->BindShaderParameters(); }
 
-			const LowLevelGraphics::Geometry* const GetGeometry();
-			Material* const GetMaterial();
-			Transform* const GetTransform();
+		void SetMaterialID(MaterialID mId){ m_materialID = mId; }
 
-			void UpdateAABB();
-			virtual void Update();
+		const LowLevelGraphics::Geometry* const GetGeometry();
+		Material* const GetMaterial();
+		Transform* const GetTransform();
+
+		void SetState(State state) { m_state = state; }
+		State GetState() { return m_state; }
+
+		void UpdateAABB();
+		virtual void Update();
 
 		protected:
 			Object();
 			Transform m_transform;
 			GeometryID m_geometryID;
 			MaterialID m_materialID;
+			State m_state;
+	
 	};
 
 } // namespace SceneManager

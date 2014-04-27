@@ -36,7 +36,7 @@ namespace SceneManager
 	{
 		GamePlayObject::Init();
 
-		SetXY(-0.4f, 8.0f);
+		SetXY(-4.0f, -0.2f);
 		SetScaleXY(0.5f , 0.5f);
 	}
 

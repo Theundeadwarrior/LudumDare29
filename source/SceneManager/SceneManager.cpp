@@ -55,7 +55,7 @@ Scene* SceneManager::GetCurrentScene()
 
 void SceneManager::UpdateCurrentScene()
 {
-	m_currentScene->UpdateAllObjects();
+	m_currentScene->Update();
 }
 
 void SceneManager::ClearAllResources()

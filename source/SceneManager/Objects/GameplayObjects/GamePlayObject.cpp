@@ -46,8 +46,8 @@ namespace SceneManager
 	{
 		Scene* scene = SceneManager::GetInstance().GetCurrentScene();
 		
-		std::vector<Object*>::iterator it = scene->GetBeginObjectList();
-		std::vector<Object*>::iterator itEnd = scene->GetEndObjectList();
+		std::list<Object*>::iterator it = scene->GetBeginObjectList();
+		std::list<Object*>::iterator itEnd = scene->GetEndObjectList();
 
 		for(;it!=itEnd;++it)
 		{

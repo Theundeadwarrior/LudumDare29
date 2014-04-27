@@ -89,9 +89,26 @@ namespace SceneManager
 
 	void Scene::UpdateAllObjects()
 	{
-		for(int i = 0; i<m_objectList.size(); i++)
+		std::list<Object*>::iterator it = m_objectList.begin();
+		std::list<Object*>::iterator endit = m_objectList.end();
+
+		for (; it != endit; ++it)
 		{
-			m_objectList[i]->Update();
+			// The object might have been deleted
+			if ((*it)->GetState() == Object::E_ToDelete)
+			{
+				delete *it;
+				it = m_objectList.erase(it);
+				
+				if (it == endit)
+				{
+					break;
+				}
+			}
+			else
+			{
+				(*it)->Update();
+			}
 		}
 	}
 
@@ -210,6 +227,11 @@ namespace SceneManager
 	Scene::~Scene()
 	{
 		Events::EventManager::GetInstance().UnregisterMouseListener(this);
+	}
+
+	void Scene::Update()
+	{
+		UpdateAllObjects();
 	}
 
 } // namespace SceneManager
