@@ -219,6 +219,7 @@
     <ClInclude Include="..\..\source\SceneManager\Material\Material.h" />
     <ClInclude Include="..\..\source\SceneManager\Material\MaterialParameters.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\Cube.h" />
+    <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\Background.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\MainCharacter.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\Platform.h" />
@@ -255,6 +256,7 @@
     <ClCompile Include="..\..\source\SceneManager\Manager\TextureManager.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Material\Material.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\Cube.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\Background.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\MainCharacter.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\Platform.cpp" />
