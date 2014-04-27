@@ -67,6 +67,8 @@ namespace SceneManager
 
 	    virtual glm::vec4 GetNextPosition()const{return m_currentPosition;}
 
+		virtual CharacterState GetCharacterState(){return Normal;}
+
 	protected:
 		bool m_isPositionAffectedByLevel;
 		glm::vec4 m_currentPosition;
