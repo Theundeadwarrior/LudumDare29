@@ -8,7 +8,6 @@
 #include "SceneManager/Objects/GameplayObjects/PlatformCanyon.h"
 #include "SceneManager/Level/Level.h"
 
-
 #define SCROLLING_DISTANCE_PER_FRAME -0.3f
 #define POSITION_TO_DELETE -256.0F
 #define POSITION_TO_SPAWN 256.0F
@@ -19,8 +18,8 @@ namespace Atum
 namespace SceneManager
 {
 	PlaceholderLevel::PlaceholderLevel()
-	: m_titleScreenObject(NULL)
-	, m_dummyCamera(NULL)
+		: m_titleScreenObject(NULL)
+		, m_dummyCamera(NULL)
 	{
 		//Init();
 		m_currentLevel = new Level();
@@ -37,7 +36,7 @@ namespace SceneManager
 		CreateTitleScreenObject();
 
 		int currentShift = 0;
-		
+
 		InitLevel(m_currentLevel);
 		InitLevel(m_nextLevel);
 
@@ -77,7 +76,7 @@ namespace SceneManager
 		m_nextLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
 
 		// Needs to generate a new level if the current one is getting out of the screen.
-		if (m_currentLevel->GetCurrentPosition().x < POSITION_TO_DELETE)
+		if (m_currentLevel->GetPosition().x < POSITION_TO_DELETE)
 		{
 			Level* levelToDel = m_currentLevel;
 			m_currentLevel = m_nextLevel;
@@ -106,11 +105,12 @@ namespace SceneManager
 	}
 
 
-
 	Level::Level()
-	: m_currentPosition()
+    : m_currentPosition()
 	{
+
 	}
+
 
 	Level::~Level()
 	{
@@ -121,6 +121,7 @@ namespace SceneManager
 		{
 			(*it)->SetState(Object::E_ToDelete);
 		}
+
 	}
 
 	void Level::BuildObjectsFromLevelLayout()
@@ -160,7 +161,7 @@ namespace SceneManager
 					currentIndex++;
 					currentXPosition++;
 				}
-				
+
 				currentIndex--;
 				currentXPosition--;
 			}
@@ -180,13 +181,9 @@ namespace SceneManager
 				continue;
 			}
 
-			{
-				Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition - 8, 0, 1), glm::vec4(currentPlatformLength, 1, 1, 1));
-				((GamePlayObject*)platform)->Init();
-				m_objectList.push_back(platform);
-			}
-
-			
+			Object* platform = new PlatformCanyon(glm::vec4(currentXPosition - currentPlatformLength / 2.0f, currentYPosition - 8, 0, 0)*0.5f, glm::vec4(currentPlatformLength*0.5f, 0.5f, 1, 1));
+			((GamePlayObject*)platform)->Init();
+			m_objectList.push_back(platform);
 		}
 	}
 
@@ -204,13 +201,14 @@ namespace SceneManager
 
 	float Level::GetLastPlatformYPosition()
 	{
-		return m_objectList.empty() ? 0 : ((GamePlayObject*)m_objectList.back())->GetCurrentPosition().y;
+		return m_objectList.empty() ? 0 : ((GamePlayObject*)m_objectList.back())->GetPosition().y;
 	}
 
 	float Level::GetFirstPlatformYPosition()
 	{
-		return m_objectList.empty() ? 0 : ((GamePlayObject*)m_objectList.front())->GetCurrentPosition().y;
+		return m_objectList.empty() ? 0 : ((GamePlayObject*)m_objectList.front())->GetPosition().y;
 	}
+
 
 } // namespace SceneManager
 } // namespace Atum

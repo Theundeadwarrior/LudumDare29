@@ -38,6 +38,10 @@ namespace SceneManager
 
 		void Jump();
 
+		float GetSpeed(){return m_speed;}
+
+		virtual glm::vec4 GetNextPosition()const{return glm::vec4(m_currentPosition[0], m_currentPosition[1]+m_speed,0,0);}
+
 	private:
 		GamePlayObject::CharacterState m_currentState;
 		glm::vec4 m_colorBlend;

@@ -1,7 +1,7 @@
 #include "SceneManager/Objects/GameplayObjects/MainCharacter.h"
 #include "SceneManager/SceneManager.h"
 
-#define GRAVITY 0.0002f
+#define GRAVITY 0.0075f
 
 namespace Atum
 {
@@ -10,6 +10,7 @@ namespace SceneManager
 	MainCharacter::MainCharacter()
 		: m_acceleration(GRAVITY)
         , m_speed(0)
+		, m_currentState(GamePlayObject::Falling)
 	{
 		Events::EventManager::GetInstance().RegisterKeyboardListener(this);
 		m_isPositionAffectedByLevel = false;
@@ -48,9 +49,22 @@ namespace SceneManager
 	{
 		GamePlayObject::Update();
 
-		m_speed -= m_acceleration; 
+		if(m_currentState == GamePlayObject::Jumping || m_currentState == GamePlayObject::Falling)
+		{
+			if(m_speed >= -1.2f)
+				m_speed -= m_acceleration; 
 
-		SetRelativeXY(0,m_speed);
+			if(m_currentState == GamePlayObject::Jumping && m_speed < 0.0f)
+			{
+				m_currentState = GamePlayObject::Falling;
+			}
+		}
+		else
+		{
+			m_speed = 0.0f;
+		}
+
+		SetRelativeXY(0.0f,m_speed);
 	}
 
 	void MainCharacter::Reset()
@@ -114,7 +128,13 @@ namespace SceneManager
 
 	void MainCharacter::Jump()
 	{
-		m_speed = 0.015f;
+		if(m_currentState != GamePlayObject::Jumping &&
+			m_currentState != GamePlayObject::Falling && 
+			m_currentState != GamePlayObject::Dead)
+		{
+ 			m_speed = 0.27f;
+			m_currentState = GamePlayObject::Jumping;
+		}
 	}
 
 } // namespace SceneManager

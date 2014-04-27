@@ -23,7 +23,7 @@ public:
 	std::vector<Object*>::iterator GetObjectListEnd(){ return m_objectList.end(); }
 
 
-	glm::vec4& GetCurrentPosition() { return m_currentPosition;  }
+	glm::vec4& GetPosition() { return m_currentPosition;  }
 	float GetLastPlatformYPosition();
 	float GetFirstPlatformYPosition();
 	void Translate(const glm::vec4& translation);
