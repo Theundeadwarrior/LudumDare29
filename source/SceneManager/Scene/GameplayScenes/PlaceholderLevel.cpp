@@ -8,7 +8,16 @@
 #include "SceneManager/Objects/GameplayObjects/PlatformCanyon.h"
 #include "SceneManager/Objects/GameplayObjects/PlatformRuins.h"
 #include "SceneManager/Level/Level.h"
-#include "../../Objects/GameplayObjects/PlatformBridge.h"
+#include "SceneManager/Objects/GameplayObjects/PlatformBridge.h"
+#include "SceneManager/Manager/TypedefID.h"
+#include "ParticleSystem/ParticleSystem.h"
+#include "ParticleSystem/Behavior/AccelerationBehavior.h"
+#include "ParticleSystem/Behavior/AttractorRepulsor.h"
+#include "ParticleSystem/Behavior/FadeBehavior.h"
+#include "ParticleSystem/Behavior/OrbitalBehavior.h"
+#include "ParticleSystem/Behavior/MultiColorBehavior.h"
+#include "ParticleSystem/Behavior/FollowBehavior.h"
+#include "ParticleSystem/Behavior/ExplodingSizeBehavior.h"
 
 #define SCROLLING_DISTANCE_PER_FRAME -0.2f
 #define POSITION_TO_DELETE -148.0F
@@ -53,6 +62,54 @@ namespace SceneManager
 		AddObject(m_background);
 
 		ResetLevelsPosition();
+
+		// Testing particle systems:
+		InitParticleSystem();
+	}
+
+	void PlaceholderLevel::InitParticleSystem()
+	{
+		////-------------------------------------------------INIT PARTICLE SYSTEMS---------------------------------------------------------------------------------------------
+		ShaderListID particleShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/GLSL_Particles_Vertex_Shader.vx", "../../data/shaders/GLSL_Particles_Fragment_Shader.fg", NULL);
+		//Particle system parameters
+		ParticleSystem::ParticleSystemParameters parameters;
+		parameters.emitPosition = glm::vec3(0.0f,0.0f,4.0f);
+		parameters.offsetRadius = 10.0f;
+		parameters.colorRange[0] = glm::vec4(0.0f, 0.44f, 0.86f, 0.3f);
+		parameters.colorRange[1] = glm::vec4(1.0f, 1.0f, 1.0f, 0.5f);
+		parameters.particleSizeRange[0] = 4.0f;
+		parameters.particleSizeRange[1] = 8.0f;
+		parameters.velocityRange[0] = 0.2f;
+		parameters.velocityRange[1] = 0.4f;
+		parameters.orientationRange[0] = glm::vec3(-1.0f,-1.0f,-0.5f);
+		parameters.orientationRange[1] = glm::vec3(1.0f,1.0f,0.5f);
+		parameters.lifespanRange[0] = 1.0f;
+		parameters.lifespanRange[1] = 4.0f;
+		parameters.shaderListID = particleShaderID;
+
+		////Behaviors
+		unsigned int nbParticleBatches = 20;
+		unsigned int nbTargetParticles = 500;
+		unsigned int nbMaxParticles = 1000;
+		ParticleSystem::Behavior* behavior = new ParticleSystem::AccelerationBehavior(0.0f,2.0f,nbParticleBatches);
+		parameters.behaviors.push_back(behavior);
+		std::vector<ParticleSystem::AttractorRepulsor> attractors;
+		attractors.push_back(ParticleSystem::AttractorRepulsor(parameters.emitPosition+glm::vec3(2.0f,2.0f,2.0f),80.0f));
+		//attractors.push_back(ParticleSystem::AttractorRepulsor(parameters.emitPosition-glm::vec3(2.0f,2.0f,2.0f),140.0f));
+
+		behavior = new ParticleSystem::FollowBehavior(attractors);
+		parameters.behaviors.push_back(behavior);
+		behavior = new ParticleSystem::FadeBehavior();
+		parameters.behaviors.push_back(behavior);
+		behavior = new ParticleSystem::MultiColorBehavior(nbParticleBatches);
+		parameters.behaviors.push_back(behavior);
+		//behavior = new ParticleSystem::OrbitalBehavior(attractors);
+		//parameters.behaviors.push_back(behavior);
+		behavior = new ParticleSystem::ExplodingSizeBehavior();
+		parameters.behaviors.push_back(behavior);
+
+		ParticleSystem::ParticleSystem* particleSystem = new ParticleSystem::ParticleSystem(parameters, nbMaxParticles, nbTargetParticles, nbParticleBatches);
+		m_particleSystemList.push_back(particleSystem);
 	}
 
 	void PlaceholderLevel::ResetLevelsPosition()
@@ -204,16 +261,16 @@ namespace SceneManager
 		{
 			params.LevelHeight = 12;
 			params.LevelWidth = 256;
-			params.PlatformLenghtRange[0] = 8;
-			params.PlatformLenghtRange[1] = 24;
+			params.PlatformLenghtRange[0] = 6;
+			params.PlatformLenghtRange[1] = 16;
 			params.IsUnderGround = false;
 		}
 		else
 		{
 			params.LevelHeight = 12;
 			params.LevelWidth = 256;
-			params.PlatformLenghtRange[0] = 8;
-			params.PlatformLenghtRange[1] = 24;
+			params.PlatformLenghtRange[0] = 4;
+			params.PlatformLenghtRange[1] = 12;
 			params.IsUnderGround = true;
 		}
 

@@ -76,12 +76,12 @@ public:
 
 protected:
     std::list<Object*> m_objectList;
-	
+	std::vector<ParticleSystem::ParticleSystem*> m_particleSystemList;
+
 private:
 	std::vector<Object*> m_pointCloudList;
 	std::vector<Camera*> m_cameraList;
 	std::vector<PointLight*> m_pointLightList;
-	std::vector<ParticleSystem::ParticleSystem*> m_particleSystemList;
 
 	SkyBox * m_skyBox;
 	Camera* m_currentCamera;

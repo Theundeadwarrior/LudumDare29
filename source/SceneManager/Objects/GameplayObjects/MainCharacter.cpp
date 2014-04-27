@@ -5,7 +5,7 @@
 #define MAX_FALLING_SPEED -0.5f
 #define JUMPING_SPEED 0.2f
 #define STARTING_X -4.0f
-#define STARTING_Y -0.2f
+#define STARTING_Y 2.2f
 #define CAMERA_SOFT_THRESHOLD 1.0f
 #define CAMERA_MOVEMENT 0.01f
 #define CAMERA_STABILISATION 0.1f

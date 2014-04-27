@@ -19,6 +19,7 @@
 #include "SceneManager/Scene/GameplayScenes/CreditScreen.h"
 #include "SceneManager/Scene/GameplayScenes/PlaceholderLevel.h"
 #include "../SceneManager/Level/Level.h"
+#include "../SceneManager/Camera/PerspectiveCamera.h"
 //#include "SceneManager/Objects/Cube.h"
 //#include "SceneManager/SkyBox/SkyBox.h"
 //#include "ParticleSystem/ParticleSystem.h"
@@ -345,14 +346,14 @@ TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_
 
 	////-------------------------------------------------INIT SCENES---------------------------------------------------------------------------------------------
 	//// camera
-	//SceneManager::PerspectiveCameraParams params(45, 1024/768.0f, 0.1f, 1000.0f);
-	//SceneManager::Camera* camera = new SceneManager::PerspectiveCamera(params, glm::vec3(0,5,5), glm::vec3(0,0,-1), glm::vec3(0,5,-5));
+	SceneManager::PerspectiveCameraParams params(45, 1024/768.0f, 0.1f, 1000.0f);
+	SceneManager::Camera* camera = new SceneManager::PerspectiveCamera(params, glm::vec3(0,0,5), glm::vec3(0,0,-1), glm::vec3(0,5,-5));
 
-	//// Update camera parameters
-	//LowLevelGraphics::ShaderProgram::UpdateGlobalShaderParameter(LowLevelGraphics::VIEWMATRIX,&camera->GetViewMatrix(),SHADER_MATRIX44);
+	// Update camera parameters
+	LowLevelGraphics::ShaderProgram::UpdateGlobalShaderParameter(LowLevelGraphics::VIEWMATRIX,&camera->GetViewMatrix(),SHADER_MATRIX44);
 
-	//glm::mat4x4* projectionMatrix = (dynamic_cast<SceneManager::PerspectiveCamera*>(camera))->GetPerspectiveMat();
-	//LowLevelGraphics::ShaderProgram::UpdateGlobalShaderParameter(LowLevelGraphics::PROJECTIONMATRIX,projectionMatrix,SHADER_MATRIX44);
+	glm::mat4x4* projectionMatrix = (dynamic_cast<SceneManager::PerspectiveCamera*>(camera))->GetPerspectiveMat();
+	LowLevelGraphics::ShaderProgram::UpdateGlobalShaderParameter(LowLevelGraphics::PROJECTIONMATRIX,projectionMatrix,SHADER_MATRIX44);
 
 	//// Lights
 	//SceneManager::LightBaseParams light1BaseParams;

@@ -72,7 +72,7 @@ namespace SceneManager
 			m_uOffset = 0.0f;
 		}
 
-		m_uOffset += 0.005f;
+		m_uOffset += 0.015f;
 	}
 
 } // namespace SceneManager

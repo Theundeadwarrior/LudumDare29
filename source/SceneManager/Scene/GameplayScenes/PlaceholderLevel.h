@@ -58,7 +58,7 @@ public:
 private:
 	void GoBeneathTheSurface();
 	void ResetLevelsPosition();
-
+	void InitParticleSystem();
 private:
 	MainCharacter* m_mainCharacter;
 	Background* m_background;

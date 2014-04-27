@@ -11,7 +11,7 @@
 #include "Utilities/Timer/Timer.h"
 
 #define GLM_PRECISION_HIGHP_FLOAT
-#define MILLISECOND_FRAME_TIME 16.66666666666667
+#define MILLISECOND_FRAME_TIME 16.5
 
 using namespace Atum;
 

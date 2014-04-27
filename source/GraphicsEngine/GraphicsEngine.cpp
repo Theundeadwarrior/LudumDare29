@@ -96,7 +96,9 @@ void GraphicsEngine::Render(SceneManager::Scene* scene)
 				//-----------------------------------------------------------------------------
 				//Particles
 				LowLevelGraphics::LowLevelAPI::SetAdditiveBlendFunc();
+				LowLevelGraphics::LowLevelAPI::DisableDepthRead();
 				DrawParticles(scene);
+				LowLevelGraphics::LowLevelAPI::EnableDepthRead();
 			}
 			LowLevelGraphics::LowLevelAPI::LockShaderPointSize();
 
