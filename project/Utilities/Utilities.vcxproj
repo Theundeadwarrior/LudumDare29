@@ -20,8 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Utilities\BasicGeometry\BasicGeometryGenerator.h" />
-    <ClInclude Include="..\..\source\Utilities\BrainLoader\BrainLoader.h" />
-    <ClInclude Include="..\..\source\Utilities\BrainLoader\Image3D.h" />
     <ClInclude Include="..\..\source\Utilities\Color\Color.h" />
     <ClInclude Include="..\..\source\Utilities\Debug\Debug.h" />
     <ClInclude Include="..\..\source\Utilities\IdGenerator\IdGenerator.h" />
@@ -39,8 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Utilities\BasicGeometry\BasicGeometryGenerator.cpp" />
-    <ClCompile Include="..\..\source\Utilities\BrainLoader\BrainLoader.cpp" />
-    <ClCompile Include="..\..\source\Utilities\BrainLoader\Image3D.cpp" />
     <ClCompile Include="..\..\source\Utilities\Color\Color.cpp" />
     <ClCompile Include="..\..\source\Utilities\Debug\Debug.cpp" />
     <ClCompile Include="..\..\source\Utilities\IdGenerator\IdGenerator.cpp" />

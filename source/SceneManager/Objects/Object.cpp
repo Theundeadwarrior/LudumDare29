@@ -80,47 +80,10 @@ namespace SceneManager
 
 	void Object::GetPropertyList( PropertyList& o_properties ) const
 	{
-		Property* name = new Property( COMP_PROP_NAME, GetName() );
-		o_properties.AddProperty(name);
-		
-		Property* position = new Property( COMP_PROP_POSITION, m_transform.GetPosition() );
-		o_properties.AddProperty(position);
-
-		Property* scaleP = new Property( COMP_PROP_SCALE, m_transform.GetScale() );
-		o_properties.AddProperty(scaleP);
-
-		Property* rotation = new Property( COMP_PROP_ROTATION, m_transform.GetRotation() );
-		o_properties.AddProperty(rotation);
 	}
 
 	void Object::UpdatePropertyList( const PropertyList& i_properties )
 	{
-		const Property* name = i_properties.GetProperty(COMP_PROP_NAME);
-		if ( name )
-		{
-			name->GetValue(m_name);
-		}
-		const Property* position = i_properties.GetProperty(COMP_PROP_POSITION);
-		if ( position )
-		{
-			glm::vec3 newPos;
-			position->GetValue(newPos);
-			m_transform.SetTranslate(newPos);
-		}
-		const Property* scaleP = i_properties.GetProperty(COMP_PROP_SCALE);
-		if ( scaleP )
-		{
-			glm::vec3 newScale;
-			scaleP->GetValue(newScale);
-			m_transform.SetScale(newScale);
-		}
-		const Property* rotation = i_properties.GetProperty(COMP_PROP_ROTATION);
-		if ( rotation )
-		{
-			glm::quat newRotation;
-			rotation->GetValue(newRotation);
-			m_transform.SetRotation(newRotation);
-		}
 	}
 
 } // namespace SceneManager

@@ -18,12 +18,6 @@ namespace SceneManager
 	void Component::UpdateAABB()
 	{}
 
-	void Component::GetPropertyList( PropertyList& o_properties ) const
-	{}
-
-	void Component::UpdatePropertyList( const PropertyList& i_properties )
-	{}
-
 	Atum::Utilities::AABB Component::GetAABB()
 	{
 		return m_aabb;

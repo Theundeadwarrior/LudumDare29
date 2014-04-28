@@ -95,34 +95,6 @@ void GraphicsEngine::StopRendering()
 }
 
 //-----------------------------------------------------------------------------
-void GraphicsEngine::DrawSkyBox(SceneManager::Scene* scene)
-{
-	SceneManager::SkyBox *const skyBox = scene->GetSkyBox();
-	if (skyBox)
-	{
-		LowLevelGraphics::LowLevelAPI::BindShaders(skyBox->GetMaterial()->GetShaderList());
-		
-		SceneManager::Camera* const cam = scene->GetCurrentCamera();
-		glm::mat4x4 viewMatrix = cam->GetViewMatrix();
-		skyBox->UpdateViewMatrix(viewMatrix);
-
-		skyBox->UpdateProjectionMatrix();
-
-		LowLevelGraphics::LowLevelAPI::EnableTextureCubeMap();
-
-		skyBox->UpdateTextureSkyBox();
-
-		LowLevelGraphics::ShaderProgram* shaderProgram = skyBox->GetMaterial()->GetShaderList()->GetShaderProgram();
-
-		LowLevelGraphics::LowLevelAPI::DrawSkyBox(skyBox->GetGeometry(), shaderProgram->GetProgramId());
-
-		LowLevelGraphics::LowLevelAPI::DisableTextureCubeMap();
-
-		LowLevelGraphics::LowLevelAPI::UnbindShaders();
-	}
-}
-
-//-----------------------------------------------------------------------------
 void GraphicsEngine::DrawAlphaObjects(SceneManager::Scene* scene)
 {
 	std::list<SceneManager::Object*>::iterator it = scene->GetBeginObjectList();
@@ -212,49 +184,7 @@ void GraphicsEngine::DrawParticles(SceneManager::Scene* scene)
 	}
 }
 
-//-----------------------------------------------------------------------------
-void GraphicsEngine::DrawPointClouds(SceneManager::Scene* scene)
-{
-    std::vector<SceneManager::Object*>::iterator it = scene->GetBeginPointCloudList();
-    std::vector<SceneManager::Object*>::iterator itEnd = scene->GetEndPointCloudList();
 
-    for(;it!=itEnd;++it)
-    {
-		(*it)->Update();
-
-		LowLevelGraphics::ShaderProgram* shaderProgram = (*it)->GetMaterial()->GetShaderList()->GetShaderProgram();
-		LowLevelGraphics::LowLevelAPI::BindShaders((*it)->GetMaterial()->GetShaderList());
-
-        glm::mat4x4 modelMatrix;
-        (*it)->GetTransform()->GetMatrix(modelMatrix);
-
-        shaderProgram->UpdateShaderParameter(LowLevelGraphics::MODELMATRIX,&modelMatrix[0][0],SHADER_MATRIX44);
-
-        LowLevelGraphics::LowLevelAPI::DrawCallPointCloud((*it)->GetGeometry(), shaderProgram->GetProgramId());
-        LowLevelGraphics::LowLevelAPI::UnbindShaders();
-    }
-}
-
-void GraphicsEngine::DrawSelectionBox(SceneManager::Scene* scene)
-{
-	const UserInterface::UiManager& manager = UserInterface::UiManager::GetInstance();
-	SceneManager::PerspectiveCamera* camera ( 
-		dynamic_cast<SceneManager::PerspectiveCamera*>(scene->GetCurrentCamera()) );
-
-	if ( manager.GetSelectedComponent() && camera )
-	{
-		glm::vec3 maxCorner( manager.GetSelectedComponent()->GetAABB().m_maxBounds );
-		glm::vec3 minCorner( manager.GetSelectedComponent()->GetAABB().m_minBounds );
-
-		glm::mat4x4 viewMatrix;
-		camera->GetViewMatrix(viewMatrix);
-
-		glm::mat4x4 perspectiveMatrix;
-		camera->GetPerspectiveMat(perspectiveMatrix);
-
-		LowLevelGraphics::LowLevelAPI::DrawBoundingBox(&viewMatrix[0][0], &perspectiveMatrix[0][0], minCorner, maxCorner);
-	}
-}
 
 void GraphicsEngine::DrawPointLightSphere( SceneManager::Scene* scene )
 {

@@ -12,13 +12,13 @@ namespace Utilities
 	const float EPSILON = 0.00001f;
 	const float D_TO_R = 0.0174532925f;
 
-	LowLevelGraphics::GeometryParameters CreateCubeGeometry(unsigned int length);//counterclockwise
-	LowLevelGraphics::GeometryParameters CreateSphereGeometry(float radius, unsigned int slices, unsigned int stacks);
+	//LowLevelGraphics::GeometryParameters CreateCubeGeometry(unsigned int length);//counterclockwise
+	//LowLevelGraphics::GeometryParameters CreateSphereGeometry(float radius, unsigned int slices, unsigned int stacks);
 	LowLevelGraphics::GeometryParameters CreatePlaneGeometry(float height, float width);
-	LowLevelGraphics::GeometryParameters CreateTorusGeometry(int sides, int cs_sides, float radius, float cs_radius);
+	//LowLevelGraphics::GeometryParameters CreateTorusGeometry(int sides, int cs_sides, float radius, float cs_radius);
 
 
-	LowLevelGraphics::GeometryParameters CreateSkyBoxGeometry(float sideBox);
+	//LowLevelGraphics::GeometryParameters CreateSkyBoxGeometry(float sideBox);
 }
 }
 

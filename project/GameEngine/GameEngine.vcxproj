@@ -35,9 +35,6 @@
     <ProjectReference Include="..\ParticleSystem\ParticleSystem.vcxproj">
       <Project>{0266f58c-9dda-45c6-9565-0e32aa7b6d0c}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\PhysicsEngine\PhysicsEngine.vcxproj">
-      <Project>{22b22196-1cb6-4b06-b527-511b6d123b98}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\SceneManager\SceneManager.vcxproj">
       <Project>{b599c8c5-7c44-4682-8e39-b1f07fabc252}</Project>
     </ProjectReference>

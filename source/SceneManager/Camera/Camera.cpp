@@ -2,7 +2,6 @@
 #define SCENEMANAGER_CAMERA_CPP
 
 #include "Camera.h"
-#include "SceneManager/Properties/PropertyList.h"
 #include "GLM/include/glm/gtc/matrix_transform.hpp"
 
 
