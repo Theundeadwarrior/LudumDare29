@@ -172,6 +172,8 @@ namespace SceneManager
 
 		m_currentSpriteState = Sprites_Transition;
 		m_currentSprite = GetTextureIDList()[Sprites_Transition].begin();
+
+		m_currentState = GamePlayObject::Falling;
 	}
 	  
 	void MainCharacter::BindShaderParameters()

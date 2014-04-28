@@ -38,7 +38,7 @@ namespace SceneManager
 		SceneManager& sceneManager = SceneManager::GetInstance();
 
 		Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
-		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/Credits.bmp");
+		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/test1.bmp");
 
 		static TextureId titleScreenTextureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
 

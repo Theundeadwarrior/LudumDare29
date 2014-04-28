@@ -196,6 +196,16 @@ namespace SceneManager
 
 			m_mainCharacter->Reset();
 
+			// Reset PArticle Colors
+			auto it = m_particleSystemList.begin();
+			auto endit = m_particleSystemList.end();
+			glm::vec4 newMinColor(0.0f, 0.44f, 0.86f, 0.1f);
+			glm::vec4 newMaxColor(1.0f, 1.0f, 1.0f, 0.4f);
+			for (; it != endit; ++it)
+			{
+				(*it)->SetColor(newMinColor, newMaxColor);
+			}
+
 			SceneManager::GetInstance().SetCurrentScene(1); // GameOver Screen (so testsceneloader can manage space on screen)
 		}
 
@@ -242,6 +252,17 @@ namespace SceneManager
 		//throw std::exception("The method or operation is not implemented.");
 
 		m_switchMusic = true;
+
+		// update particles color
+		auto it = m_particleSystemList.begin();
+		auto endit = m_particleSystemList.end();
+		glm::vec4 newMinColor(0.5f, 1.0f, 0.0f, 0.1f);
+		glm::vec4 newMaxColor(1.0f, 1.0f, 0.0f, 0.4f);
+		for (; it != endit; ++it)
+		{
+			(*it)->SetColor(newMinColor, newMaxColor);
+		}
+
 	}
 
 
