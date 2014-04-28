@@ -149,6 +149,10 @@ namespace SceneManager
 
 	void PlaceholderLevel::Update()
 	{
+		if(m_mainCharacter->GetCharacterState() == GamePlayObject::Dead)
+		{
+			m_mainCharacter->SetCharacterState(GamePlayObject::Falling);
+		}
 		if(m_mainCharacter->GetCharacterState() != GamePlayObject::WallStop)
 		{
 			m_background->Move();
