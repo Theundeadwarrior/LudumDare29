@@ -180,6 +180,7 @@ namespace SceneManager
 		m_speed = 0;
 		m_cameraDiff = 20;
 		m_currentPosition.y = -20;
+		m_currentState = GamePlayObject::Falling;
 	}
 
 } // namespace SceneManager

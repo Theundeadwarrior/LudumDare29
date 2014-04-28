@@ -288,5 +288,11 @@ void ParticleSystem::UpdatePropertyList( const SceneManager::PropertyList& i_pro
 	}
 }
 
+void ParticleSystem::SetColor(glm::vec4 minColor, glm::vec4 maxColor)
+{
+	m_parameters.colorRange[0] = minColor;
+	m_parameters.colorRange[1] = maxColor;
+}
+
 }
 }

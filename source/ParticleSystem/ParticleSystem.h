@@ -53,6 +53,7 @@ public:
 	void Draw();
 
 	void SetPosition(glm::vec3 position){m_parameters.emitPosition = position;}
+	void SetColor(glm::vec4 minColor, glm::vec4 maxColor);
 
 	glm::vec3 GetPosition()const{return m_parameters.emitPosition;}
 	Spawner GetSpawner(){return m_spawner;}

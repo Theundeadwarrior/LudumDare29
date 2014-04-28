@@ -171,32 +171,42 @@ namespace SceneManager
 				InitLevel(m_nextLevel);
 				m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 			}
+		}
 
-			// Might have to switch level if we fall down
-			if (m_mainCharacter->GetPosition().y < SURFACE_HEIGHT_POSITION && m_currentLevel->IsUnderGround() == false)
+		// Might have to switch level if we fall down
+		if (m_mainCharacter->GetPosition().y < SURFACE_HEIGHT_POSITION && m_currentLevel->IsUnderGround() == false)
+		{
+			GoBeneathTheSurface();
+		}
+
+		if (m_mainCharacter->GetPosition().y < DEATH_HEIGHT)
+		{
+			delete m_currentLevel;
+			delete m_nextLevel;
+			m_mainCharacter->SetCharacterState(GamePlayObject::Dead);
+
+			// reset level - HOLY COW SO MUCH HAAAAAAAAXXXXX
+			m_currentLevel = new Level();
+			m_nextLevel = new Level();
+
+			InitLevel(m_currentLevel);
+			InitLevel(m_nextLevel);
+
+			ResetLevelsPosition();
+
+			m_mainCharacter->Reset();
+
+			// Reset PArticle Colors
+			auto it = m_particleSystemList.begin();
+			auto endit = m_particleSystemList.end();
+			glm::vec4 newMinColor(0.0f, 0.44f, 0.86f, 0.1f);
+			glm::vec4 newMaxColor(1.0f, 1.0f, 1.0f, 0.4f);
+			for (; it != endit; ++it)
 			{
-  				GoBeneathTheSurface();
+				(*it)->SetColor(newMinColor, newMaxColor);
 			}
 
-			if (m_mainCharacter->GetPosition().y < DEATH_HEIGHT)
-			{
-				delete m_currentLevel;
-				delete m_nextLevel;
-				m_mainCharacter->SetCharacterState(GamePlayObject::Dead);
-
-				// reset level - HOLY COW SO MUCH HAAAAAAAAXXXXX
-				m_currentLevel = new Level();
-				m_nextLevel = new Level();
-
-				InitLevel(m_currentLevel);
-				InitLevel(m_nextLevel);
-
-				ResetLevelsPosition();
-
-				m_mainCharacter->Reset();
-
-				SceneManager::GetInstance().SetCurrentScene(1); // GameOver Screen (so testsceneloader can manage space on screen)
-			}
+			SceneManager::GetInstance().SetCurrentScene(1); // GameOver Screen (so testsceneloader can manage space on screen)
 		}
 
 		if(m_switchMusic)
@@ -242,6 +252,17 @@ namespace SceneManager
 		//throw std::exception("The method or operation is not implemented.");
 
 		m_switchMusic = true;
+
+		// update particles color
+		auto it = m_particleSystemList.begin();
+		auto endit = m_particleSystemList.end();
+		glm::vec4 newMinColor(0.5f, 1.0f, 0.0f, 0.1f);
+		glm::vec4 newMaxColor(1.0f, 1.0f, 0.0f, 0.4f);
+		for (; it != endit; ++it)
+		{
+			(*it)->SetColor(newMinColor, newMaxColor);
+		}
+
 	}
 
 
