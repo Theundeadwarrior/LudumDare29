@@ -19,6 +19,7 @@
 #include "SceneManager/Scene/GameplayScenes/CreditScreen.h"
 #include "SceneManager/Scene/GameplayScenes/PlaceholderLevel.h"
 #include "../SceneManager/Level/Level.h"
+#include "SceneManager/Manager/SoundManager.h"
 #include "../SceneManager/Camera/PerspectiveCamera.h"
 //#include "SceneManager/Objects/Cube.h"
 //#include "SceneManager/SkyBox/SkyBox.h"
@@ -523,6 +524,7 @@ void TestSceneLoader::NotifyKeyPressed(const Events::KeyboardEvent& event)
 			if (m_sceneManager.GetCurrentSceneId() == INTRO_SCENE_ID)
 			{
 				m_sceneManager.SetCurrentScene(GAME_SCENE_ID);
+				SceneManager::SoundManager::GetInstance().StartMusic();
 			}
 			else if (m_sceneManager.GetCurrentSceneId() == GAMEOVER_SCENE_ID)
 			{
@@ -532,6 +534,7 @@ void TestSceneLoader::NotifyKeyPressed(const Events::KeyboardEvent& event)
 				//SceneManager::Scene* currentScene = m_sceneManager.GetCurrentScene();
 				//currentScene->Init();
 				m_sceneManager.SetCurrentScene(INTRO_SCENE_ID);
+				SceneManager::SoundManager::GetInstance().StopMusic();
 			}
 		}
 

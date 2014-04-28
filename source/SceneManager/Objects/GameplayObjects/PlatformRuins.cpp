@@ -28,8 +28,8 @@ namespace SceneManager
 		if (textureID == INVALID_TEXTURE_ID)
 		{
 			Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/ruins.png");
-			textureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
+			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/undergroundtext.png");
+			textureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA);
 		}
 
 		return textureID;

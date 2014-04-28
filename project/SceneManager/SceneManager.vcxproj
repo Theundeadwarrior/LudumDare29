@@ -214,6 +214,7 @@
     <ClInclude Include="..\..\source\SceneManager\Manager\GeometryManager.h" />
     <ClInclude Include="..\..\source\SceneManager\Manager\MaterialManager.h" />
     <ClInclude Include="..\..\source\SceneManager\Manager\ShaderListManager.h" />
+    <ClInclude Include="..\..\source\SceneManager\Manager\SoundManager.h" />
     <ClInclude Include="..\..\source\SceneManager\Manager\TextureManager.h" />
     <ClInclude Include="..\..\source\SceneManager\Manager\TypedefID.h" />
     <ClInclude Include="..\..\source\SceneManager\Material\Material.h" />
@@ -223,6 +224,7 @@
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\ForeGround.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\MainCharacter.h" />
+    <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\MovingBackground.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\Platform.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformBridge.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformCanyon.h" />
@@ -255,6 +257,7 @@
     <ClCompile Include="..\..\source\SceneManager\Manager\GeometryManager.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Manager\MaterialManager.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Manager\ShaderListManager.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\Manager\SoundManager.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Manager\TextureManager.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Material\Material.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\Cube.cpp" />
@@ -262,6 +265,7 @@
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\ForeGround.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\MainCharacter.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\MovingBackground.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\Platform.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformBridge.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\PlatformCanyon.cpp" />

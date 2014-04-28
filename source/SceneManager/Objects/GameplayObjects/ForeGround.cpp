@@ -14,8 +14,8 @@ namespace SceneManager
 	Foreground::Foreground()
 		:m_uOffset(0.0f)
 	{
-		SetScaleXY(2.2f,1.3f);
-		SetXY(0.f,-1.2f); 
+		SetScaleXY(2.2f,2.2f);
+		SetXY(0.f,-0.4f); 
 		m_isPositionAffectedByLevel = false;
 	}
 
@@ -46,12 +46,12 @@ namespace SceneManager
 	{
 		SceneManager& sceneManager = SceneManager::GetInstance();
 
-		Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
-		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/foreground_desert.png");
+		Utilities::Image::ImageParameters<unsigned char> foreGroundIceTexture;
+		Utilities::Image::LoadImageFromFile(foreGroundIceTexture, "../../data/placeholders/foreground_desert.png");
 
-		static TextureId titleScreenTextureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA);
+		static TextureId foreGroundIceTextureId = SceneManager::GetInstance().GetTextureManager()->CreateTexture(foreGroundIceTexture, LowLevelGraphics::LowLevelAPI::ATUM_RGBA);
 
-		return titleScreenTextureID;
+		return foreGroundIceTextureId;
 	}
 
 	MaterialID Foreground::GetMaterialID()

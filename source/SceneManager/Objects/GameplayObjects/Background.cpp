@@ -14,8 +14,8 @@ namespace SceneManager
 	Background::Background()
 		:m_uOffset(0.0f)
 	{
-		SetScaleXY(4.f,4.f);
-		SetXY(0.f,0.3f); 
+		SetScaleXY(4.f,8.f);
+		SetXY(0.f,-2.0f); 
 		m_isPositionAffectedByLevel = false;
 	}
 
@@ -47,7 +47,7 @@ namespace SceneManager
 		SceneManager& sceneManager = SceneManager::GetInstance();
 
 		Utilities::Image::ImageParameters<unsigned char> titleScreenImage;
-		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/desertbackground.bmp");
+		Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/placeholders/dualBackTest2.png");
 
 		static TextureId titleScreenTextureID = SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
 

@@ -8,6 +8,7 @@
 #include "SceneManager/Objects/GameplayObjects/PlatformCanyon.h"
 #include "SceneManager/Objects/GameplayObjects/PlatformRuins.h"
 #include "SceneManager/Level/Level.h"
+#include "SceneManager/Manager/SoundManager.h"
 #include "SceneManager/Objects/GameplayObjects/PlatformBridge.h"
 #include "SceneManager/Manager/TypedefID.h"
 #include "ParticleSystem/ParticleSystem.h"
@@ -33,7 +34,9 @@ namespace SceneManager
 	PlaceholderLevel::PlaceholderLevel()
 		: m_mainCharacter(NULL)
 		, m_background(NULL)
+		, m_movingBackground(NULL)
 		, m_dummyCamera(NULL)
+		, m_switchMusic(false)
 	{
 		m_currentLevel = new Level();
 		m_nextLevel = new Level();
@@ -56,6 +59,11 @@ namespace SceneManager
 		InitLevel(m_currentLevel);
 		InitLevel(m_nextLevel);
 
+		m_movingBackground = new MovingBackground();
+		m_movingBackground->Init();
+
+		AddObject(m_movingBackground);
+
 		m_background = new Background();
 		m_background->Init();
 
@@ -73,14 +81,14 @@ namespace SceneManager
 		ShaderListID particleShaderID = SceneManager::GetInstance().GetShaderListManager()->CreateShaderList("../../data/shaders/GLSL_Particles_Vertex_Shader.vx", "../../data/shaders/GLSL_Particles_Fragment_Shader.fg", NULL);
 		//Particle system parameters
 		ParticleSystem::ParticleSystemParameters parameters;
-		parameters.emitPosition = glm::vec3(0.0f,0.0f,4.0f);
+		parameters.emitPosition = glm::vec3(-0.4f,0.0f,2.0f);
 		parameters.offsetRadius = 10.0f;
-		parameters.colorRange[0] = glm::vec4(0.0f, 0.44f, 0.86f, 0.3f);
-		parameters.colorRange[1] = glm::vec4(1.0f, 1.0f, 1.0f, 0.5f);
-		parameters.particleSizeRange[0] = 4.0f;
-		parameters.particleSizeRange[1] = 8.0f;
-		parameters.velocityRange[0] = 0.2f;
-		parameters.velocityRange[1] = 0.4f;
+		parameters.colorRange[0] = glm::vec4(0.0f, 0.44f, 0.86f, 0.1f);
+		parameters.colorRange[1] = glm::vec4(1.0f, 1.0f, 1.0f, 0.4f);
+		parameters.particleSizeRange[0] = 10.0f;
+		parameters.particleSizeRange[1] = 20.0f;
+		parameters.velocityRange[0] = 0.3f;
+		parameters.velocityRange[1] = 0.5f;
 		parameters.orientationRange[0] = glm::vec3(-1.0f,-1.0f,-0.5f);
 		parameters.orientationRange[1] = glm::vec3(1.0f,1.0f,0.5f);
 		parameters.lifespanRange[0] = 1.0f;
@@ -89,23 +97,19 @@ namespace SceneManager
 
 		////Behaviors
 		unsigned int nbParticleBatches = 20;
-		unsigned int nbTargetParticles = 500;
-		unsigned int nbMaxParticles = 1000;
+		unsigned int nbTargetParticles = 200;
+		unsigned int nbMaxParticles = 400;
 		ParticleSystem::Behavior* behavior = new ParticleSystem::AccelerationBehavior(0.0f,2.0f,nbParticleBatches);
 		parameters.behaviors.push_back(behavior);
 		std::vector<ParticleSystem::AttractorRepulsor> attractors;
 		attractors.push_back(ParticleSystem::AttractorRepulsor(parameters.emitPosition+glm::vec3(2.0f,2.0f,2.0f),80.0f));
-		//attractors.push_back(ParticleSystem::AttractorRepulsor(parameters.emitPosition-glm::vec3(2.0f,2.0f,2.0f),140.0f));
+		attractors.push_back(ParticleSystem::AttractorRepulsor(parameters.emitPosition-glm::vec3(2.0f,2.0f,2.0f),140.0f));
 
 		behavior = new ParticleSystem::FollowBehavior(attractors);
 		parameters.behaviors.push_back(behavior);
 		behavior = new ParticleSystem::FadeBehavior();
 		parameters.behaviors.push_back(behavior);
 		behavior = new ParticleSystem::MultiColorBehavior(nbParticleBatches);
-		parameters.behaviors.push_back(behavior);
-		//behavior = new ParticleSystem::OrbitalBehavior(attractors);
-		//parameters.behaviors.push_back(behavior);
-		behavior = new ParticleSystem::ExplodingSizeBehavior();
 		parameters.behaviors.push_back(behavior);
 
 		ParticleSystem::ParticleSystem* particleSystem = new ParticleSystem::ParticleSystem(parameters, nbMaxParticles, nbTargetParticles, nbParticleBatches);
@@ -123,6 +127,7 @@ namespace SceneManager
 	{
 		delete m_mainCharacter;
 		delete m_background;
+		delete m_movingBackground;
 		delete m_foreground;
 		delete m_dummyCamera;
 	}
@@ -147,6 +152,7 @@ namespace SceneManager
 		if(m_mainCharacter->GetCharacterState() != GamePlayObject::WallStop)
 		{
 			m_background->Move();
+			m_movingBackground->Move();
 			m_foreground->Move();
 
 			m_currentLevel->Translate(glm::vec4(SCROLLING_DISTANCE_PER_FRAME, 0, 0, 0));
@@ -193,6 +199,11 @@ namespace SceneManager
 			}
 		}
 
+		if(m_switchMusic)
+		{
+			m_switchMusic = SoundManager::GetInstance().IncrementSwitchMusic(true);
+		}
+
 		// Calls the update on base class for updating all objects
 		Scene::Update();
 	}
@@ -222,7 +233,6 @@ namespace SceneManager
 		InitLevel(m_currentLevel);
 		InitLevel(m_nextLevel);
 
-
 		// HACKATHON!!! 
 		m_currentLevel->Translate(glm::vec4(POSITION_FIRST_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition() - 26, 0, 0));
  		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
@@ -230,6 +240,8 @@ namespace SceneManager
  		m_mainCharacter->GoBeneathTheSurface();
 
 		//throw std::exception("The method or operation is not implemented.");
+
+		m_switchMusic = true;
 	}
 
 
