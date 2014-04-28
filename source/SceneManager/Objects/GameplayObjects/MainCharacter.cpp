@@ -102,7 +102,7 @@ namespace SceneManager
 	{
 		m_speed = 0;
 		SetXY(STARTING_X, STARTING_Y);
-		SetScaleXY(0.5f, 0.7993f);
+		SetScaleXY(0.5f*1.25f, 0.7993f*1.25f);
 		m_cameraDiff = STARTING_Y;
 		ms_cameraY = 0;
 	}

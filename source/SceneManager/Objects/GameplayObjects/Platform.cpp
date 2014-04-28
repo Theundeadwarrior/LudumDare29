@@ -110,16 +110,16 @@ namespace SceneManager
 			result = IntersectMainCharacterWithPosition(gameplayObject->GetNextPosition(), gameplayObject->GetScale(), false);
 			if(result == IntersectionResult_Top && gameplayObject->GetCharacterState() != Jumping)
 			{
-				gameplayObject->SetXY(gameplayObject->GetPosition()[0],GetPosition()[1]+GetScale()[1]);
+				gameplayObject->SetXY(gameplayObject->GetPosition()[0],GetPosition()[1]+GetScale()[1]+0.15f);
 			}
 			else if(result == IntersectionResult_Left)
 			{
-				gameplayObject->SetXY(GetPosition()[0]+GetScale()[0], gameplayObject->GetPosition()[1]);
+				gameplayObject->SetXY(GetPosition()[0]+GetScale()[0]+0.2f, gameplayObject->GetPosition()[1]);
 			}
 		}
 		else if(result == IntersectionResult_Top && gameplayObject->GetCharacterState() != Jumping)
 		{
-			gameplayObject->SetXY(gameplayObject->GetPosition()[0],GetPosition()[1]+GetScale()[1]);
+			gameplayObject->SetXY(gameplayObject->GetPosition()[0],GetPosition()[1]+GetScale()[1]+0.15f);
 		}
 
 		return result;
@@ -129,7 +129,7 @@ namespace SceneManager
 	{
 		float diffx = position[0]-GetPosition()[0];
 
-		if(abs(diffx+(GetScale()[0]*0.5f+scale[0]*0.5f)) < 0.01f)
+		if(abs(diffx+(GetScale()[0]*0.5f+scale[0]*0.5f)) < 0.1f)
 		{
 			float diffy = position[1]-GetPosition()[1];
 			if(diffy > -(GetScale()[1]*0.5f+scale[1]*0.5f) && diffy < GetScale()[1]*0.5f+scale[1]*0.5f)
@@ -138,18 +138,18 @@ namespace SceneManager
 			}
 		}
 
-		if(diffx > -(GetScale()[0]*0.5f+scale[0]*0.5f)+0.01f && diffx < GetScale()[0]*0.5f+scale[0]*0.5f)
+		if(diffx > -(GetScale()[0]*0.5f+scale[0]*0.5f)+0.03f && diffx < GetScale()[0]*0.5f+scale[0]*0.5f)
 		{			
 			if(upperBound)
 			{
-				float diffy = position[1]-(GetPosition()[1]+GetScale()[1]);
-				if(abs(diffy) < 0.1f)
+				float diffy = (position[1]-scale[1]*0.5f)-(GetPosition()[1]+GetScale()[1]*0.5f);
+				if(abs(diffy) < 0.15f)
 					return IntersectionResult_Top;
 			}
 			else
 			{
-				float diffy = position[1]-GetPosition()[1];
-				if(abs(diffy) < GetScale()[1])
+				float diffy = (position[1]-scale[1]*0.5f)-(GetPosition()[1]);
+				if(abs(diffy) < 0.05f)
 					return IntersectionResult_Top;
 			}
 		}
