@@ -57,7 +57,7 @@ namespace SceneManager
 
 		for(;it!=itEnd;++it)
 		{
-			if(GetGameplayObjectType() != GamePlayObjectType_Platform)
+			if(GetGameplayObjectType() == GamePlayObjectType_MainCharacter)
 			{
 				if(Intersect(static_cast<GamePlayObject*>(*it)) != GamePlayObjectType_Invalid)
 				{

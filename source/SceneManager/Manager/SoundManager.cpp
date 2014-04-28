@@ -103,7 +103,7 @@ namespace Atum
 
 		void SoundManager::StopMusic()
 		{	
-			while(SoundManager::GetInstance().IncrementSwitchMusic(SoundManager::BelowToTitle,0.001f))
+			while(SoundManager::GetInstance().IncrementSwitchMusic(SoundManager::BelowToTitle,0.005f))
 			{
 				Sleep(1);
 			}

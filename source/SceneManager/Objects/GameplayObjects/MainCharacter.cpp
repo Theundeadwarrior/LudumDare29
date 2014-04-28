@@ -110,6 +110,7 @@ namespace SceneManager
 		ms_cameraY = 0;
 
 		m_currentSprite = GetTextureIDList()[Sprites_Above].begin();
+		m_currentSpriteState = Sprites_Above;
 	}
 
 	MaterialID MainCharacter::GetMaterialID()
@@ -154,9 +155,10 @@ namespace SceneManager
 
 	void MainCharacter::Jump()
 	{
-		//if(m_currentState != GamePlayObject::Jumping &&
-		//	m_currentState != GamePlayObject::Falling && 
-		//	m_currentState != GamePlayObject::Dead)
+		if(m_currentState != GamePlayObject::Jumping &&
+			m_currentState != GamePlayObject::Falling && 
+			m_currentState != GamePlayObject::Dead &&
+			m_currentState != GamePlayObject::WallStop)
 		{
  			m_speed = JUMPING_SPEED;
 			m_currentState = GamePlayObject::Jumping;

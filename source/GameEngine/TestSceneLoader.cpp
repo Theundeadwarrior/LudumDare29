@@ -526,7 +526,7 @@ void TestSceneLoader::NotifyKeyPressed(const Events::KeyboardEvent& event)
 			if (m_sceneManager.GetCurrentSceneId() == INTRO_SCENE_ID)
 			{
 				m_sceneManager.SetCurrentScene(GAME_SCENE_ID);
-				while(SceneManager::SoundManager::GetInstance().IncrementSwitchMusic(SceneManager::SoundManager::TitleToAbove,0.001f))
+				while(SceneManager::SoundManager::GetInstance().IncrementSwitchMusic(SceneManager::SoundManager::TitleToAbove,0.005f))
 				{
 					Sleep(1);
 				}

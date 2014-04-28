@@ -72,7 +72,7 @@ namespace SceneManager
 		{
 		case GamePlayObject::GamePlayObjectType_MainCharacter:
 
-			if(*state != GamePlayObject::WallStop)
+			if(*state != GamePlayObject::WallStop && *state != GamePlayObject::Dead)
 			{
 				switch(IntersectMainCharacter(gameplayObject))
 				{
