@@ -12,11 +12,18 @@ namespace SceneManager
 class SoundManager
 {
 public:
+	enum MusicTransition
+	{
+		TitleToAbove,
+		AboveToBelow,
+		BelowToTitle
+	};
+
 	static SoundManager& GetInstance();
 	~SoundManager();
 
 	void StartMusic();
-	bool IncrementSwitchMusic(bool underworld);
+	bool IncrementSwitchMusic(MusicTransition transition, float transitionSpeed = 0.05f);
 	void StopMusic();
 
 private:
@@ -25,7 +32,8 @@ private:
 	void operator=(SoundManager const&); //don't implement
 
 	irrklang::ISoundEngine* m_engine;
-    irrklang::ISound* m_currentMusic;
+	irrklang::ISound* m_currentMusicTitle;
+    irrklang::ISound* m_currentMusicAbove;
 	irrklang::ISound* m_currentMusicUnder;
 };
 

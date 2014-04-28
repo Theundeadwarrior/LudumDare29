@@ -108,18 +108,22 @@ namespace SceneManager
 		if(result == IntersectionResult_None)
 		{
 			result = IntersectMainCharacterWithPosition(gameplayObject->GetNextPosition(), gameplayObject->GetScale(), false);
-			if(result == IntersectionResult_Top && gameplayObject->GetCharacterState() != Jumping)
+			if(result == IntersectionResult_Top && gameplayObject->GetCharacterState() != Jumping) 
 			{
 				gameplayObject->SetXY(gameplayObject->GetPosition()[0],GetPosition()[1]+GetScale()[1]+0.15f);
 			}
 			else if(result == IntersectionResult_Left)
 			{
-				gameplayObject->SetXY(GetPosition()[0]+GetScale()[0]+0.2f, gameplayObject->GetPosition()[1]);
+				gameplayObject->SetXY(GetPosition()[0]-GetScale()[0]*0.5f-gameplayObject->GetScale()[0]*0.5f+0.15f, gameplayObject->GetPosition()[1]);
 			}
 		}
 		else if(result == IntersectionResult_Top && gameplayObject->GetCharacterState() != Jumping)
 		{
 			gameplayObject->SetXY(gameplayObject->GetPosition()[0],GetPosition()[1]+GetScale()[1]+0.15f);
+		}
+		else if(result == IntersectionResult_Left)
+		{
+			gameplayObject->SetXY(GetPosition()[0]-GetScale()[0]*0.5f-gameplayObject->GetScale()[0]*0.5f+0.15f, gameplayObject->GetPosition()[1]);
 		}
 
 		return result;

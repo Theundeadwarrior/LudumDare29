@@ -61,6 +61,8 @@ TestSceneLoader::TestSceneLoader(SceneManager::SceneManager & sceneManager) : m_
 	m_sceneManager.RemoveScene(2);
 	m_sceneManager.AddScene(placeholder);
 
+	SceneManager::SoundManager::GetInstance().StartMusic();
+
 	////-------------------------------------------------INIT SHADERS---------------------------------------------------------------------------------------------
 	//// Init Phong shader
 	//SceneManager::ShaderListID phongShaderID = m_sceneManager.GetShaderListManager()->CreateShaderList("../../data/shaders/GLSL_Generic_Vertex_Shader.vx", "../../data/shaders/GLSL_Generic_Fragment_Shader.fg", SceneManager::PHONG_SHADING | SceneManager::DIFFUSE_MAP);
@@ -524,7 +526,10 @@ void TestSceneLoader::NotifyKeyPressed(const Events::KeyboardEvent& event)
 			if (m_sceneManager.GetCurrentSceneId() == INTRO_SCENE_ID)
 			{
 				m_sceneManager.SetCurrentScene(GAME_SCENE_ID);
-				SceneManager::SoundManager::GetInstance().StartMusic();
+				while(SceneManager::SoundManager::GetInstance().IncrementSwitchMusic(SceneManager::SoundManager::TitleToAbove,0.001f))
+				{
+					Sleep(1);
+				}
 			}
 			else if (m_sceneManager.GetCurrentSceneId() == GAMEOVER_SCENE_ID)
 			{

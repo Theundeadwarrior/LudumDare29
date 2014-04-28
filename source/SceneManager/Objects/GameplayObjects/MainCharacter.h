@@ -15,6 +15,14 @@ namespace SceneManager
 	class MainCharacter : public GamePlayObject, public Events::InputKeyboardListener
 	{
 	public:
+		enum Sprites
+		{
+			Sprites_Above,
+			Sprites_Transition,
+			Sprites_Below,
+			Sprites_Count
+		};
+
 		MainCharacter();
 		~MainCharacter();
 
@@ -25,6 +33,7 @@ namespace SceneManager
 		virtual void Uninit();
 
 		virtual void Update();
+		void UpdateSprite();
 		virtual void Reset();
 
 		// Used when changing surface
@@ -33,6 +42,8 @@ namespace SceneManager
 
 		virtual TextureId GetTextureID();
 		virtual MaterialID GetMaterialID();
+
+		std::vector<TextureId>* GetTextureIDList();
 
 		virtual const GamePlayObject::GamePlayObjectType GetGameplayObjectType()const{return GamePlayObject::GamePlayObjectType_MainCharacter;}
 
@@ -49,12 +60,18 @@ namespace SceneManager
 		virtual CharacterState GetCharacterState(){ return m_currentState; }
 		void SetCharacterState(CharacterState state){ m_currentState = state; }
 
+		virtual void BindShaderParameters() override;
+
 	private:
 		GamePlayObject::CharacterState m_currentState;
 		glm::vec4 m_colorBlend;
 
 		float m_speed;
 		float m_cameraDiff;
+
+		std::vector<TextureId> m_textureIdListPerState[Sprites_Count];
+		std::vector<TextureId>::iterator m_currentSprite;
+		Sprites m_currentSpriteState;
 	};
 
 } // namespace SceneManager

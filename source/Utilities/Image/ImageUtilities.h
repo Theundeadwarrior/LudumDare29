@@ -32,7 +32,7 @@ namespace Image
 	};
 
 	template <class T>
-	inline typename void LoadImageFromFile(ImageParameters<T>& outputParams, const char* tpath)
+	inline typename void LoadImageFromFile(ImageParameters<T>& outputParams, const char* tpath, bool mirrorX = false)
 	{
 		ATUM_ASSERT_MESSAGE(tpath, "Path must not be null");
 
@@ -40,7 +40,14 @@ namespace Image
 		outputParams.path = tpath;
 		cimg_library::CImg<T> imageFile(tpath);
 		outputParams.spectrum = imageFile.spectrum();
+
+		if(mirrorX)
+		{
+			imageFile.mirror('x');
+		}
+
 		imageFile.mirror('y');
+		
 		imageFile.rotate(90);
 		T** content = new T*[outputParams.spectrum];
 

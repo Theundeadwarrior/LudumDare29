@@ -171,37 +171,37 @@ namespace SceneManager
 				InitLevel(m_nextLevel);
 				m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
 			}
+		}
 
-			// Might have to switch level if we fall down
-			if (m_mainCharacter->GetPosition().y < SURFACE_HEIGHT_POSITION && m_currentLevel->IsUnderGround() == false)
-			{
-  				GoBeneathTheSurface();
-			}
+		// Might have to switch level if we fall down
+		if (m_mainCharacter->GetPosition().y < SURFACE_HEIGHT_POSITION && m_currentLevel->IsUnderGround() == false)
+		{
+			GoBeneathTheSurface();
+		}
 
-			if (m_mainCharacter->GetPosition().y < DEATH_HEIGHT)
-			{
-				delete m_currentLevel;
-				delete m_nextLevel;
-				m_mainCharacter->SetCharacterState(GamePlayObject::Dead);
+		if (m_mainCharacter->GetPosition().y < DEATH_HEIGHT)
+		{
+			delete m_currentLevel;
+			delete m_nextLevel;
+			m_mainCharacter->SetCharacterState(GamePlayObject::Dead);
 
-				// reset level - HOLY COW SO MUCH HAAAAAAAAXXXXX
-				m_currentLevel = new Level();
-				m_nextLevel = new Level();
+			// reset level - HOLY COW SO MUCH HAAAAAAAAXXXXX
+			m_currentLevel = new Level();
+			m_nextLevel = new Level();
 
-				InitLevel(m_currentLevel);
-				InitLevel(m_nextLevel);
+			InitLevel(m_currentLevel);
+			InitLevel(m_nextLevel);
 
-				ResetLevelsPosition();
+			ResetLevelsPosition();
 
-				m_mainCharacter->Reset();
+			m_mainCharacter->Reset();
 
-				SceneManager::GetInstance().SetCurrentScene(1); // GameOver Screen (so testsceneloader can manage space on screen)
-			}
+			SceneManager::GetInstance().SetCurrentScene(1); // GameOver Screen (so testsceneloader can manage space on screen)
 		}
 
 		if(m_switchMusic)
 		{
-			m_switchMusic = SoundManager::GetInstance().IncrementSwitchMusic(true);
+			m_switchMusic = SoundManager::GetInstance().IncrementSwitchMusic(SoundManager::AboveToBelow);
 		}
 
 		// Calls the update on base class for updating all objects
