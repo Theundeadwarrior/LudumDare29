@@ -19,7 +19,6 @@ namespace SceneManager
 		{
 			Sprites_Above,
 			Sprites_Transition,
-			Sprites_Below,
 			Sprites_Count
 		};
 

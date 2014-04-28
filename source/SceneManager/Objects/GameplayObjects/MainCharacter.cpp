@@ -204,8 +204,8 @@ namespace SceneManager
 		{
 			if(m_currentSpriteState == Sprites_Transition)
 			{
-				m_currentSprite = GetTextureIDList()[Sprites_Below].begin();
-				m_currentSpriteState = Sprites_Below;
+				m_currentSprite = GetTextureIDList()[Sprites_Above].begin();
+				m_currentSpriteState = Sprites_Above;
 			}
 			else
 			{
@@ -281,92 +281,8 @@ namespace SceneManager
 			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Above_Running/cycleMarchePinguinStraight0011.png",true);
 			m_textureIdListPerState[Sprites_Above].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
 
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0001.png");
+			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Above_Running/cycleMarchePinguinStraight0011.png",true);
 			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0002.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0003.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0004.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0005.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0006.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0007.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0008.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0009.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0010.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0011.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0012.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0013.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0014.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0015.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0016.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0017.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Transition/transition0018.png");
-			m_textureIdListPerState[Sprites_Transition].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0001.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0002.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0003.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0004.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0005.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0006.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0007.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0008.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0009.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0010.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
-
-			Utilities::Image::LoadImageFromFile(titleScreenImage, "../../data/textures/Sprites_Below_Running/cycleMarchePinguinStraight0011.png",true);
-			m_textureIdListPerState[Sprites_Below].push_back(SceneManager::GetInstance().GetTextureManager()->CreateTexture(titleScreenImage, LowLevelGraphics::LowLevelAPI::ATUM_RGBA));
 		}
 
 		return m_textureIdListPerState;
