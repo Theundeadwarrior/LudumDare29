@@ -219,6 +219,7 @@
     <ClInclude Include="..\..\source\SceneManager\Manager\TypedefID.h" />
     <ClInclude Include="..\..\source\SceneManager\Material\Material.h" />
     <ClInclude Include="..\..\source\SceneManager\Material\MaterialParameters.h" />
+    <ClInclude Include="..\..\source\SceneManager\Objects\Cube.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\Background.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\ForeGround.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.h" />
@@ -231,6 +232,9 @@
     <ClInclude Include="..\..\source\SceneManager\Objects\Mesh.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\Object.h" />
     <ClInclude Include="..\..\source\SceneManager\Objects\Plane.h" />
+    <ClInclude Include="..\..\source\SceneManager\Objects\PointCloud.h" />
+    <ClInclude Include="..\..\source\SceneManager\Objects\Sphere.h" />
+    <ClInclude Include="..\..\source\SceneManager\Objects\Torus.h" />
     <ClInclude Include="..\..\source\SceneManager\Properties\Property.h" />
     <ClInclude Include="..\..\source\SceneManager\Properties\PropertyList.h" />
     <ClInclude Include="..\..\source\SceneManager\Properties\SelectionListProperty.h" />
@@ -240,6 +244,7 @@
     <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\PlaceholderLevel.h" />
     <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\TitleScreen.h" />
     <ClInclude Include="..\..\source\SceneManager\Scene\Scene.h" />
+    <ClInclude Include="..\..\source\SceneManager\SkyBox\SkyBox.h" />
     <ClInclude Include="..\..\source\SceneManager\Utilities\Transform.h" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +260,7 @@
     <ClCompile Include="..\..\source\SceneManager\Manager\SoundManager.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Manager\TextureManager.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Material\Material.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\Objects\Cube.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\Background.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\ForeGround.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\GameplayObjects\GamePlayObject.cpp" />
@@ -267,6 +273,9 @@
     <ClCompile Include="..\..\source\SceneManager\Objects\Mesh.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\Object.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Objects\Plane.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\Objects\PointCloud.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\Objects\Sphere.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\Objects\Torus.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Properties\Property.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Properties\PropertyList.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Properties\SelectionListProperty.cpp" />
@@ -276,6 +285,7 @@
     <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\PlaceholderLevel.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\TitleScreen.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Scene\Scene.cpp" />
+    <ClCompile Include="..\..\source\SceneManager\SkyBox\SkyBox.cpp" />
     <ClCompile Include="..\..\source\SceneManager\Utilities\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,8 @@ namespace SceneManager
 		Camera(const glm::vec3& position, const glm::vec3& POI, const glm::vec3& up);
 		virtual ~Camera(){};
 
+		//Getters
+		//virtual PropertyList GetPropertyList() const;
 		void GetViewMatrix(glm::mat4x4& matrix);
 		glm::mat4x4 GetViewMatrix();
 		glm::vec3 GetPosition() { return m_position; }

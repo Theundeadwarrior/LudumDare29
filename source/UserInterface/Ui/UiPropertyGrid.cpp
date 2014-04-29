@@ -56,44 +56,247 @@ void UiPropertyGrid::DisplayPropertyGrid( SceneManager::Component* object )
 
 void UiPropertyGrid::CreateGrid()
 {
+	//Add object properties
+	m_component->GetPropertyList( m_propertyList );
+	SceneManager::PropertyList::PropIterator pIter( m_propertyList.GetProperties().begin() );
+	SceneManager::PropertyList::PropIterator pIterBeforeAdd( pIter );
+	for ( ; pIter != m_propertyList.GetProperties().end() ; pIter++)
+	{
+		AddElement( *pIter );
+		pIterBeforeAdd = pIter;
+	}
 
+	SceneManager::Object* object( dynamic_cast<SceneManager::Object*>(m_component) );
+	SceneManager::PointCloud* pointCloud (dynamic_cast<SceneManager::PointCloud*>(m_component));
+	if ( object && !pointCloud )
+	{
+		//Add Lighting properties
+		object->GetMaterial()->GetLightingPropertyList( m_propertyList );
+		pIter = ++pIterBeforeAdd;
+		for ( ; pIter != m_propertyList.GetProperties().end() ; pIter++)
+		{
+			AddElement( *pIter,UI_LIGHTING_TECH_GROUP );
+			pIterBeforeAdd = pIter;
+		}
+
+		//Add Effects properties
+		object->GetMaterial()->GetEffectPropertyList( m_propertyList );
+		pIter = ++pIterBeforeAdd;
+		for ( ; pIter != m_propertyList.GetProperties().end() ; pIter++)
+		{
+			AddElement( *pIter,UI_EFFECTS_GROUP );
+			pIterBeforeAdd = pIter;
+		}
+	}
 }
 
 void UiPropertyGrid::DeleteGrid()
 {
+	TwRemoveAllVars(m_panel);
 
+	ClearElementList();
+	ClearPanelPropertyMapping(this);
+	m_propertyList.ClearPropertyList();
 }
 
 void UiPropertyGrid::RefreshPropertyGrid()
 {
-	
+	DisplayPropertyGrid(m_component);
 }
 
 void UiPropertyGrid::SetGroup( SceneManager::Property* property, const std::string& group ) const
 {
-
+	std::string groupParam(UI_PARAM_GROUP);
+	property->AddParameter(groupParam + "'" + group + "'" );
 }
 
 /////////////// Add new types here ///////////////////////
 
 void UiPropertyGrid::AddElement( SceneManager::Property* property, const std::string& group )
 {
-	
+	AddPropertyMapping(property, this); //don't touch!
+
+	if ( group.size() != 0 ) SetGroup(property,group);
+	if( property->GetType() == SceneManager::PROPERTY_INT )
+	{
+		TwAddVarCB(m_panel, 
+			property->GetName().c_str(),
+			TW_TYPE_INT32, 
+			SetCallbackPropertyInt, 
+			GetCallbackPropertyInt, 
+			property, 
+			property->GetParameters().c_str() );
+	}
+	else if ( property->GetType() == SceneManager::PROPERTY_FLOAT )
+	{
+		TwAddVarCB(m_panel, 
+			property->GetName().c_str(),
+			TW_TYPE_FLOAT, 
+			SetCallbackPropertyFloat, 
+			GetCallbackPropertyFloat, 
+			property, 
+			property->GetParameters().c_str() );
+	}
+	else if ( property->GetType() == SceneManager::PROPERTY_DOUBLE )
+	{
+		TwAddVarCB(m_panel, 
+			property->GetName().c_str(),
+			TW_TYPE_DOUBLE, 
+			SetCallbackPropertyDouble, 
+			GetCallbackPropertyDouble, 
+			property, 
+			property->GetParameters().c_str() );
+	}
+	else if ( property->GetType() == SceneManager::PROPERTY_BOOL )
+	{
+		TwAddVarCB(m_panel, 
+			property->GetName().c_str(),
+			TW_TYPE_BOOLCPP, 
+			SetCallbackPropertyBool, 
+			GetCallbackPropertyBool, 
+			property, 
+			property->GetParameters().c_str() );
+	}
+	else if ( property->GetType() == SceneManager::PROPERTY_STRING )
+	{
+		TwAddVarCB(m_panel, 
+			property->GetName().c_str(),
+			TW_TYPE_STDSTRING, 
+			SetCallbackPropertyString, 
+			GetCallbackPropertyString, 
+			property, 
+			property->GetParameters().c_str() );
+	}
+	else if ( property->GetType() == SceneManager::PROPERTY_VECTOR3F )
+	{
+		TwAddVarCB(m_panel, 
+			property->GetName().c_str(),
+			TW_TYPE_DIR3F, 
+			SetCallbackPropertyVector3f, 
+			GetCallbackPropertyVector3f, 
+			property, 
+			property->GetParameters().c_str() );
+	}
+	else if ( property->GetType() == SceneManager::PROPERTY_VECTOR4F )
+	{
+		TwAddVarCB(m_panel, 
+			property->GetName().c_str(),
+			TW_TYPE_COLOR4F, 
+			SetCallbackPropertyVector4f, 
+			GetCallbackPropertyVector4f, 
+			property, 
+			property->GetParameters().c_str() );
+	}
+	else if ( property->GetType() == SceneManager::PROPERTY_QUATERNION )
+	{
+		TwAddVarCB(m_panel, 
+			property->GetName().c_str(),
+			TW_TYPE_QUAT4F, 
+			SetCallbackPropertyQuat, 
+			GetCallbackPropertyQuat, 
+			property, 
+			property->GetParameters().c_str() );
+	}
+	else if ( property->GetType() == SceneManager::PROPERTY_COLOR )
+	{
+		TwAddVarCB(m_panel, 
+			property->GetName().c_str(),
+			TW_TYPE_COLOR3F, 
+			SetCallbackPropertyVector3f, 
+			GetCallbackPropertyVector3f, 
+			property, 
+			property->GetParameters().c_str() );
+	}
+	else if ( property->GetType() == SceneManager::PROPERTY_TEXTURE )
+	{
+		AddTextureElement(property,group);
+	}
+	else if ( property->GetType() == SceneManager::PROPERTY_SELECTION_LIST )
+	{
+		AddDropDownElement(property,group);
+	}
 }
 
 void UiPropertyGrid::AddTextureElement( SceneManager::Property* property, const std::string& group )
 {
-	
+	std::string groupParam( std::string(UI_PARAM_GROUP) + "'" + group + "'" );
+	AddSeparator(groupParam);
+
+	//Add path selected
+	std::string path;
+	property->GetValue(path);
+	bool IsFileSet = false;
+	std::string file;
+	if ( path.size() == 0 )
+	{
+		file = "Not set";
+	}
+	else
+	{
+		IsFileSet = true;
+		file = UiUtilities::GetFileFromPath(path) ;
+	}
+	std::string pathLabel( property->GetName() + " texture: ");
+	AddReadOnlyString(pathLabel+file, groupParam );
+
+	//Add select texture button
+	std::string selectButtonLabel( "Select " + property->GetName() + " texture...");
+	UiButton* selectTexture = new UiButton(selectButtonLabel, CreateTextureCallback, property);
+	selectTexture->SetLabel(selectButtonLabel);
+	selectTexture->SetGroup(group);
+	m_elementList.push_back( selectTexture );
+	selectTexture->AddToPanel(*this);
+
+	//Add clear texture button
+	if ( IsFileSet )
+	{
+		std::string clearButtonLabel( "Clear " + property->GetName() + " texture" );
+		UiButton* clearTexture = new UiButton(clearButtonLabel, ClearTextureCallback, property);
+		clearTexture->SetLabel(clearButtonLabel);
+		clearTexture->SetGroup(group);
+		m_elementList.push_back( clearTexture );
+		clearTexture->AddToPanel(*this);
+	}
+
+	AddSeparator(groupParam);
 }
 
 void UiPropertyGrid::AddDropDownElement( SceneManager::Property* property, const std::string& group )
 {
-	
+	SceneManager::SelectionListProperty* dropDownProp( dynamic_cast<SceneManager::SelectionListProperty*>(property) );
+	if ( dropDownProp )
+	{
+		std::string dropDownLabel( property->GetName() + " :" );
+		UiDropDown* dropDown = new UiDropDown( dropDownLabel, *dropDownProp->GetSelectionList() );
+		dropDown->SetGroup(group);
+
+		///Get id and set it
+		int selectionID;
+		dropDownProp->GetValue(selectionID);
+		m_elementList.push_back(dropDown);
+
+		//Add to the panel
+		TwAddVarCB(m_panel, 
+			dropDown->GetName().c_str(),
+			dropDown->GetEnumType(), 
+			SetCallbackPropertyDropdown, 
+			GetCallbackPropertyDropdown, 
+			property, 
+			dropDown->GetParameters().c_str() );
+	}
 }
 
 void UiPropertyGrid::UpdatePropertyList()
 {
-
+	m_component->UpdatePropertyList( m_propertyList );
+	SceneManager::Object* object (dynamic_cast<SceneManager::Object*>(m_component));
+	SceneManager::PointCloud* pointCloud (dynamic_cast<SceneManager::PointCloud*>(m_component));
+	if (object && !pointCloud)
+	{
+		object->GetMaterial()->UpdateLightingPropertyList(m_propertyList);
+		object->GetMaterial()->UpdateEffectPropertyList(m_propertyList);
+		//RefreshPropertyGrid();
+	}
 }
 
 /////////////////////////////////////////////////

@@ -19,10 +19,15 @@ namespace SceneManager
 
 	void Cube::GetPropertyList( PropertyList& o_properties )
 	{
+		Object::GetPropertyList(o_properties); //get the parent properties
+		//get the child properties
+
 	}
 
 	void Cube::UpdatePropertyList( PropertyList& i_properties )
 	{
+		Object::UpdatePropertyList( i_properties ); //update the parent properties
+		//update the child properties
 	}
 
 } // namespace SceneManager

@@ -13,6 +13,10 @@
 
 namespace Atum
 {
+namespace SceneManager
+{
+	class PropertyList; 
+}
 
 namespace SceneManager
 {
@@ -21,6 +25,9 @@ namespace SceneManager
 		public:
 			Component();
 			virtual ~Component()=0;
+
+			virtual void GetPropertyList ( PropertyList& o_properties ) const;
+			virtual void UpdatePropertyList ( const PropertyList& i_properties );
 
 			virtual void UpdateAABB();
 			virtual Atum::Utilities::AABB GetAABB();

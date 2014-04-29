@@ -5,6 +5,7 @@
 #include "SceneManager/Camera/PerspectiveCamera.h"
 
 #include "Utilities/Image/ImageUtilities.h"
+#include "Utilities/BasicGeometry/BasicGeometryGenerator.h"
 
 
 namespace Atum

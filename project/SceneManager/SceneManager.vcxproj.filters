@@ -55,10 +55,19 @@
     <ClInclude Include="..\..\source\SceneManager\Scene\Scene.h">
       <Filter>Source Files\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\SceneManager\Objects\Cube.h">
+      <Filter>Source Files\Objects</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\source\SceneManager\Objects\Mesh.h">
       <Filter>Source Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\SceneManager\Objects\Plane.h">
+      <Filter>Source Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SceneManager\Objects\Sphere.h">
+      <Filter>Source Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SceneManager\Objects\Torus.h">
       <Filter>Source Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\SceneManager\Camera\Camera.h">
@@ -94,6 +103,9 @@
     <ClInclude Include="..\..\source\SceneManager\Lights\PointLight.h">
       <Filter>Source Files\Lights</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\SceneManager\Objects\PointCloud.h">
+      <Filter>Source Files\Objects</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\source\SceneManager\Material\MaterialParameters.h">
       <Filter>Source Files\Material</Filter>
     </ClInclude>
@@ -111,6 +123,9 @@
     </ClInclude>
     <ClInclude Include="..\..\source\SceneManager\Properties\TextureProperty.h">
       <Filter>Source Files\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\SceneManager\SkyBox\SkyBox.h">
+      <Filter>Source Files\SkyBox</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\SceneManager\Scene\GameplayScenes\TitleScreen.h">
       <Filter>Source Files\Scene\GameplayScenes</Filter>
@@ -171,6 +186,15 @@
     <ClCompile Include="..\..\source\SceneManager\Objects\Plane.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\SceneManager\Objects\Sphere.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\SceneManager\Objects\Torus.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\SceneManager\Objects\Cube.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\source\SceneManager\Camera\Camera.cpp">
       <Filter>Source Files\Camera</Filter>
     </ClCompile>
@@ -201,6 +225,9 @@
     <ClCompile Include="..\..\source\SceneManager\Lights\PointLight.cpp">
       <Filter>Source Files\Lights</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\SceneManager\Objects\PointCloud.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\source\SceneManager\Component\Component.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
@@ -215,6 +242,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\SceneManager\Properties\TextureProperty.cpp">
       <Filter>Source Files\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\SceneManager\SkyBox\SkyBox.cpp">
+      <Filter>Source Files\SkyBox</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\SceneManager\Scene\GameplayScenes\TitleScreen.cpp">
       <Filter>Source Files\Scene\GameplayScenes</Filter>
