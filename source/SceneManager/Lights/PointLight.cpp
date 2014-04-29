@@ -70,28 +70,10 @@ void PointLight::UpdateAABB()
 
 void PointLight::GetPropertyList( PropertyList& o_properties ) const
 {
-	Property* name = new Property( COMP_PROP_NAME, GetName() );
-	o_properties.AddProperty(name);
-
-	Property* position = new Property( COMP_PROP_POSITION, m_transform.GetPosition() );
-	o_properties.AddProperty(position);
 }
 
 void PointLight::UpdatePropertyList( const PropertyList& i_properties )
 {
-	const Property* name = i_properties.GetProperty(COMP_PROP_NAME);
-	if ( name )
-	{
-		name->GetValue(m_name);
-	}
-	const Property* position = i_properties.GetProperty(COMP_PROP_POSITION);
-	if ( position )
-	{
-		glm::vec3 newPos;
-		position->GetValue(newPos);
-		m_transform.SetTranslate(newPos);
-		Update();
-	}
 }
 
 void PointLight::Update()

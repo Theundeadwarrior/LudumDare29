@@ -38,9 +38,6 @@ GeometryID GeometryManager::CreateGeometry( const LowLevelGraphics::GeometryPara
 void GeometryManager::CreateStandardGeometry()
 {
 	m_standardPlaneGeometryId	= CreateGeometry( Utilities::CreatePlaneGeometry(1,1) );
-	m_standardCubeGeometryId	= CreateGeometry( Utilities::CreateCubeGeometry(1) );
-	m_standardSphereGeometryId	= CreateGeometry( Utilities::CreateSphereGeometry(1,16,16) );
-	m_standardtorusGeometryId	= CreateGeometry( Utilities::CreateTorusGeometry(10,40,1,0.5f) );
 }
 
 //-----------------------------------------------------------------------------

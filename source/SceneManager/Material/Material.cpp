@@ -3,8 +3,6 @@
 #include "SceneManager/SceneManager.h"
 #include "SceneManager/Properties/PropertyList.h"
 #include "SceneManager/Properties/Property.h"
-#include "SceneManager/Properties/SelectionListProperty.h"
-#include "SceneManager/Properties/TextureProperty.h"
 #include "Utilities/Image/ImageUtilities.h"
 #include "LowLevelGraphics/LowLevelAPI/GPUAPI/LowLevelGPUAPI.h"
 
@@ -320,175 +318,21 @@ LowLevelGraphics::TextureSkyBox* const Material::GetSkyBox() const
 //-----------------------------------------------------------------------------
 void Material::GetLightingPropertyList( PropertyList& o_properties )
 {
-	if(m_materialParameters.phongParam.m_isActive)
-	{
-		Property* lightTech = new SelectionListProperty(
-			"LightingTechnique", SceneManager::GetInstance().GetMaterialManager()->GetLightingTechniques(), 1);
-		o_properties.AddProperty(lightTech);
-
-		Property* ambiant = new Property("Ambiant", glm::vec3(m_materialParameters.phongParam.m_ambiantColor), VECTORTYPE_COLOR);
-		Property* diffuse = new Property("Diffuse", glm::vec3(m_materialParameters.phongParam.m_diffuseColor), VECTORTYPE_COLOR);
-		Property* specular = new Property("Specular", glm::vec3(m_materialParameters.phongParam.m_specularColor), VECTORTYPE_COLOR);
-		Property* shininess = new Property("Shininess", m_materialParameters.phongParam.m_shininess);
-		o_properties.AddProperty(ambiant);
-		o_properties.AddProperty(diffuse);
-		o_properties.AddProperty(specular);
-		o_properties.AddProperty(shininess);
-	}
-	else if(m_materialParameters.plainColorParam.m_isActive)
-	{
-		Property* lightTech = new SelectionListProperty(
-			"LightingTechnique", SceneManager::GetInstance().GetMaterialManager()->GetLightingTechniques(), 0);
-		o_properties.AddProperty(lightTech);
-
-		Property* plainColor = new Property("Color", glm::vec3(m_materialParameters.plainColorParam.m_color), VECTORTYPE_COLOR);
-		o_properties.AddProperty(plainColor);
-	}
 }
 
 //-----------------------------------------------------------------------------
 void Material::UpdateLightingPropertyList( PropertyList& properties )
 {
-	const Property* lightTech = properties.GetProperty("LightingTechnique");
-	int lightId;
-	lightTech->GetValue(lightId);
-	if(lightId == 1)
-	{
-		if(!m_materialParameters.phongParam.m_isActive)
-		{
-			// We are changing shader type
-			m_materialParameters.phongParam.m_isActive = true;
-			m_materialParameters.plainColorParam.m_isActive = false;
-			UpdateShaderListID();
-		}
-		else
-		{
-			const Property* ambiant = properties.GetProperty("Ambiant");
-			glm::vec3 ambiantValue;
-			ambiant->GetValue(ambiantValue);
-			m_materialParameters.phongParam.m_ambiantColor = glm::vec4(ambiantValue,1);
-
-			const Property* diffuse = properties.GetProperty("Diffuse");
-			glm::vec3 diffuseValue;
-			diffuse->GetValue(diffuseValue);
-			m_materialParameters.phongParam.m_diffuseColor = glm::vec4(diffuseValue,1);
-
-			const Property* specular = properties.GetProperty("Specular");
-			glm::vec3 specularValue;
-			specular->GetValue(specularValue);
-			m_materialParameters.phongParam.m_specularColor = glm::vec4(specularValue,1);
-
-			const Property* shininess = properties.GetProperty("Shininess");
-			shininess->GetValue(m_materialParameters.phongParam.m_shininess);
-		}
-	}
-	else if(lightId == 0)
-	{
-		if(!m_materialParameters.plainColorParam.m_isActive)
-		{
-			// We are changing shader type
-			m_materialParameters.phongParam.m_isActive = false;
-			m_materialParameters.plainColorParam.m_isActive = true;
-			UpdateShaderListID();
-		}
-		else
-		{
-			const Property* color = properties.GetProperty("Color");
-			glm::vec3 colorValue;
-			color->GetValue(colorValue);
-			m_materialParameters.plainColorParam.m_color = glm::vec4(colorValue,1);
-		}
-	}
 }
 
 //-----------------------------------------------------------------------------
 void Material::GetEffectPropertyList( PropertyList& o_properties )
 {
-	LowLevelGraphics::Texture* diffuseMapTexture = SceneManager::GetInstance().GetTextureManager()->GetTexture(m_materialParameters.diffuseMapParam.m_textID);
-	std::string currentDiffuseTexPath("");
-	if(diffuseMapTexture && m_materialParameters.diffuseMapParam.m_isActive )
-	{
-		currentDiffuseTexPath = diffuseMapTexture->GetPath();
-	}
-	Property* diffuseMap = new TextureProperty("DiffuseMap", currentDiffuseTexPath);
-	o_properties.AddProperty(diffuseMap);
-
-	LowLevelGraphics::Texture* parallaxMapTexture = SceneManager::GetInstance().GetTextureManager()->GetTexture(m_materialParameters.parallaxParam.m_parallaxmapID);
-	std::string currentParallaxTexPath("");
-	if(parallaxMapTexture && m_materialParameters.parallaxParam.m_isActive )
-	{
-		currentParallaxTexPath = parallaxMapTexture->GetPath();
-		Property* parallaxHeightScale = new Property("Parallax Height Scale", m_materialParameters.parallaxParam.m_parallaxHeightScale);
-		Property* parallaxHeightBias = new Property("Parallax Height Bias", m_materialParameters.parallaxParam.m_parallaxHeightBias);
-		o_properties.AddProperty(parallaxHeightScale);
-		o_properties.AddProperty(parallaxHeightBias);
-	}
-	Property* parallaxMap = new TextureProperty("ParallaxMap", currentParallaxTexPath);
-	o_properties.AddProperty(parallaxMap);
-
 }
 
 //-----------------------------------------------------------------------------
 void Material::UpdateEffectPropertyList( PropertyList& properties )
 {
-	const Property* diffuseMap = properties.GetProperty("DiffuseMap");
-	std::string newDiffuseMapPath;
-	diffuseMap->GetValue(newDiffuseMapPath);
-
-	LowLevelGraphics::Texture* diffuseMapTexture = SceneManager::GetInstance().GetTextureManager()->GetTexture(m_materialParameters.diffuseMapParam.m_textID);
-	if ( newDiffuseMapPath.size() == 0 )
-	{
-		m_materialParameters.diffuseMapParam.m_isActive = false;
-		UpdateShaderListID();
-	}
-	else if ( !diffuseMapTexture|| newDiffuseMapPath.compare(diffuseMapTexture->GetPath()))
-	{
-		m_materialParameters.diffuseMapParam.m_isActive = true;
-		Utilities::Image::ImageParameters<unsigned char> imageParameter;
-		Utilities::Image::LoadImageFromFile(imageParameter, newDiffuseMapPath.c_str());
-		unsigned int texId = SceneManager::GetInstance().GetTextureManager()->CreateTexture(imageParameter, LowLevelGraphics::LowLevelAPI::ATUM_RGB);
-		m_materialParameters.diffuseMapParam.m_textID = texId;
-		UpdateShaderListID();
-	}
-	else if ( newDiffuseMapPath.compare(diffuseMapTexture->GetPath()) == 0 )
-	{
-		m_materialParameters.diffuseMapParam.m_isActive = true;
-	}
-
-	const Property* parallaxMap = properties.GetProperty("ParallaxMap");
-	std::string newParallaxMapPath;
-	parallaxMap->GetValue(newParallaxMapPath);
-
-	LowLevelGraphics::Texture* parallaxMapTexture = SceneManager::GetInstance().GetTextureManager()->GetTexture(m_materialParameters.parallaxParam.m_parallaxmapID);
-	if( newParallaxMapPath.size() == 0)
-	{
-		m_materialParameters.parallaxParam.m_isActive = false;
-		UpdateShaderListID();
-	}
-	else if( !parallaxMapTexture || newParallaxMapPath.compare(parallaxMapTexture->GetPath()))
-	{
-		m_materialParameters.parallaxParam.m_isActive = true;
-		Utilities::Image::ImageParameters<unsigned char> imageParameter;
-		Utilities::Image::LoadImageFromFile(imageParameter, newParallaxMapPath.c_str());
-		unsigned int texId = SceneManager::GetInstance().GetTextureManager()->CreateTexture(imageParameter, LowLevelGraphics::LowLevelAPI::ATUM_RGBA);
-		m_materialParameters.parallaxParam.m_parallaxmapID = texId;
-
-		UpdateShaderListID();
-	}
-	else if ( newParallaxMapPath.compare(parallaxMapTexture->GetPath()) == 0 )
-	{
-		m_materialParameters.parallaxParam.m_isActive = true;
-	}
-
-	const Property* parallaxHeightScale = properties.GetProperty("Parallax Height Scale");
-	if ( parallaxHeightScale )
-		parallaxHeightScale->GetValue(m_materialParameters.parallaxParam.m_parallaxHeightScale);
-
-	const Property* parallaxHeightBias = properties.GetProperty("Parallax Height Bias");
-	if ( parallaxHeightBias )
-		parallaxHeightBias->GetValue(m_materialParameters.parallaxParam.m_parallaxHeightBias);
-
-	UpdateShaderListID();
 }
 
 }
