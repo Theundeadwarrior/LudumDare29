@@ -22,7 +22,7 @@ public:
 	Level(bool isUnderGround = false);
 	~Level();
 
-	void Level::BuildObjectsFromLevelLayout();
+	void Level::BuildObjectsFromLevelLayout(MainCharacter* mainCharacter);
 	std::vector<Object*>::iterator GetObjectListBegin(){ return m_objectList.begin(); }
 	std::vector<Object*>::iterator GetObjectListEnd(){ return m_objectList.end(); }
 

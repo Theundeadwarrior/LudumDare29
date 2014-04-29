@@ -61,6 +61,9 @@ namespace SceneManager
 
 		virtual void BindShaderParameters() override;
 
+		const bool GetIsAtStartLevel()const{return m_isAtStartLevel;}
+		void SetIsAtStartLevel(bool isAtStart){m_isAtStartLevel = isAtStart;}
+
 	private:
 		GamePlayObject::CharacterState m_currentState;
 		glm::vec4 m_colorBlend;
@@ -71,6 +74,8 @@ namespace SceneManager
 		std::vector<TextureId> m_textureIdListPerState[Sprites_Count];
 		std::vector<TextureId>::iterator m_currentSprite;
 		Sprites m_currentSpriteState;
+
+		bool m_isAtStartLevel;
 	};
 
 } // namespace SceneManager

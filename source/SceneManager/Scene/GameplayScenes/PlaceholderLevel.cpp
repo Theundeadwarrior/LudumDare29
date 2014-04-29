@@ -38,8 +38,6 @@ namespace SceneManager
 		, m_dummyCamera(NULL)
 		, m_switchMusic(false)
 	{
-		m_currentLevel = new Level();
-		m_nextLevel = new Level();
 	}
 
 	PlaceholderLevel::~PlaceholderLevel()
@@ -55,6 +53,9 @@ namespace SceneManager
 		AddObject(m_foreground);
 
 		CreateTitleScreenObject();
+
+		m_currentLevel = new Level();
+		m_nextLevel = new Level();
 
 		InitLevel(m_currentLevel);
 		InitLevel(m_nextLevel);
@@ -189,6 +190,8 @@ namespace SceneManager
 			delete m_nextLevel;
 			m_mainCharacter->SetCharacterState(GamePlayObject::Dead);
 
+			m_mainCharacter->Reset();
+
 			// reset level - HOLY COW SO MUCH HAAAAAAAAXXXXX
 			m_currentLevel = new Level();
 			m_nextLevel = new Level();
@@ -197,8 +200,6 @@ namespace SceneManager
 			InitLevel(m_nextLevel);
 
 			ResetLevelsPosition();
-
-			m_mainCharacter->Reset();
 
 			// Reset PArticle Colors
 			auto it = m_particleSystemList.begin();
@@ -225,7 +226,7 @@ namespace SceneManager
 	void PlaceholderLevel::InitLevel(Level* level)
 	{
 		std::list<Object*> objects;
-		level->BuildObjectsFromLevelLayout();
+		level->BuildObjectsFromLevelLayout(m_mainCharacter);
 
 		auto itObj = level->GetObjectListBegin();
 		auto endItObj = level->GetObjectListEnd();
@@ -244,14 +245,14 @@ namespace SceneManager
 		m_currentLevel = new Level(true);
 		m_nextLevel = new Level(true);
 
+		m_mainCharacter->GoBeneathTheSurface();
+
 		InitLevel(m_currentLevel);
 		InitLevel(m_nextLevel);
 
 		// HACKATHON!!! 
 		m_currentLevel->Translate(glm::vec4(POSITION_FIRST_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition() - 26, 0, 0));
  		m_nextLevel->Translate(glm::vec4(POSITION_TO_SPAWN, m_currentLevel->GetLastPlatformYPosition() - m_nextLevel->GetFirstPlatformYPosition(), 0, 0));
-
- 		m_mainCharacter->GoBeneathTheSurface();
 
 		//throw std::exception("The method or operation is not implemented.");
 
@@ -271,8 +272,7 @@ namespace SceneManager
 
 
 	Level::Level(bool isUnderGround)
-    : m_currentPosition()
-	, m_isUnderGround(isUnderGround)
+    : m_isUnderGround(isUnderGround)
 	{
 
 	}
@@ -290,10 +290,11 @@ namespace SceneManager
 
 	}
 
-	void Level::BuildObjectsFromLevelLayout()
+	void Level::BuildObjectsFromLevelLayout(MainCharacter* mainCharacter)
 	{
 		// Generate parameters and layout
 		LevelLayoutGenerator::Parameters params;
+
 		if (IsUnderGround() == false)
 		{
 			params.LevelHeight = 12;
@@ -321,11 +322,12 @@ namespace SceneManager
 		auto endit = level.m_platforms.end();
 
 		float currentXPosition = 0;
+		int startHack = 0;
 
 		for (; it < endit; ++it)
 		{
 			float platformLength = it->Length;
-			float platformHeight = it->Height;
+			float platformHeight = it->Height*0.5f+2.0f;
 
 			if (it->Type == PlatformInfo::E_Canyon)
 			{
@@ -344,6 +346,38 @@ namespace SceneManager
 				Object* platform = new PlatformBridge(glm::vec4(currentXPosition + platformLength / 2.0f, platformHeight - 8, 0, 0)*0.5f, glm::vec4(platformLength*0.5f, 0.5f, 1, 1));
 				((GamePlayObject*)platform)->Init();
 				m_objectList.push_back(platform);
+			}
+			else if (it->Type == PlatformInfo::E_Jump && mainCharacter->GetIsAtStartLevel())
+			{
+				if(mainCharacter->GetCharacterState()!=GamePlayObject::Normal && ((startHack < 2 && !IsUnderGround()) || (startHack < 3 && IsUnderGround())))
+				{
+					float jumpHeight;
+					if(it == level.m_platforms.begin())
+					{
+						jumpHeight = (it+1)->Height*0.5f+2.0f;
+					}
+					else
+					{
+						jumpHeight = (it-1)->Height*0.5f+2.0f;
+					}
+					if (!IsUnderGround())
+					{
+						Object* platform = new PlatformCanyon(glm::vec4(currentXPosition + platformLength / 2.0f, jumpHeight - 8, 0, 0)*0.5f, glm::vec4(platformLength*0.5f, 0.5f, 1, 1));
+						((GamePlayObject*)platform)->Init();
+						m_objectList.push_back(platform);
+					}
+					else
+					{
+						Object* platform = new PlatformRuins(glm::vec4(currentXPosition + platformLength / 2.0f, jumpHeight - 8, 0, 0)*0.5f, glm::vec4(platformLength*0.5f, 0.5f, 1, 1));
+						((GamePlayObject*)platform)->Init();
+						m_objectList.push_back(platform);
+					}		
+					startHack++;
+				}
+				else
+				{
+					mainCharacter->SetIsAtStartLevel(false);
+				}
 			}
 
 			currentXPosition += platformLength;
