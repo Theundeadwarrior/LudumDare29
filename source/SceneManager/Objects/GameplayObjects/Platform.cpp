@@ -153,7 +153,7 @@ namespace SceneManager
 			else
 			{
 				float diffy = (position[1]-scale[1]*0.5f)-(GetPosition()[1]);
-				if(abs(diffy) < 0.05f)
+				if(abs(diffy) < 0.15f)
 					return IntersectionResult_Top;
 			}
 		}

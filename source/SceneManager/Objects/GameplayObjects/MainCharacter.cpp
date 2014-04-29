@@ -2,7 +2,7 @@
 #include "SceneManager/SceneManager.h"
 
 #define GRAVITY 0.015f
-#define MAX_FALLING_SPEED -0.5f
+#define MAX_FALLING_SPEED -0.35f
 #define JUMPING_SPEED 0.2f
 #define STARTING_X -4.0f
 #define STARTING_Y 2.2f
@@ -19,6 +19,7 @@ namespace SceneManager
 		, m_currentState(GamePlayObject::Falling)
 		, m_cameraDiff(STARTING_Y)
 		, m_currentSpriteState(Sprites_Above)
+		, m_isAtStartLevel(true)
 	{
 		Events::EventManager::GetInstance().RegisterKeyboardListener(this);
 		m_isPositionAffectedByLevel = false;
@@ -108,6 +109,7 @@ namespace SceneManager
 		SetScaleXY(0.5f*1.25f, 0.7993f*1.25f);
 		m_cameraDiff = STARTING_Y;
 		ms_cameraY = 0;
+		m_isAtStartLevel = true;
 
 		m_currentSprite = GetTextureIDList()[Sprites_Above].begin();
 		m_currentSpriteState = Sprites_Above;
@@ -176,6 +178,8 @@ namespace SceneManager
 		m_currentSprite = GetTextureIDList()[Sprites_Transition].begin();
 
 		m_currentState = GamePlayObject::Falling;
+
+		m_isAtStartLevel = true;
 	}
 	  
 	void MainCharacter::BindShaderParameters()
